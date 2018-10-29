@@ -107,7 +107,7 @@ public class VuforiaWebcamTesting extends OpMode
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
 
         // Vuforia licence key
-        parameters.vuforiaLicenseKey = " -- INSERT VUFORIA LICENCE KEY HERE -- ";
+        parameters.vuforiaLicenseKey = "AZOzs1v/////AAAAGfZ89+YVSkARrJFO98YgYZIrm9u59C7mHH9KAhmKVs174QVvnERAm0c7uR/CtBfm6/yXZ0XTVs+StBBfcOxMLVA5lypX2pEWuHOaalFwucWGfCCC1Ky65+kcs2gbST2G/pIsCvOx6SyiuBalZnJui6J5kpHb8E0wEdXq4xQa29jW+IIUHkBAL0SzG6l+zhQiPiNI7CN22tAvm/MFaoafEdv9VFBAGYszNi7voUxXdJNqYF13wlKdg18SW3lucybVcpfUpoAFtkndnF7xYl2NCrUaoKMFuFO6MmzBk+/5V828nU6B2OjW6KpG1F5bGlw9A4Wa//yG6oMHubiqRZHMVlgkXnFzVIJ/JgpgZfIott3L";
         parameters.fillCameraMonitorViewParent = true;
 
         // Set camera name for Vuforia config
