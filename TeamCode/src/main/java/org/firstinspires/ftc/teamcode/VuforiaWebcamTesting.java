@@ -100,7 +100,7 @@ public class VuforiaWebcamTesting extends OpMode
     @Override
     public void init() {
         // Default webcam name
-        webcamName = hardwareMap.get(WebcamName.class, "Webcam 1");
+        webcamName = hardwareMap.get(WebcamName.class, "Webcam 2");
 
         // Set up parameters for Vuforia
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
@@ -172,8 +172,14 @@ public class VuforiaWebcamTesting extends OpMode
         // Initialize the detector
         detector = new GoldAlignDetector();
         detector.init(hardwareMap.appContext,CameraViewDisplay.getInstance(), 0, true);
-        detector.useDefaults();
+
+        detector.yellowFilter = new LeviColorFilter(LeviColorFilter.ColorPreset.YELLOW, 100); // Create new filter
+        detector.useDefaults(); // Use default settings
         detector.areaScoringMethod = DogeCV.AreaScoringMethod.MAX_AREA; // Can also be PERFECT_AREA
+        //detector.perfectAreaScorer.perfectArea = 10000; // Uncomment if using PERFECT_AREA scoring
+
+        //detector.useDefaults();
+        //detector.areaScoringMethod = DogeCV.AreaScoringMethod.MAX_AREA; // Can also be PERFECT_AREA
         //detector.perfectAreaScorer.perfectArea = 10000; // if using PERFECT_AREA scoring
         detector.downscale = 0.8;
 
