@@ -391,7 +391,7 @@ public class ManualDriving_RoverRuckus extends OpMode
         } else {
             io.domSweepMotor.setPower(0);
         }
-        
+
         /*telemetry.addData("Elevator Hand Position", position);
         io.setHands(position);
         telemetry.addData("Relic Hand Position", position2);
