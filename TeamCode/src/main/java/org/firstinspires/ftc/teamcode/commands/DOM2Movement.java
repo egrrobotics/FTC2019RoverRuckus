@@ -8,29 +8,29 @@ import org.firstinspires.ftc.teamcode.utilities.PID;
  * Created by David Austin on 10/27/2016.
  */
 
-public class RPU1Movement extends BasicCommand {
+public class DOM2Movement extends BasicCommand {
     public double targetPosition;
-    double rpu1Speed;
-    public PID rpu1PID;
+    double dom2Speed;
+    public PID dom2PID;
     public static final int INCREASINGDIRECTION = 0;
     public static final int DECREASINGDIRECTION = 1;
     int test;
     long endTime;
     boolean coast = false;
-    public RPU1Movement(double targetPosition, int test, double spd){
+    public DOM2Movement(double targetPosition, int test, double spd){
         //headingPID = new PID(0.05,0,0);
         //headingPID = new PID(0.02, 0.02, 0);
         //headingPID = new PID(0.05, 0, 0);
         //headingPID.setTarget(targetHeading);
-        rpu1PID = new PID(.01,0,0);
+        dom2PID = new PID(.015,0,0);
         //distancePID = new PID(.2,0,0);
-        rpu1PID.setTarget(targetPosition);
+        dom2PID.setTarget(targetPosition);
         this.targetPosition = targetPosition;
         this.test = test;
-        rpu1Speed = spd;
+        dom2Speed = spd;
         //this.targetHeading = targetHeading;
     }
-    public RPU1Movement(double targetPosition, int test, double spd, boolean coast){
+    public DOM2Movement(double targetPosition, int test, double spd, boolean coast){
         this(targetPosition,test,spd);
         this.coast=coast;
     }
@@ -42,7 +42,7 @@ public class RPU1Movement extends BasicCommand {
     public void execute(){
         //double heading = io.getHeading();
         //double heading = Math.toDegrees(io.heading);
-        double correction = rpu1PID.getCorrection(io.getRPU1MotorEncoder());
+        double correction = dom2PID.getCorrection(io.getDOM2MotorEncoder());
         //double distanceCorrection;
 /*        switch(test) {
             case XGREATERTHAN:
@@ -67,22 +67,22 @@ public class RPU1Movement extends BasicCommand {
             rightSpeed = Range.clip(rightSpeed, -1, 0);
         }*/
 
-        io.rpu1Motor.setPower(rpu1Speed * correction);
+        io.dom2Motor.setPower(dom2Speed * correction);
 
         //telemetry.addData("x: ",io.getX());
         //telemetry.addData("y: ",io.getY());
         //telemetry.addData("Target Heading:", targetHeading);
         //telemetry.addData("Heading:", heading);
         //telemetry.addData("Heading Correction: ", correction);
-/*        telemetry.addData("RPU1 Correction: ", correction);
-        telemetry.addData("RPU1 Speed Requested: ", rpu1Speed);
-        telemetry.addData("RPU1 Speed Actual with Correction: ", rpu1Speed * correction);
+/*        telemetry.addData("RPU2 Correction: ", correction);
+        telemetry.addData("RPU2 Speed Requested: ", rpu2Speed);
+        telemetry.addData("RPU2 Speed Actual with Correction: ", rpu2Speed * correction);
         //telemetry.addData("Right Speed: ", rightSpeed);
         telemetry.addData("Jewel Color is Unknown, Red, Blue: ", io.getJewelColor());
         telemetry.addData("Alliance Color is Unknown, Red, Blue: ", io.getAllianceColor());
         telemetry.addData("VuMark from IdentifyVuMark from IO", io.getVuMark());
         telemetry.addData("VuMark from IdentifyVuMark from IO", "%s visible", io.vuMark);
-        telemetry.addData("Mode:", "RPU1 Movement");*/
+        telemetry.addData("Mode:", "RPU2 Movement");*/
     }
 
     public boolean isFinished(){
@@ -98,11 +98,11 @@ public class RPU1Movement extends BasicCommand {
         //telemetry.addData("Right Speed: ", (driveSpeed * distancePID.getCorrection(io.getY())) + headingPID.getCorrection(io.getHeading()));
         switch(test) {
             case INCREASINGDIRECTION:
-                return io.getRPU1MotorEncoder() > targetPosition;
+                return io.getDOM2MotorEncoder() > targetPosition;
             case DECREASINGDIRECTION:
-                return io.getRPU1MotorEncoder() < targetPosition;
+                return io.getDOM2MotorEncoder() < targetPosition;
             default:
-                return io.getRPU1MotorEncoder() > targetPosition;
+                return io.getDOM2MotorEncoder() > targetPosition;
         }
     }
 

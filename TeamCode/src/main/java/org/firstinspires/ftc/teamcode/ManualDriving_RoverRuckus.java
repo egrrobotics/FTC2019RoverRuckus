@@ -34,16 +34,18 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-//import org.firstinspires.ftc.teamcode.utilities.IO;
-//import org.firstinspires.ftc.teamcode.utilities.IO_4WD_Test;
-//import org.firstinspires.ftc.teamcode.utilities.PID;
-import org.firstinspires.ftc.teamcode.commands.*;
-import org.firstinspires.ftc.teamcode.utilities.*;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.teamcode.commands.BasicCommand;
+import org.firstinspires.ftc.teamcode.commands.DOM1Movement;
+import org.firstinspires.ftc.teamcode.commands.DOM2Movement;
+import org.firstinspires.ftc.teamcode.utilities.IO_RoverRuckus_Test;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.firstinspires.ftc.teamcode.commands.RPU1Movement;
+//import org.firstinspires.ftc.teamcode.utilities.IO;
+//import org.firstinspires.ftc.teamcode.utilities.IO_4WD_Test;
+//import org.firstinspires.ftc.teamcode.utilities.PID;
 
 /**
  * This file contains an example of an iterative (Non-Linear) "OpMode".
@@ -59,11 +61,11 @@ import org.firstinspires.ftc.teamcode.commands.RPU1Movement;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="Manual Driving 4WD OpMode", group="Iterative Opmode")
+@TeleOp(name="Manual Driving Rover Ruckus OpMode", group="Iterative Opmode")
 //@Disabled
-public class ManualDriving_4WD extends OpMode
+public class ManualDriving_RoverRuckus extends OpMode
 {
-    IO_4WD_Test io;
+    IO_RoverRuckus_Test io;
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
     //private boolean half_speed_engaged = false;
@@ -89,12 +91,12 @@ public class ManualDriving_4WD extends OpMode
     double  position = 0; //(MAX_POS - MIN_POS) / 2; // Start at halfway position
     double  position2 = 1; //(MAX_POS - MIN_POS) / 2; // Start at halfway position
 
-    double initStartingPositionRPU1;
-    double initStartingPositionRPU2;
-    double relicRetrievalStartingPositionRPU1;
-    double relicRetrievalStartingPositionRPU2;
-    double relicScoreStartingPositionRPU1;
-    double relicScoreStartingPositionRPU2;
+    double initStartingPositionDOM1;
+    double initStartingPositionDOM2;
+    //double relicRetrievalStartingPositionRPU1;
+    //double relicRetrievalStartingPositionRPU2;
+    //double relicScoreStartingPositionRPU1;
+    //double relicScoreStartingPositionRPU2;
 
     static final int INIT = 0;
     static final int EXECUTE = 1;
@@ -111,32 +113,32 @@ public class ManualDriving_4WD extends OpMode
     //int retrieveRelicScoreStateRPU1;
     //int retrieveRelicScoreStateRPU2;
     //ArrayList<BasicCommand> commands;
-    ArrayList<BasicCommand> commandsInitRPU1;
-    ArrayList<BasicCommand> commandsInitRPU2;
-    ArrayList<BasicCommand> commandsRetrieveRelicRPU1;
-    ArrayList<BasicCommand> commandsRetrieveRelicRPU2;
-    ArrayList<BasicCommand> commandsRetrieveRelicStowRPU1;
-    ArrayList<BasicCommand> commandsRetrieveRelicStowRPU2;
-    ArrayList<BasicCommand> commandsRetrieveRelicScoreRPU1;
-    ArrayList<BasicCommand> commandsRetrieveRelicScoreRPU2;
+    ArrayList<BasicCommand> commandsInitDOM1;
+    ArrayList<BasicCommand> commandsInitDOM2;
+    //ArrayList<BasicCommand> commandsRetrieveRelicRPU1;
+    //ArrayList<BasicCommand> commandsRetrieveRelicRPU2;
+    //ArrayList<BasicCommand> commandsRetrieveRelicStowRPU1;
+    //ArrayList<BasicCommand> commandsRetrieveRelicStowRPU2;
+    //ArrayList<BasicCommand> commandsRetrieveRelicScoreRPU1;
+    //ArrayList<BasicCommand> commandsRetrieveRelicScoreRPU2;
     //BasicCommand currentCommand;
-    BasicCommand currentCommandInitRPU1;
-    BasicCommand currentCommandInitRPU2;
-    BasicCommand currentCommandRetrieveRelicRPU1;
-    BasicCommand currentCommandRetrieveRelicRPU2;
-    BasicCommand currentCommandRetrieveRelicStowRPU1;
-    BasicCommand currentCommandRetrieveRelicStowRPU2;
-    BasicCommand currentCommandRetrieveRelicScoreRPU1;
-    BasicCommand currentCommandRetrieveRelicScoreRPU2;
+    BasicCommand currentCommandInitDOM1;
+    BasicCommand currentCommandInitDOM2;
+    //BasicCommand currentCommandRetrieveRelicRPU1;
+    //BasicCommand currentCommandRetrieveRelicRPU2;
+    //BasicCommand currentCommandRetrieveRelicStowRPU1;
+    //BasicCommand currentCommandRetrieveRelicStowRPU2;
+    //BasicCommand currentCommandRetrieveRelicScoreRPU1;
+    //BasicCommand currentCommandRetrieveRelicScoreRPU2;
     //Iterator<BasicCommand> iterator;
-    Iterator<BasicCommand> iteratorInitRPU1;
-    Iterator<BasicCommand> iteratorInitRPU2;
-    Iterator<BasicCommand> iteratorRetrieveRelicRPU1;
-    Iterator<BasicCommand> iteratorRetrieveRelicRPU2;
-    Iterator<BasicCommand> iteratorRetrieveRelicStowRPU1;
-    Iterator<BasicCommand> iteratorRetrieveRelicStowRPU2;
-    Iterator<BasicCommand> iteratorRetrieveRelicScoreRPU1;
-    Iterator<BasicCommand> iteratorRetrieveRelicScoreRPU2;
+    Iterator<BasicCommand> iteratorInitDOM1;
+    Iterator<BasicCommand> iteratorInitDOM2;
+    //Iterator<BasicCommand> iteratorRetrieveRelicRPU1;
+    //Iterator<BasicCommand> iteratorRetrieveRelicRPU2;
+    //Iterator<BasicCommand> iteratorRetrieveRelicStowRPU1;
+    //Iterator<BasicCommand> iteratorRetrieveRelicStowRPU2;
+    //Iterator<BasicCommand> iteratorRetrieveRelicScoreRPU1;
+    //Iterator<BasicCommand> iteratorRetrieveRelicScoreRPU2;
 
     /*
 
@@ -144,61 +146,61 @@ public class ManualDriving_4WD extends OpMode
      */
     @Override
     public void init() {
-        io = new IO_4WD_Test(hardwareMap, telemetry);
-        io.retractHands();
-        io.openRelicHand();
-        io.jewelArmUp();
-        io.proximityArmMid();
+        io = new IO_RoverRuckus_Test(hardwareMap, telemetry);
+        //io.retractHands();
+        //io.openRelicHand();
+        //io.jewelArmUp();
+        ///io.proximityArmMid();
+        io.hookStop();
         io.resetDriveEncoders();
 
-        //commented out due to Rover Ruckus (uncomment to use Relic Recovery)
-        //BasicCommand.setIO(io);
+        BasicCommand.setIO(io);
         BasicCommand.setTelemetry(telemetry);
 
         //commands = new ArrayList<BasicCommand>();
-        commandsInitRPU1 = new ArrayList<BasicCommand>();
-        commandsInitRPU2 = new ArrayList<BasicCommand>();
-        commandsRetrieveRelicRPU1 = new ArrayList<BasicCommand>();
-        commandsRetrieveRelicRPU2 = new ArrayList<BasicCommand>();
-        commandsRetrieveRelicStowRPU1 = new ArrayList<BasicCommand>();
-        commandsRetrieveRelicStowRPU2 = new ArrayList<BasicCommand>();
-        commandsRetrieveRelicScoreRPU1 = new ArrayList<BasicCommand>();
-        commandsRetrieveRelicScoreRPU2 = new ArrayList<BasicCommand>();
-        addInitRPU1Commands();
-        addInitRPU2Commands();
-        addRetrieveRelicRPU1Commands();
-        addRetrieveRelicRPU2Commands();
-        addRetrieveRelicStowRPU1Commands();
-        addRetrieveRelicStowRPU2Commands();
-        addRetrieveRelicScoreRPU1Commands();
-        addRetrieveRelicScoreRPU2Commands();
+        commandsInitDOM1 = new ArrayList<BasicCommand>();
+        commandsInitDOM2 = new ArrayList<BasicCommand>();
+        //commandsRetrieveRelicRPU1 = new ArrayList<BasicCommand>();
+        //commandsRetrieveRelicRPU2 = new ArrayList<BasicCommand>();
+        //commandsRetrieveRelicStowRPU1 = new ArrayList<BasicCommand>();
+        //commandsRetrieveRelicStowRPU2 = new ArrayList<BasicCommand>();
+        //commandsRetrieveRelicScoreRPU1 = new ArrayList<BasicCommand>();
+        //commandsRetrieveRelicScoreRPU2 = new ArrayList<BasicCommand>();
+        addInitDOM1Commands();
+        addInitDOM2Commands();
+        //addRetrieveRelicRPU1Commands();
+        //addRetrieveRelicRPU2Commands();
+        //addRetrieveRelicStowRPU1Commands();
+        //addRetrieveRelicStowRPU2Commands();
+        //addRetrieveRelicScoreRPU1Commands();
+        //addRetrieveRelicScoreRPU2Commands();
         //addCommands();
         //addFinalCommands();
         //iterator = commands.iterator();
-        iteratorInitRPU1 = commandsInitRPU1.iterator();
-        iteratorInitRPU2 = commandsInitRPU2.iterator();
-        iteratorRetrieveRelicRPU1 = commandsRetrieveRelicRPU1.iterator();
-        iteratorRetrieveRelicRPU2 = commandsRetrieveRelicRPU2.iterator();
-        iteratorRetrieveRelicStowRPU1 = commandsRetrieveRelicStowRPU1.iterator();
-        iteratorRetrieveRelicStowRPU2 = commandsRetrieveRelicStowRPU2.iterator();
-        iteratorRetrieveRelicScoreRPU1 = commandsRetrieveRelicScoreRPU1.iterator();
-        iteratorRetrieveRelicScoreRPU2 = commandsRetrieveRelicScoreRPU2.iterator();
+        iteratorInitDOM1 = commandsInitDOM1.iterator();
+        iteratorInitDOM2 = commandsInitDOM2.iterator();
+        //iteratorRetrieveRelicRPU1 = commandsRetrieveRelicRPU1.iterator();
+        //iteratorRetrieveRelicRPU2 = commandsRetrieveRelicRPU2.iterator();
+        //iteratorRetrieveRelicStowRPU1 = commandsRetrieveRelicStowRPU1.iterator();
+        //iteratorRetrieveRelicStowRPU2 = commandsRetrieveRelicStowRPU2.iterator();
+        //iteratorRetrieveRelicScoreRPU1 = commandsRetrieveRelicScoreRPU1.iterator();
+        //iteratorRetrieveRelicScoreRPU2 = commandsRetrieveRelicScoreRPU2.iterator();
         //currentCommand = iterator.next();
-        currentCommandInitRPU1 = iteratorInitRPU1.next();
-        currentCommandInitRPU2 = iteratorInitRPU2.next();
-        currentCommandRetrieveRelicRPU1 = iteratorRetrieveRelicRPU1.next();
-        currentCommandRetrieveRelicRPU2 = iteratorRetrieveRelicRPU2.next();
-        currentCommandRetrieveRelicStowRPU1 = iteratorRetrieveRelicStowRPU1.next();
-        currentCommandRetrieveRelicStowRPU2 = iteratorRetrieveRelicStowRPU2.next();
-        currentCommandRetrieveRelicScoreRPU1 = iteratorRetrieveRelicScoreRPU1.next();
-        currentCommandRetrieveRelicScoreRPU2 = iteratorRetrieveRelicScoreRPU2.next();
+        currentCommandInitDOM1 = iteratorInitDOM1.next();
+        currentCommandInitDOM2 = iteratorInitDOM2.next();
+        //currentCommandRetrieveRelicRPU1 = iteratorRetrieveRelicRPU1.next();
+        //currentCommandRetrieveRelicRPU2 = iteratorRetrieveRelicRPU2.next();
+        //currentCommandRetrieveRelicStowRPU1 = iteratorRetrieveRelicStowRPU1.next();
+        //currentCommandRetrieveRelicStowRPU2 = iteratorRetrieveRelicStowRPU2.next();
+        //currentCommandRetrieveRelicScoreRPU1 = iteratorRetrieveRelicScoreRPU1.next();
+        //currentCommandRetrieveRelicScoreRPU2 = iteratorRetrieveRelicScoreRPU2.next();
 
-        initStartingPositionRPU1 = ((RPU1Movement) currentCommandInitRPU1).targetPosition;
-        initStartingPositionRPU2 = ((RPU2Movement) currentCommandInitRPU2).targetPosition;
-        relicRetrievalStartingPositionRPU1 = ((RPU1Movement) currentCommandRetrieveRelicRPU1).targetPosition;
-        relicRetrievalStartingPositionRPU2 = ((RPU2Movement) currentCommandRetrieveRelicRPU2).targetPosition;
-        relicScoreStartingPositionRPU1 = ((RPU1Movement) currentCommandRetrieveRelicScoreRPU1).targetPosition;
-        relicScoreStartingPositionRPU2 = ((RPU2Movement) currentCommandRetrieveRelicScoreRPU2).targetPosition;
+        initStartingPositionDOM1 = ((DOM1Movement) currentCommandInitDOM1).targetPosition;
+        initStartingPositionDOM2 = ((DOM2Movement) currentCommandInitDOM2).targetPosition;
+        //relicRetrievalStartingPositionRPU1 = ((RPU1Movement) currentCommandRetrieveRelicRPU1).targetPosition;
+        //relicRetrievalStartingPositionRPU2 = ((RPU2Movement) currentCommandRetrieveRelicRPU2).targetPosition;
+        //relicScoreStartingPositionRPU1 = ((RPU1Movement) currentCommandRetrieveRelicScoreRPU1).targetPosition;
+        //relicScoreStartingPositionRPU2 = ((RPU2Movement) currentCommandRetrieveRelicScoreRPU2).targetPosition;
         //state = INIT;
         //initStateRPU1 = INIT;
         //initStateRPU2 = INIT;
@@ -302,14 +304,27 @@ public class ManualDriving_4WD extends OpMode
             io.setDrivePower((leftPower*.6), (rightPower*.6));
         }
 
-        if((io.getForkLiftMotorEncoder() <= -4000) && (gamepad2.left_stick_y < 0)) {
+        if((io.getChinMotorEncoder() <= -4000) && (gamepad1.y)) {
+            io.chinMotor.setPower(0);
+        } else if(((io.getChinMotorEncoder() >= 0) || (io.touchChin.getState() == false)) && (gamepad1.a)){
+            io.chinMotor.setPower(0);
+        } else if (gamepad1.y){
+            io.chinMotor.setPower(1);
+        } else if (gamepad1.a){
+            io.chinMotor.setPower(-1);
+        } else {
+            io.chinMotor.setPower(0);
+        }
+
+
+        /*if((io.getForkLiftMotorEncoder() <= -4000) && (gamepad2.left_stick_y < 0)) {
             io.forkLiftMotor.setPower(0);
         } else if(((io.getForkLiftMotorEncoder() >= 0) || (io.touchBottom.getState() == false)) && (gamepad2.left_stick_y > 0)){
             io.forkLiftMotor.setPower(0);
         } else{
             io.forkLiftMotor.setPower(gamepad2.left_stick_y);
         }
-
+*/
         //io.rpu1Motor.setPower(.4*gamepad2.right_stick_y);
         //io.rpu2Motor.setPower(.4*gamepad2.right_stick_x);
 
@@ -327,7 +342,7 @@ public class ManualDriving_4WD extends OpMode
             io.forkLiftMotor.setPower(gamepad2.left_stick_y);
         }*/
 
-        if (gamepad2.x) {
+        /*if (gamepad2.x) {
             // Keep stepping up until we hit the max value.
             position += INCREMENT ;
             if (position >= MAX_POS ) {
@@ -359,17 +374,33 @@ public class ManualDriving_4WD extends OpMode
                 position2 = MIN_POS;
                 //rampUp = !rampUp;  // Switch ramp direction
             }
+        }*/
+
+        if (gamepad1.x) {
+            io.hookCounterClockwise();
+        } else if (gamepad1.b){
+            io.hookClockwise();
+        } else {
+            io.hookStop();
         }
 
-        telemetry.addData("Elevator Hand Position", position);
+        if (gamepad2.x) {
+            io.domSweepMotor.setPower(1);
+        } else if (gamepad2.b){
+            io.domSweepMotor.setPower(-1);
+        } else {
+            io.domSweepMotor.setPower(0);
+        }
+        
+        /*telemetry.addData("Elevator Hand Position", position);
         io.setHands(position);
         telemetry.addData("Relic Hand Position", position2);
-        io.setRelicHand(position2);
+        io.setRelicHand(position2);*/
         //io.setJewelArm(position);
 
         //stateMachine(initState, currentCommandInit, iteratorInit);
 
-        if(gamepad2.right_bumper && !relic_retrieval_engaged_changed){
+        /*if(gamepad2.right_bumper && !relic_retrieval_engaged_changed){
             relic_retrieval_engaged = !relic_retrieval_engaged;
             relic_retrieval_stow_engaged = false;
             relic_retrieval_score_engaged = false;
@@ -394,21 +425,81 @@ public class ManualDriving_4WD extends OpMode
             relic_retrieval_score_engaged_changed = true;
         } else if (gamepad2.right_trigger != 1) {
             relic_retrieval_score_engaged_changed = false;
+        }*/
+
+        currentCommandInitDOM1.execute();
+        currentCommandInitDOM2.execute();
+
+        if (gamepad2.left_stick_y == 1) {
+            // Keep stepping up until we hit the max value.
+            initStartingPositionDOM1 += 10 ;
+            initStartingPositionDOM2 += 10 ;
+            if (initStartingPositionDOM1 >= 800 ) {
+                initStartingPositionDOM1 = 800;
+                //rampUp = !rampUp;   // Switch ramp direction
+            }
+            if (initStartingPositionDOM2 >= 800 ) {
+                initStartingPositionDOM2 = 800;
+                //rampUp = !rampUp;   // Switch ramp direction
+            }
+        }
+        else if (gamepad2.left_stick_y == -1) {
+            // Keep stepping down until we hit the min value.
+            initStartingPositionDOM1 -= 10 ;
+            initStartingPositionDOM2 -= 10 ;
+            if ((initStartingPositionDOM1 <= 0) || (io.touchDOM.getState() == false)) {
+                initStartingPositionDOM1 = 0;
+                //rampUp = !rampUp;  // Switch ramp direction
+            }
+            if ((initStartingPositionDOM2 <= 0) || (io.touchDOM.getState() == false)) {
+                initStartingPositionDOM2 = 0;
+                //rampUp = !rampUp;  // Switch ramp direction
+            }
         }
 
-        if (!relic_retrieval_engaged && !relic_retrieval_stow_engaged && !relic_retrieval_score_engaged) {
 
-/*            telemetry.addData("RPU1 Target Position: ", initStartingPositionRPU1);
-            telemetry.addData("RPU2 Target Position: ", initStartingPositionRPU2);*/
+        if((io.getDOMMotorExtendEncoder() >= 400) && (gamepad2.right_stick_x > 0)) {
+            io.domExtendMotor.setPower(0);
+        } else if(((io.getDOMMotorExtendEncoder() <= 0) || (io.touchDOMExtend.getState() == false)) && (gamepad2.right_stick_x < 0)) {
+            io.domExtendMotor.setPower(0);
+        } else {
+            io.domExtendMotor.setPower(gamepad2.right_stick_x);
+        }
+
+
+        /*if (gamepad2.right_stick_x == 1) {
+            // Keep stepping up until we hit the max value.
+            relicRetrievalStartingPositionRPU2 += 10 ;
+            if (relicRetrievalStartingPositionRPU2 >= 800 ) {
+                relicRetrievalStartingPositionRPU2 = 800;
+                //rampUp = !rampUp;   // Switch ramp direction
+            }
+        }
+        else if (gamepad2.right_stick_x == -1) {
+            // Keep stepping down until we hit the min value.
+            relicRetrievalStartingPositionRPU2 -= 10 ;
+            if (relicRetrievalStartingPositionRPU2 <= 0 ) {
+                relicRetrievalStartingPositionRPU2 = 0;
+                //rampUp = !rampUp;  // Switch ramp direction
+            }
+        }*/
+
+        ((DOM1Movement) currentCommandInitDOM1).dom1PID.setTarget(initStartingPositionDOM1);
+        ((DOM2Movement) currentCommandInitDOM2).dom2PID.setTarget(initStartingPositionDOM2);
+
+        /*if (!relic_retrieval_engaged && !relic_retrieval_stow_engaged && !relic_retrieval_score_engaged) {
+
+*//*            telemetry.addData("RPU1 Target Position: ", initStartingPositionRPU1);
+            telemetry.addData("RPU2 Target Position: ", initStartingPositionRPU2);*//*
 
             currentCommandInitRPU1.execute();
             currentCommandInitRPU2.execute();
-        }
+        }*/
 
-        if (relic_retrieval_engaged && !relic_retrieval_stow_engaged && !relic_retrieval_score_engaged) {
+        /*if (relic_retrieval_engaged && !relic_retrieval_stow_engaged && !relic_retrieval_score_engaged) {
 
-/*            telemetry.addData("RPU1 Target Position: ", relicRetrievalStartingPositionRPU1);
-            telemetry.addData("RPU2 Target Position: ", relicRetrievalStartingPositionRPU2);*/
+*//*            telemetry.addData("RPU1 Target Position: ", relicRetrievalStartingPositionRPU1);
+            telemetry.addData("RPU2 Target Position: ", relicRetrievalStartingPositionRPU2);*//*
 
             currentCommandRetrieveRelicRPU1.execute();
             currentCommandRetrieveRelicRPU2.execute();
@@ -449,17 +540,17 @@ public class ManualDriving_4WD extends OpMode
 
             ((RPU1Movement) currentCommandRetrieveRelicRPU1).rpu1PID.setTarget(relicRetrievalStartingPositionRPU1);
             ((RPU2Movement) currentCommandRetrieveRelicRPU2).rpu2PID.setTarget(relicRetrievalStartingPositionRPU2);
-        }
+        }*/
 
-        if (relic_retrieval_stow_engaged && !relic_retrieval_engaged && !relic_retrieval_score_engaged) {
+        /*if (relic_retrieval_stow_engaged && !relic_retrieval_engaged && !relic_retrieval_score_engaged) {
             currentCommandRetrieveRelicStowRPU1.execute();
             currentCommandRetrieveRelicStowRPU2.execute();
-        }
+        }*/
 
-        if (relic_retrieval_score_engaged && !relic_retrieval_stow_engaged && !relic_retrieval_engaged) {
+        /*if (relic_retrieval_score_engaged && !relic_retrieval_stow_engaged && !relic_retrieval_engaged) {
 
-/*            telemetry.addData("RPU1 Target Position: ", relicScoreStartingPositionRPU1);
-            telemetry.addData("RPU2 Target Position: ", relicScoreStartingPositionRPU2);*/
+*//*            telemetry.addData("RPU1 Target Position: ", relicScoreStartingPositionRPU1);
+            telemetry.addData("RPU2 Target Position: ", relicScoreStartingPositionRPU2);*//*
 
             currentCommandRetrieveRelicScoreRPU1.execute();
             currentCommandRetrieveRelicScoreRPU2.execute();
@@ -500,7 +591,7 @@ public class ManualDriving_4WD extends OpMode
 
             ((RPU1Movement) currentCommandRetrieveRelicScoreRPU1).rpu1PID.setTarget(relicScoreStartingPositionRPU1);
             ((RPU2Movement) currentCommandRetrieveRelicScoreRPU2).rpu2PID.setTarget(relicScoreStartingPositionRPU2);
-        }
+        }*/
 
 
         /*if (!relic_retrieval_engaged && !relic_retrieval_stow_engaged && !relic_retrieval_score_engaged) {
@@ -773,11 +864,43 @@ public class ManualDriving_4WD extends OpMode
         telemetry.addData("Left Front Drive Encoder",  "Starting at %.2f",
                 io.getLeftFrontDriveEncoder());*/
 
-        telemetry.addData("Right Front Drive Encoder",  "Starting at %.2f",
-                io.getRightFrontDriveEncoder());
+        telemetry.addData("Right Back Drive Encoder",  "Starting at %.2f",
+                io.getRightBackDriveEncoder());
         telemetry.addData("Left Back Drive Encoder",  "Starting at %.2f",
                 io.getLeftBackDriveEncoder());
 
+        telemetry.addData("Chin Motor Encoder",  "Starting at %.2f",
+                io.getChinMotorEncoder());
+        telemetry.addData("DOM1 Motor Encoder",  "Starting at %.2f",
+                io.getDOM1MotorEncoder());
+        telemetry.addData("DOM2 Motor Encoder",  "Starting at %.2f",
+                io.getDOM2MotorEncoder());
+        telemetry.addData("DOM Motor Extend Encoder",  "Starting at %.2f",
+                io.getDOMMotorExtendEncoder());
+
+        telemetry.addData("Left Range", String.format("%.01f in", io.leftDistance.getDistance(DistanceUnit.INCH)));
+        telemetry.addData("Right Range", String.format("%.01f in", io.rightDistance.getDistance(DistanceUnit.INCH)));
+        telemetry.addData("Front Range", String.format("%.01f in", io.frontDistance.getDistance(DistanceUnit.INCH)));
+        telemetry.addData("Back Range", String.format("%.01f in", io.backDistance.getDistance(DistanceUnit.INCH)));
+
+
+        if (io.touchChin.getState() == false) {
+            telemetry.addData("Touch Chin", "Is Pressed");
+        } else {
+            telemetry.addData("Touch Chin", "Is Not Pressed");
+        }
+
+        if (io.touchDOM.getState() == false) {
+            telemetry.addData("Touch DOM", "Is Pressed");
+        } else {
+            telemetry.addData("Touch DOM", "Is Not Pressed");
+        }
+
+        if (io.touchDOMExtend.getState() == false) {
+            telemetry.addData("Touch DOM Extend", "Is Pressed");
+        } else {
+            telemetry.addData("Touch DOM Extend", "Is Not Pressed");
+        }
 
 
 
@@ -817,20 +940,26 @@ public class ManualDriving_4WD extends OpMode
             forkLiftMotor.setPower(-1);
         }*/
         io.setDrivePower(0 , 0);
-        io.forkLiftMotor.setPower(0);
+        io.chinMotor.setPower(0);
+        io.dom1Motor.setPower(0);
+        io.dom2Motor.setPower(0);
+        io.domExtendMotor.setPower(0);
+        io.domSweepMotor.setPower(0);
+        io.hookStop();
+        /*io.forkLiftMotor.setPower(0);
         io.rpu1Motor.setPower(0);
-        io.proximityArmUp();
+        io.proximityArmUp();*/
     }
 
-    public void addInitRPU1Commands() {
-        commandsInitRPU1.add(new RPU1Movement(0, RPU1Movement.INCREASINGDIRECTION, .25));
+    public void addInitDOM1Commands() {
+        commandsInitDOM1.add(new DOM1Movement(0, DOM1Movement.INCREASINGDIRECTION, .25));
     }
 
-    public void addInitRPU2Commands() {
-        commandsInitRPU2.add(new RPU2Movement(0, RPU2Movement.INCREASINGDIRECTION, .25));
+    public void addInitDOM2Commands() {
+        commandsInitDOM2.add(new DOM2Movement(0, DOM2Movement.INCREASINGDIRECTION, .25));
     }
 
-    public void addRetrieveRelicRPU1Commands() {
+    /*public void addRetrieveRelicRPU1Commands() {
         commandsRetrieveRelicRPU1.add(new RPU1Movement(257, RPU1Movement.INCREASINGDIRECTION, .4));
     }
 
@@ -852,7 +981,7 @@ public class ManualDriving_4WD extends OpMode
 
     public void addRetrieveRelicScoreRPU2Commands() {
         commandsRetrieveRelicScoreRPU2.add(new RPU2Movement(280, RPU2Movement.INCREASINGDIRECTION, .25));
-    }
+    }*/
 
  /*   public void stateMachine(int smState, BasicCommand smCurrentCommand, Iterator<BasicCommand> smIterator){
         switch (smState) {

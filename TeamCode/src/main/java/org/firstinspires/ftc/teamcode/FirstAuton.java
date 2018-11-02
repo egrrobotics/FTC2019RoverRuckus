@@ -18,7 +18,7 @@ import static org.firstinspires.ftc.teamcode.utilities.Sleep.sleep;
  */
 
 public abstract class FirstAuton extends OpMode {
-    IO_4WD_Test io;
+    IO_RoverRuckus_Test io;
     static final int INIT = 0;
     static final int EXECUTE = 1;
     static final int STOP = 2;
@@ -27,16 +27,16 @@ public abstract class FirstAuton extends OpMode {
     int initState;
     ArrayList<BasicCommand> commands;
     ArrayList<BasicCommand> commandsInit;
-    ArrayList<BasicCommand> commandsInitRPU1;
-    ArrayList<BasicCommand> commandsInitRPU2;
+    ArrayList<BasicCommand> commandsInitDOM1;
+    ArrayList<BasicCommand> commandsInitDOM2;
     BasicCommand currentCommand;
     BasicCommand currentCommandInit;
-    BasicCommand currentCommandInitRPU1;
-    BasicCommand currentCommandInitRPU2;
+    BasicCommand currentCommandInitDOM1;
+    BasicCommand currentCommandInitDOM2;
     Iterator<BasicCommand> iterator;
     Iterator<BasicCommand> iteratorInit;
-    Iterator<BasicCommand> iteratorInitRPU1;
-    Iterator<BasicCommand> iteratorInitRPU2;
+    Iterator<BasicCommand> iteratorInitDOM1;
+    Iterator<BasicCommand> iteratorInitDOM2;
     //int allianceColor = IO.RED;
 
     public FirstAuton() {
@@ -45,14 +45,15 @@ public abstract class FirstAuton extends OpMode {
     }
 
     public void init() {
-        io = new IO_4WD_Test(hardwareMap, telemetry);
+        //io = new IO_4WD_Test(hardwareMap, telemetry);
+        io = new IO_RoverRuckus_Test(hardwareMap, telemetry);
         //io.setAllianceColor(allianceColor);
         BasicCommand.setIO(io);
         BasicCommand.setTelemetry(telemetry);
-        io.retractHands();
-        io.openRelicHand();
-        io.jewelArmUp();
-        io.proximityArmUp();
+        //io.retractHands();
+        //io.openRelicHand();
+        //io.jewelArmUp();
+        //io.proximityArmUp();
         telemetry.addData("Status", " Arms Initialized");
         io.calibrateGyroandIMU();
         //HSCamera.setHardwareMap(hardwareMap);
@@ -63,21 +64,21 @@ public abstract class FirstAuton extends OpMode {
 
         commands = new ArrayList<BasicCommand>();
         commandsInit = new ArrayList<BasicCommand>();
-        commandsInitRPU1 = new ArrayList<BasicCommand>();
-        commandsInitRPU2 = new ArrayList<BasicCommand>();
-        addInitCommands();
-        addInitRPU1Commands();
-        addInitRPU2Commands();
+        commandsInitDOM1 = new ArrayList<BasicCommand>();
+        commandsInitDOM2 = new ArrayList<BasicCommand>();
+        //addInitCommands();
+        addInitDOM1Commands();
+        addInitDOM2Commands();
         addCommands();
         addFinalCommands();
         iterator = commands.iterator();
         iteratorInit = commandsInit.iterator();
-        iteratorInitRPU1 = commandsInitRPU1.iterator();
-        iteratorInitRPU2 = commandsInitRPU2.iterator();
+        iteratorInitDOM1 = commandsInitDOM1.iterator();
+        iteratorInitDOM2 = commandsInitDOM2.iterator();
         currentCommand = iterator.next();
         currentCommandInit = iteratorInit.next();
-        currentCommandInitRPU1 = iteratorInitRPU1.next();
-        currentCommandInitRPU2 = iteratorInitRPU2.next();
+        currentCommandInitDOM1 = iteratorInitDOM1.next();
+        currentCommandInitDOM2 = iteratorInitDOM2.next();
         state = INIT;
         initState = INIT;
     }
@@ -100,11 +101,11 @@ public abstract class FirstAuton extends OpMode {
             telemetry.addData(">", "IMU Calibrated.  Wait for vuMark Identification.");
         }
 
-        telemetry.addData("VuMark from IdentifyVuMark from IO", io.getVuMark());
+        //telemetry.addData("VuMark from IdentifyVuMark from IO", io.getVuMark());
 
         //if (!currentCommandInit.isFinished()) {
         //if (io.getVuMark() == IO_4WD_Test.UNKNOWN) {
-            switch (initState) {
+            /*switch (initState) {
                 case INIT:
                     currentCommandInit.init();
                     initState = EXECUTE;
@@ -130,10 +131,10 @@ public abstract class FirstAuton extends OpMode {
                 case FINISHED:
                     break;
 
-            }
+            }*/
         //}
 
-        if (io.getVuMark() == 0) {
+        /*if (io.getVuMark() == 0) {
             telemetry.addData("vuMark", "Unknown");
             telemetry.addData("vuMark", "not identified, try INIT again");
         } else if (io.getVuMark() == 1) {
@@ -145,7 +146,7 @@ public abstract class FirstAuton extends OpMode {
         } else if (io.getVuMark() == 3) {
             telemetry.addData("vuMark", "Right");
             telemetry.addData("vuMark", "Ready to START");
-        }
+        }*/
     }
 
     public void start() {
@@ -156,21 +157,21 @@ public abstract class FirstAuton extends OpMode {
     public abstract void addCommands();
     public abstract void addFinalCommands();
 
-    public void addInitCommands() {
+    /*public void addInitCommands() {
         commandsInit.add(new IdentifyVuMark());
+    }*/
+
+    public void addInitDOM1Commands() {
+        commandsInitDOM1.add(new DOM1Movement(0, DOM1Movement.INCREASINGDIRECTION, .25));
     }
 
-    public void addInitRPU1Commands() {
-        commandsInitRPU1.add(new RPU1Movement(0, RPU1Movement.INCREASINGDIRECTION, .25));
-    }
-
-    public void addInitRPU2Commands() {
-        commandsInitRPU2.add(new RPU2Movement(0, RPU2Movement.INCREASINGDIRECTION, .25));
+    public void addInitDOM2Commands() {
+        commandsInitDOM2.add(new DOM2Movement(0, DOM2Movement.INCREASINGDIRECTION, .25));
     }
 
     public void loop() {
-        currentCommandInitRPU1.execute();
-        currentCommandInitRPU2.execute();
+        currentCommandInitDOM1.execute();
+        currentCommandInitDOM2.execute();
         io.updatePosition();
         switch(state){
             case INIT:

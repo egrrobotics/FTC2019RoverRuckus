@@ -81,9 +81,9 @@ public class IdentifyProximity extends BasicCommand{
         //telemetry.addData("Right Red  ", io.rightColor.red());
         //telemetry.addData("Right Green", io.rightColor.green());
         //telemetry.addData("Right Blue ", io.rightColor.blue());
-        telemetry.addData("Proximity Correction:", io.getProximityCorrection());
-        telemetry.addData("Left Proximity Average:", io.getLeftProximityAverage());
-        telemetry.addData("Right Proximity Average:", io.getRightProximityAverage());
+        //telemetry.addData("Proximity Correction:", io.getProximityCorrection());
+        //telemetry.addData("Left Proximity Average:", io.getLeftProximityAverage());
+        //telemetry.addData("Right Proximity Average:", io.getRightProximityAverage());
         telemetry.addData("Left Sample Count:", leftSampleCount);
         telemetry.addData("Right Sample Count:", rightSampleCount);
         telemetry.addData("Mode:", "Identify Proximity");
@@ -97,24 +97,24 @@ public class IdentifyProximity extends BasicCommand{
             return true;
         }
         if (Double.isNaN(leftProximity) && Double.isNaN(rightProximity)) {
-            io.setLeftProximityAverage(0);
-            io.setRightProximityAverage(0);
+            //io.setLeftProximityAverage(0);
+            //io.setRightProximityAverage(0);
             return false;
         } else if (Double.isNaN(leftProximity)) {
-            io.setLeftProximityAverage(0);
-            io.setRightProximityAverage(rightProximityAvg);
+            //io.setLeftProximityAverage(0);
+            //io.setRightProximityAverage(rightProximityAvg);
             return false;
         } else if (Double.isNaN(rightProximity)) {
-            io.setLeftProximityAverage(leftProximityAvg);
-            io.setRightProximityAverage(0);
+            //io.setLeftProximityAverage(leftProximityAvg);
+            //io.setRightProximityAverage(0);
             return false;
         } else if ((rightSampleCount < 20) && (leftSampleCount < 20)) {
-            io.setLeftProximityAverage(leftProximityAvg);
-            io.setRightProximityAverage(rightProximityAvg);
+            //io.setLeftProximityAverage(leftProximityAvg);
+            //io.setRightProximityAverage(rightProximityAvg);
             return false;
         } else if ((rightSampleCount >= 20) || (leftSampleCount >= 20)) {
-            io.setLeftProximityAverage(leftProximityAvg);
-            io.setRightProximityAverage(rightProximityAvg);
+            //io.setLeftProximityAverage(leftProximityAvg);
+            //io.setRightProximityAverage(rightProximityAvg);
             return true;
         } else {
             return false;

@@ -61,12 +61,12 @@ public class DriveForward extends BasicCommand {
     public void init(){
         endTime = System.currentTimeMillis() + 10000;
 
-        if (proximitycorrection){
+        /*if (proximitycorrection){
             headingPID.setTarget(targetHeading + io.getProximityCorrection());
         }
         if (usebutton){
             this.proximitybutton = io.proximityArmButtonPushed;
-        }
+        }*/
     }
 
     public void execute(){
@@ -107,20 +107,20 @@ public class DriveForward extends BasicCommand {
         telemetry.addData("Drive Speed: ", driveSpeed);
         telemetry.addData("Left Speed: ", leftSpeed);
         telemetry.addData("Right Speed: ", rightSpeed);
-        telemetry.addData("Jewel Color is Unknown, Red, Blue: ", io.getJewelColor());
+        //telemetry.addData("Jewel Color is Unknown, Red, Blue: ", io.getJewelColor());
         telemetry.addData("Alliance Color is Unknown, Red, Blue: ", io.getAllianceColor());
-        telemetry.addData("VuMark from IdentifyVuMark from IO", io.getVuMark());
-        telemetry.addData("VuMark from IdentifyVuMark from IO", "%s visible", io.vuMark);
+        //telemetry.addData("VuMark from IdentifyVuMark from IO", io.getVuMark());
+        //telemetry.addData("VuMark from IdentifyVuMark from IO", "%s visible", io.vuMark);
         telemetry.addData("Mode:", "Drive Forward");
     }
 
     public boolean isFinished(){
         if (System.currentTimeMillis() >= endTime) return true;
-        if ((io.touchProximity.getState() == false) && (usebutton == false)){
+        /*if ((io.touchProximity.getState() == false) && (usebutton == false)){
             io.proximityArmButtonPushed = true;
             return true;
-        }
-        if ((usebutton == true) && (proximitybutton == false)) return true;
+        }*/
+        //if ((usebutton == true) && (proximitybutton == false)) return true;
         //telemetry.addData("x: ",io.getX());
         //telemetry.addData("y: ",io.getY());
         //telemetry.addData("Target Heading:", targetHeading);
