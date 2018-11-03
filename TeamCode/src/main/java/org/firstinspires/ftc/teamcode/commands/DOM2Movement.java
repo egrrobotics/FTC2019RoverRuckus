@@ -22,7 +22,8 @@ public class DOM2Movement extends BasicCommand {
         //headingPID = new PID(0.02, 0.02, 0);
         //headingPID = new PID(0.05, 0, 0);
         //headingPID.setTarget(targetHeading);
-        dom2PID = new PID(.015,0,0);
+        //dom2PID = new PID(.015,0,0);
+        dom2PID = new PID(.001,0,0);
         //distancePID = new PID(.2,0,0);
         dom2PID.setTarget(targetPosition);
         this.targetPosition = targetPosition;

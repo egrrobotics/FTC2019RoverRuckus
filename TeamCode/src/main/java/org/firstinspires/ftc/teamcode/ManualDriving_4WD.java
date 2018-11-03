@@ -43,7 +43,7 @@ import org.firstinspires.ftc.teamcode.utilities.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.firstinspires.ftc.teamcode.commands.RPU1Movement;
+//import org.firstinspires.ftc.teamcode.commands.RPU1Movement;
 
 /**
  * This file contains an example of an iterative (Non-Linear) "OpMode".
@@ -164,14 +164,14 @@ public class ManualDriving_4WD extends OpMode
         commandsRetrieveRelicStowRPU2 = new ArrayList<BasicCommand>();
         commandsRetrieveRelicScoreRPU1 = new ArrayList<BasicCommand>();
         commandsRetrieveRelicScoreRPU2 = new ArrayList<BasicCommand>();
-        addInitRPU1Commands();
+        /*addInitRPU1Commands();
         addInitRPU2Commands();
         addRetrieveRelicRPU1Commands();
         addRetrieveRelicRPU2Commands();
         addRetrieveRelicStowRPU1Commands();
         addRetrieveRelicStowRPU2Commands();
         addRetrieveRelicScoreRPU1Commands();
-        addRetrieveRelicScoreRPU2Commands();
+        addRetrieveRelicScoreRPU2Commands();*/
         //addCommands();
         //addFinalCommands();
         //iterator = commands.iterator();
@@ -193,12 +193,12 @@ public class ManualDriving_4WD extends OpMode
         currentCommandRetrieveRelicScoreRPU1 = iteratorRetrieveRelicScoreRPU1.next();
         currentCommandRetrieveRelicScoreRPU2 = iteratorRetrieveRelicScoreRPU2.next();
 
-        initStartingPositionRPU1 = ((RPU1Movement) currentCommandInitRPU1).targetPosition;
+        /*initStartingPositionRPU1 = ((RPU1Movement) currentCommandInitRPU1).targetPosition;
         initStartingPositionRPU2 = ((RPU2Movement) currentCommandInitRPU2).targetPosition;
         relicRetrievalStartingPositionRPU1 = ((RPU1Movement) currentCommandRetrieveRelicRPU1).targetPosition;
         relicRetrievalStartingPositionRPU2 = ((RPU2Movement) currentCommandRetrieveRelicRPU2).targetPosition;
         relicScoreStartingPositionRPU1 = ((RPU1Movement) currentCommandRetrieveRelicScoreRPU1).targetPosition;
-        relicScoreStartingPositionRPU2 = ((RPU2Movement) currentCommandRetrieveRelicScoreRPU2).targetPosition;
+        relicScoreStartingPositionRPU2 = ((RPU2Movement) currentCommandRetrieveRelicScoreRPU2).targetPosition;*/
         //state = INIT;
         //initStateRPU1 = INIT;
         //initStateRPU2 = INIT;
@@ -447,8 +447,8 @@ public class ManualDriving_4WD extends OpMode
                 }
             }
 
-            ((RPU1Movement) currentCommandRetrieveRelicRPU1).rpu1PID.setTarget(relicRetrievalStartingPositionRPU1);
-            ((RPU2Movement) currentCommandRetrieveRelicRPU2).rpu2PID.setTarget(relicRetrievalStartingPositionRPU2);
+            //((RPU1Movement) currentCommandRetrieveRelicRPU1).rpu1PID.setTarget(relicRetrievalStartingPositionRPU1);
+            //((RPU2Movement) currentCommandRetrieveRelicRPU2).rpu2PID.setTarget(relicRetrievalStartingPositionRPU2);
         }
 
         if (relic_retrieval_stow_engaged && !relic_retrieval_engaged && !relic_retrieval_score_engaged) {
@@ -498,8 +498,8 @@ public class ManualDriving_4WD extends OpMode
                 }
             }
 
-            ((RPU1Movement) currentCommandRetrieveRelicScoreRPU1).rpu1PID.setTarget(relicScoreStartingPositionRPU1);
-            ((RPU2Movement) currentCommandRetrieveRelicScoreRPU2).rpu2PID.setTarget(relicScoreStartingPositionRPU2);
+            //((RPU1Movement) currentCommandRetrieveRelicScoreRPU1).rpu1PID.setTarget(relicScoreStartingPositionRPU1);
+            //((RPU2Movement) currentCommandRetrieveRelicScoreRPU2).rpu2PID.setTarget(relicScoreStartingPositionRPU2);
         }
 
 
@@ -822,7 +822,7 @@ public class ManualDriving_4WD extends OpMode
         io.proximityArmUp();
     }
 
-    public void addInitRPU1Commands() {
+    /*public void addInitRPU1Commands() {
         commandsInitRPU1.add(new RPU1Movement(0, RPU1Movement.INCREASINGDIRECTION, .25));
     }
 
@@ -852,7 +852,7 @@ public class ManualDriving_4WD extends OpMode
 
     public void addRetrieveRelicScoreRPU2Commands() {
         commandsRetrieveRelicScoreRPU2.add(new RPU2Movement(280, RPU2Movement.INCREASINGDIRECTION, .25));
-    }
+    }*/
 
  /*   public void stateMachine(int smState, BasicCommand smCurrentCommand, Iterator<BasicCommand> smIterator){
         switch (smState) {

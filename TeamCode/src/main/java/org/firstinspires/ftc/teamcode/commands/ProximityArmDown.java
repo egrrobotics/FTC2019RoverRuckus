@@ -37,7 +37,7 @@ public class ProximityArmDown extends BasicCommand {
                 //rampUp = !rampUp;   // Switch ramp direction
             }
 
-            io.setProximityArm(position);
+            //io.setProximityArm(position);
         }
 
         public boolean isFinished(){

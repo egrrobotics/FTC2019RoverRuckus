@@ -20,7 +20,7 @@ public class HandsOpened extends BasicCommand {
 
     public void execute(){
         telemetry.addData("Mode:", "Hands Opened");
-        io.retractHands();
+        //io.retractHands();
         handsOpened = true;
     }
 
@@ -29,7 +29,7 @@ public class HandsOpened extends BasicCommand {
     }
     public void stop() {
         io.setDrivePower(0,0);
-        io.forkLiftMotor.setPower(0);
+        //io.forkLiftMotor.setPower(0);
     }
 
 }

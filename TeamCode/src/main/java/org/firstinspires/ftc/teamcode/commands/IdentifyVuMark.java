@@ -129,9 +129,9 @@ public class IdentifyVuMark extends BasicCommand{
             return false;
         } else {
             //io.setVuMark(vuMark.ordinal());
-            telemetry.addData("VuMark from IdentifyVuMark from IO", io.getVuMark());
+            //telemetry.addData("VuMark from IdentifyVuMark from IO", io.getVuMark());
             telemetry.addData("VuMark from IdentifyVuMark from IO", "%s visible", vuMark);
-            if (vuMark == RelicRecoveryVuMark.LEFT ) {
+            /*if (vuMark == RelicRecoveryVuMark.LEFT ) {
                 io.setVuMark(IO_4WD_Test.LEFT);
                 return true;
             } else if (vuMark == RelicRecoveryVuMark.CENTER){
@@ -145,10 +145,11 @@ public class IdentifyVuMark extends BasicCommand{
                 telemetry.addData("vuMark", "not identified");
                 //io.setVuMark(IO_4WD_Test.UNKNOWN);
                 return false;
-            }
+            }*/
             //return vuMark == (RelicRecoveryVuMark.LEFT || RelicRecoveryVuMark.RIGHT || RelicRecoveryVuMark.CENTER) || System.currentTimeMillis() >= timeOut;
             //return vuMark != RelicRecoveryVuMark.UNKNOWN || System.currentTimeMillis() >= timeOut;
         }
+        return true;
     }
     public void stop() {
         io.setDrivePower(0,0);

@@ -221,7 +221,7 @@ public class ManualDriving_RoverRuckus extends OpMode
                 io.getRightFrontDriveEncoder());
         telemetry.addData("Left Front Drive Encoder",  "Starting at %.2f",
                 io.getLeftFrontDriveEncoder());*/
-        telemetry.addData("4WD!", "Go");
+        telemetry.addData("2WD!", "Go");
     }
 
     /*
@@ -304,9 +304,9 @@ public class ManualDriving_RoverRuckus extends OpMode
             io.setDrivePower((leftPower*.6), (rightPower*.6));
         }
 
-        if((io.getChinMotorEncoder() <= -4000) && (gamepad1.y)) {
+        if((io.getChinMotorEncoder() >= 3600) && (gamepad1.y)) {
             io.chinMotor.setPower(0);
-        } else if(((io.getChinMotorEncoder() >= 0) || (io.touchChin.getState() == false)) && (gamepad1.a)){
+        } else if(((io.getChinMotorEncoder() <= 0) || (io.touchChin.getState() == false)) && (gamepad1.a)){
             io.chinMotor.setPower(0);
         } else if (gamepad1.y){
             io.chinMotor.setPower(1);
@@ -430,23 +430,23 @@ public class ManualDriving_RoverRuckus extends OpMode
         currentCommandInitDOM1.execute();
         currentCommandInitDOM2.execute();
 
-        if (gamepad2.left_stick_y == 1) {
+        if (gamepad2.left_stick_y == -1) {
             // Keep stepping up until we hit the max value.
-            initStartingPositionDOM1 += 10 ;
-            initStartingPositionDOM2 += 10 ;
-            if (initStartingPositionDOM1 >= 800 ) {
-                initStartingPositionDOM1 = 800;
+            initStartingPositionDOM1 += 50 ;
+            initStartingPositionDOM2 += 50 ;
+            if (initStartingPositionDOM1 >= 3000 ) {
+                initStartingPositionDOM1 = 3000;
                 //rampUp = !rampUp;   // Switch ramp direction
             }
-            if (initStartingPositionDOM2 >= 800 ) {
-                initStartingPositionDOM2 = 800;
+            if (initStartingPositionDOM2 >= 3000 ) {
+                initStartingPositionDOM2 = 3000;
                 //rampUp = !rampUp;   // Switch ramp direction
             }
         }
-        else if (gamepad2.left_stick_y == -1) {
+        else if (gamepad2.left_stick_y == 1) {
             // Keep stepping down until we hit the min value.
-            initStartingPositionDOM1 -= 10 ;
-            initStartingPositionDOM2 -= 10 ;
+            initStartingPositionDOM1 -= 50 ;
+            initStartingPositionDOM2 -= 50 ;
             if ((initStartingPositionDOM1 <= 0) || (io.touchDOM.getState() == false)) {
                 initStartingPositionDOM1 = 0;
                 //rampUp = !rampUp;  // Switch ramp direction
@@ -458,7 +458,7 @@ public class ManualDriving_RoverRuckus extends OpMode
         }
 
 
-        if((io.getDOMMotorExtendEncoder() >= 400) && (gamepad2.right_stick_x > 0)) {
+        if((io.getDOMMotorExtendEncoder() >= 9450) && (gamepad2.right_stick_x > 0)) {
             io.domExtendMotor.setPower(0);
         } else if(((io.getDOMMotorExtendEncoder() <= 0) || (io.touchDOMExtend.getState() == false)) && (gamepad2.right_stick_x < 0)) {
             io.domExtendMotor.setPower(0);
@@ -952,11 +952,11 @@ public class ManualDriving_RoverRuckus extends OpMode
     }
 
     public void addInitDOM1Commands() {
-        commandsInitDOM1.add(new DOM1Movement(0, DOM1Movement.INCREASINGDIRECTION, .25));
+        commandsInitDOM1.add(new DOM1Movement(0, DOM1Movement.INCREASINGDIRECTION, .5));
     }
 
     public void addInitDOM2Commands() {
-        commandsInitDOM2.add(new DOM2Movement(0, DOM2Movement.INCREASINGDIRECTION, .25));
+        commandsInitDOM2.add(new DOM2Movement(0, DOM2Movement.INCREASINGDIRECTION, .5));
     }
 
     /*public void addRetrieveRelicRPU1Commands() {

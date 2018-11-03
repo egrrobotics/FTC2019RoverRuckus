@@ -40,10 +40,10 @@ public class WaitForTime extends BasicCommand {
 
         telemetry.addData("Distance right sensor(cm)",
                 String.format(Locale.US, "%.02f", io.rightDistance.getDistance(DistanceUnit.CM)));
-        telemetry.addData("Proximity Correction:", io.getProximityCorrection());
-        telemetry.addData("Left Proximity Average:", io.getLeftProximityAverage());
-        telemetry.addData("Right Proximity Average:", io.getRightProximityAverage());
-        telemetry.addData("VuMark from IdentifyVuMark from IO", io.getVuMark());
+        //telemetry.addData("Proximity Correction:", io.getProximityCorrection());
+        //telemetry.addData("Left Proximity Average:", io.getLeftProximityAverage());
+        //telemetry.addData("Right Proximity Average:", io.getRightProximityAverage());
+        //telemetry.addData("VuMark from IdentifyVuMark from IO", io.getVuMark());
     }
 
     public boolean isFinished(){

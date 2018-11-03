@@ -61,9 +61,9 @@ public class IO_RoverRuckus_Test {
     //public double proximityCorrection = 0;
     //public boolean proximityArmButtonPushed = false;
 
-    public static double hookClockwise = 1;
-    public static double hookCounterClockwise = 0;
-    public static double hookStop = 0.5;
+    public static double hookClockwise = .79;
+    public static double hookCounterClockwise = -.79;
+    public static double hookStop = 0;
 
     //public static double leftHandOut = 0;
     //public static double rightHandOut = 1;
@@ -149,7 +149,7 @@ public class IO_RoverRuckus_Test {
 
         rightBackDrive.setDirection(DcMotorSimple.Direction.FORWARD);
         leftBackDrive.setDirection(DcMotorSimple.Direction.REVERSE);
-        chinMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        chinMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         dom1Motor.setDirection(DcMotorSimple.Direction.REVERSE);
         dom2Motor.setDirection(DcMotorSimple.Direction.FORWARD);
         domExtendMotor.setDirection(DcMotorSimple.Direction.REVERSE);

@@ -36,7 +36,7 @@ public class DriveForwardGlyph extends BasicCommand {
     public void init(){
         endTime = System.currentTimeMillis() + 10000;
 
-        if (fieldposition == "Blue1") {
+        /*if (fieldposition == "Blue1") {
             if (io.getVuMark()== io.LEFT) {
                 this.targetPosition = 28; //inches
                 this.test = XGREATERTHAN;
@@ -114,7 +114,7 @@ public class DriveForwardGlyph extends BasicCommand {
                 this.test = YGREATERTHAN;
                 this.targetHeading = 90; //turn in degrees
             }
-        }
+        }*/
 
         headingPID.setTarget(targetHeading);
         distancePID.setTarget(targetPosition);
@@ -158,10 +158,10 @@ public class DriveForwardGlyph extends BasicCommand {
         telemetry.addData("Drive Speed: ", driveSpeed);
         telemetry.addData("Left Speed: ", leftSpeed);
         telemetry.addData("Right Speed: ", rightSpeed);
-        telemetry.addData("Jewel Color is Unknown, Red, Blue: ", io.getJewelColor());
+        //telemetry.addData("Jewel Color is Unknown, Red, Blue: ", io.getJewelColor());
         telemetry.addData("Alliance Color is Unknown, Red, Blue: ", io.getAllianceColor());
-        telemetry.addData("VuMark from IdentifyVuMark from IO", io.getVuMark());
-        telemetry.addData("VuMark from IdentifyVuMark from IO", "%s visible", io.vuMark);
+        //telemetry.addData("VuMark from IdentifyVuMark from IO", io.getVuMark());
+        //telemetry.addData("VuMark from IdentifyVuMark from IO", "%s visible", io.vuMark);
         telemetry.addData("Mode:", "Drive Forward");
     }
 

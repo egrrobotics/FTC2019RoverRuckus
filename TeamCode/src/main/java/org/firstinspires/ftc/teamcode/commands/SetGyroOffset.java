@@ -11,7 +11,7 @@ public class SetGyroOffset extends BasicCommand {
         }
 
         public void init() {
-            io.setGyroOffset();
+            //io.setGyroOffset();
         }
 
         public void execute(){

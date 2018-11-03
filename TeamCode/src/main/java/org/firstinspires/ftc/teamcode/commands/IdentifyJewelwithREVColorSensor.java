@@ -17,39 +17,40 @@ public class IdentifyJewelwithREVColorSensor extends BasicCommand{
     }
 
     public void init() {
-        io.revColorSensor.enableLed(true);
+        //io.revColorSensor.enableLed(true);
         endTime = System.currentTimeMillis() + 4000;
         // send the info back to driver station using telemetry function.
         telemetry.addData("LED", true ? "On" : "Off");
-        telemetry.addData("Clear", io.revColorSensor.alpha());
+        /*telemetry.addData("Clear", io.revColorSensor.alpha());
         telemetry.addData("Red  ", io.revColorSensor.red());
         telemetry.addData("Green", io.revColorSensor.green());
         telemetry.addData("Blue ", io.revColorSensor.blue());
-        telemetry.addData("Unknown, Red, Blue: ", io.getJewelColor());
+        telemetry.addData("Unknown, Red, Blue: ", io.getJewelColor());*/
         telemetry.addData("Mode:", "Identify Jewel");
     }
 
     public void execute() {
-        if (((io.revColorSensor.red() - io.revColorSensor.blue()) >= 10) && (foundRedJewel == 0)) {
+        /*if (((io.revColorSensor.red() - io.revColorSensor.blue()) >= 10) && (foundRedJewel == 0)) {
             foundRedJewel = System.currentTimeMillis();
         } else if (foundBlueJewel == 0) {
             foundBlueJewel = System.currentTimeMillis();
-        }
+        }*/
 /*        if (((io.revColorSensor.blue() - io.revColorSensor.red()) > 0) && (foundBlueJewel == 0)) {
             foundBlueJewel = System.currentTimeMillis();
         }*/
         telemetry.addData("LED", true ? "On" : "Off");
-        telemetry.addData("Clear", io.revColorSensor.alpha());
+        /*telemetry.addData("Clear", io.revColorSensor.alpha());
         telemetry.addData("Red  ", io.revColorSensor.red());
         telemetry.addData("Green", io.revColorSensor.green());
         telemetry.addData("Blue ", io.revColorSensor.blue());
-        telemetry.addData("Unknown, Red, Blue: ", io.getJewelColor());
+        telemetry.addData("Unknown, Red, Blue: ", io.getJewelColor());*/
         telemetry.addData("Mode:", "Identify Jewel");
     }
 
     public boolean isFinished(){
         if (System.currentTimeMillis() >= endTime) return true;
-        if (Math.abs(io.revColorSensor.red() - io.revColorSensor.blue()) == 0) {
+        return true;
+        /*if (Math.abs(io.revColorSensor.red() - io.revColorSensor.blue()) == 0) {
             io.setJewelColor(IO_4WD_Test.UNKNOWN);
             telemetry.addData("Unknown, Red, Blue: ", io.getJewelColor());
             telemetry.addData("Mode:", "Identify Jewel");
@@ -69,7 +70,7 @@ public class IdentifyJewelwithREVColorSensor extends BasicCommand{
             telemetry.addData("Unknown, Red, Blue: ", io.getJewelColor());
             telemetry.addData("Mode:", "Identify Jewel");
             return false;
-        }
+        }*/
 /*        } else if (((io.revColorSensor.blue() - io.revColorSensor.red()) > 0) && (foundBlueJewel != 0) && (System.currentTimeMillis() >= (foundBlueJewel + 1000))) {
             io.setJewelColor(IO_4WD_Test.BLUE);
             telemetry.addData("Unknown, Red, Blue: ", io.getJewelColor());

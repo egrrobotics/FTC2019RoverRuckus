@@ -20,16 +20,17 @@ public class ElevatorDown extends BasicCommand {
 
     public void execute(){
         telemetry.addData("Mode:", "Elevator Down");
-        io.forkLiftMotor.setPower(.6);
+        //io.forkLiftMotor.setPower(.6);
     }
 
     public boolean isFinished(){
-        return io.touchBottom.getState() == false || System.currentTimeMillis() >= timeOut;
+        //return io.touchBottom.getState() == false || System.currentTimeMillis() >= timeOut;
+        return true;
     }
 
     public void stop() {
         io.setDrivePower(0,0);
-        io.forkLiftMotor.setPower(0);
+        //io.forkLiftMotor.setPower(0);
     }
 
 }

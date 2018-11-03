@@ -37,7 +37,7 @@ public class Rotate extends BasicCommand {
         telemetry.addData("Correction: ", correction);
         telemetry.addData("Left Speed: ", leftSpd);
         telemetry.addData("Right Speed: ", rightSpd);
-        telemetry.addData("VuMark from IdentifyVuMark from IO", io.getVuMark());
+        //telemetry.addData("VuMark from IdentifyVuMark from IO", io.getVuMark());
         telemetry.addData("Mode:", "Rotate");
     }
 
@@ -50,7 +50,7 @@ public class Rotate extends BasicCommand {
         telemetry.addData("Correction: ", headingPID.getCorrection(Math.toDegrees(io.heading)));
         telemetry.addData("Left Speed: ", leftSpd);
         telemetry.addData("Right Speed: ", rightSpd);
-        telemetry.addData("VuMark from IdentifyVuMark from IO", io.getVuMark());
+        //telemetry.addData("VuMark from IdentifyVuMark from IO", io.getVuMark());
         //return Math.abs(io.getHeading() - heading) <=2 || System.currentTimeMillis() >= timeOut;
         return Math.abs(Math.toDegrees(io.heading) - heading) <=2.3 || System.currentTimeMillis() >= timeOut;
     }

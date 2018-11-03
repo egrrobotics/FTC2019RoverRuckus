@@ -22,37 +22,37 @@ public class IdentifyJewel extends BasicCommand{
     }
 
     public void init() {
-        io.colorSensor.enableLed(true);
+        //io.colorSensor.enableLed(true);
         endTime = System.currentTimeMillis() + 7000;
         // send the info back to driver station using telemetry function.
         telemetry.addData("LED", true ? "On" : "Off");
-        telemetry.addData("Clear", io.colorSensor.alpha());
+        /*telemetry.addData("Clear", io.colorSensor.alpha());
         telemetry.addData("Red  ", io.colorSensor.red());
         telemetry.addData("Green", io.colorSensor.green());
         telemetry.addData("Blue ", io.colorSensor.blue());
-        telemetry.addData("Unknown, Red, Blue: ", io.getJewelColor());
+        telemetry.addData("Unknown, Red, Blue: ", io.getJewelColor());*/
         telemetry.addData("Mode:", "Identify Jewel");
     }
 
     public void execute() {
-        if ((io.colorSensor.red() >= 1) && (foundRedJewel == 0)) {
+        /*if ((io.colorSensor.red() >= 1) && (foundRedJewel == 0)) {
             foundRedJewel = System.currentTimeMillis();
         }
         if ((io.colorSensor.blue() >= 1) && (foundBlueJewel == 0)) {
             foundBlueJewel = System.currentTimeMillis();
-        }
+        }*/
         telemetry.addData("LED", true ? "On" : "Off");
-        telemetry.addData("Clear", io.colorSensor.alpha());
+        /*telemetry.addData("Clear", io.colorSensor.alpha());
         telemetry.addData("Red  ", io.colorSensor.red());
         telemetry.addData("Green", io.colorSensor.green());
         telemetry.addData("Blue ", io.colorSensor.blue());
-        telemetry.addData("Unknown, Red, Blue: ", io.getJewelColor());
+        telemetry.addData("Unknown, Red, Blue: ", io.getJewelColor());*/
         telemetry.addData("Mode:", "Identify Jewel");
     }
 
     public boolean isFinished(){
         if (System.currentTimeMillis() >= endTime) return true;
-        if ((io.colorSensor.red() < 1) && (io.colorSensor.blue() < 1)) {
+        /*if ((io.colorSensor.red() < 1) && (io.colorSensor.blue() < 1)) {
             io.setJewelColor(IO_4WD_Test.UNKNOWN);
             return false;
         } else if ((io.colorSensor.red() >= 1) && (foundRedJewel != 0) && (System.currentTimeMillis() >= (foundRedJewel + 2000))) {
@@ -64,7 +64,8 @@ public class IdentifyJewel extends BasicCommand{
         } else{
             io.setJewelColor(IO_4WD_Test.UNKNOWN);
             return false;
-        }
+        }*/
+        return true;
     }
     public void stop() {
         io.setDrivePower(0,0);

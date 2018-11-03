@@ -18,21 +18,22 @@ public class ResetGyro extends BasicCommand {
         }
 
         public void execute(){
-            if (io.gyro.isCalibrating())  {
+            /*if (io.gyro.isCalibrating())  {
                 telemetry.addData(">", "Gyro Calibrating. Do Not Move!");
             } else {
                 telemetry.addData(">", "Gyro Calibrated.");
-            }
+            }*/
         }
 
         public boolean isFinished(){
-            if (!io.gyro.isCalibrating()){
+            /*if (!io.gyro.isCalibrating()){
                 telemetry.addData(">", "Gyro Calibrated.");
                 io.setGyroOffset();
                 return true;
             } else {
                 return false;
-            }
+            }*/
+            return true;
         }
         public void stop() {
             io.setDrivePower(0,0);

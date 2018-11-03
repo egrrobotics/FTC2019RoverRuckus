@@ -37,7 +37,7 @@ public class JewelArmDown extends BasicCommand {
                 //rampUp = !rampUp;   // Switch ramp direction
             }
 
-            io.setJewelArm(position);
+            //io.setJewelArm(position);
         }
 
         public boolean isFinished(){

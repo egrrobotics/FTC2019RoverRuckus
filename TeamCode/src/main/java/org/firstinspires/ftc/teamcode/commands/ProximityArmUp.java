@@ -38,7 +38,7 @@ public class ProximityArmUp extends BasicCommand {
                 //rampUp = !rampUp;  // Switch ramp direction
             }
 
-            io.setProximityArm(position);
+            //io.setProximityArm(position);
         }
 
         public boolean isFinished(){ return proximityArmUp || System.currentTimeMillis() >= timeOut; }
