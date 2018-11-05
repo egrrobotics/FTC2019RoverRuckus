@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.commands;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.utilities.IO_RoverRuckus_Test;
@@ -13,9 +14,11 @@ public class BasicCommand {
     static IO_RoverRuckus_Test io;
     //static IO_4WD_Test io;
     static Telemetry telemetry;
+    static HardwareMap map;
     public static void setIO(IO_RoverRuckus_Test i) {
         io = i;
     }
+    public static void setMap(HardwareMap Map) { map = Map; }
     public static IO_RoverRuckus_Test getIO() {
         return io ;
     }

@@ -4,17 +4,22 @@ package org.firstinspires.ftc.teamcode;
 import org.firstinspires.ftc.teamcode.commands.CommandGroup;
 import org.firstinspires.ftc.teamcode.commands.ElevatorUp;
 import org.firstinspires.ftc.teamcode.commands.HandsClosed;
+import org.firstinspires.ftc.teamcode.commands.HookRelease;
+import org.firstinspires.ftc.teamcode.commands.IdentifyGoldMineral;
 import org.firstinspires.ftc.teamcode.commands.IdentifyJewel;
 import org.firstinspires.ftc.teamcode.commands.IdentifyJewelwithREVColorSensor;
 import org.firstinspires.ftc.teamcode.commands.IdentifyVuMark;
 import org.firstinspires.ftc.teamcode.commands.JewelArmDown;
 import org.firstinspires.ftc.teamcode.commands.JewelArmUp;
 import org.firstinspires.ftc.teamcode.commands.ProximityArmMid;
+import org.firstinspires.ftc.teamcode.commands.RaiseDOM;
 import org.firstinspires.ftc.teamcode.commands.RemoveOpponentsJewel;
 import org.firstinspires.ftc.teamcode.commands.ResetDriveEncoders;
+import org.firstinspires.ftc.teamcode.commands.RobotDown;
 import org.firstinspires.ftc.teamcode.commands.Rotate;
 import org.firstinspires.ftc.teamcode.commands.WaitForTime;
 import org.firstinspires.ftc.teamcode.utilities.IO_4WD_Test;
+import org.firstinspires.ftc.teamcode.utilities.IO_RoverRuckus_Test;
 
 //import org.firstinspires.ftc.teamcode.commands.DriveForwardForDistance;
 //import org.firstinspires.ftc.teamcode.commands.DriveHorizontal;
@@ -34,17 +39,21 @@ public abstract class BlueAuton extends FirstAuton {
 
     @Override
     public void addCommands() {
-        io.setAllianceColor(IO_4WD_Test.BLUE);
+        io.setAllianceColor(IO_RoverRuckus_Test.BLUE);
         commands.add(new ResetDriveEncoders());
-        commands.add(new HandsClosed());
-        commands.add(new ProximityArmMid());
+        commands.add(new RobotDown());
+        commands.add(new WaitForTime(50));
+        commands.add(new HookRelease());
+        commands.add(new IdentifyGoldMineral());
+        commands.add(new RaiseDOM());
+        //commands.add(new ProximityArmMid());
 
-        CommandGroup group = new CommandGroup();
-        group.addCommand(new ElevatorUp());
+        //CommandGroup group = new CommandGroup();
+        //group.addCommand(new ElevatorUp());
         //group.addCommand(new ProximityArmMid());
-        group.addCommand(new JewelArmDown());
-        commands.add(group);
-        commands.add(new WaitForTime(150));
+        //group.addCommand(new JewelArmDown());
+        //commands.add(group);
+        //commands.add(new WaitForTime(150));
 
         //commands.add(new HandsClosed());
         //commands.add(new WaitForTime(150));
@@ -65,19 +74,19 @@ public abstract class BlueAuton extends FirstAuton {
         //commands.add(new DriveForward(47,DriveForward.YGREATERTHAN,.55,38));
         //group.addCommand(new IdentifyVuMark());
         //group.addCommand(new IdentifyJewel());
-        commands.add(new IdentifyJewelwithREVColorSensor());
+        //commands.add(new IdentifyJewelwithREVColorSensor());
         //commands.add(group);
-        commands.add(new RemoveOpponentsJewel());
-        commands.add(new WaitForTime(150));
-        commands.add(new ResetDriveEncoders());
-        commands.add(new JewelArmUp());
+        //commands.add(new RemoveOpponentsJewel());
+        //commands.add(new WaitForTime(150));
+        //commands.add(new ResetDriveEncoders());
+        //commands.add(new JewelArmUp());
         //commands.add(new IdentifyVuMark());
         //commands.add(new IdentifyJewel());
         //commands.add(new Rotate(-15,.7,0));
-        commands.add(new WaitForTime(150));
-        commands.add(new Rotate(0,.6,.6));
-        commands.add(new WaitForTime(150));
-        commands.add(new ResetDriveEncoders());
+        //commands.add(new WaitForTime(150));
+        //commands.add(new Rotate(0,.6,.6));
+        //commands.add(new WaitForTime(150));
+        //commands.add(new ResetDriveEncoders());
         //BasicCommand.getIO().resetDriveEncoders();
         //io.resetDriveEncoders();
         //commands.add(new ResetDriveEncoders());

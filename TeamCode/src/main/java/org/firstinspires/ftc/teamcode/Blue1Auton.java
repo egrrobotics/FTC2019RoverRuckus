@@ -17,12 +17,12 @@ import org.firstinspires.ftc.teamcode.commands.WaitForTime;
  * Created by David Austin on 11/10/2016.
  */
 
-@Autonomous(name="Blue1",group="Auton")
+@Autonomous(name="Blue Gold",group="Auton")
 public class Blue1Auton extends BlueAuton {
     public void addFinalCommands() {
         //commands.add(new DriveForward(18,DriveForward.XGREATERTHAN,.35,0));
         //commands.add(new WaitForTime(200));
-        commands.add(new ResetDriveEncoders());
+        /*commands.add(new ResetDriveEncoders());
         commands.add(new WaitForTime(100));
         commands.add(new DriveForwardGlyph(.35, "Blue1"));
         commands.add(new WaitForTime(100));
@@ -44,15 +44,15 @@ public class Blue1Auton extends BlueAuton {
         commands.add(new IdentifyProximity());
         commands.add(new WaitForTime(50));
         commands.add(new ProximityArmUp());
-        commands.add(new WaitForTime(50));
+        commands.add(new WaitForTime(50));*/
 
 
 
         //drive forward remaining with correction
-        commands.add(new DriveForward(-3.5,DriveForward.YLESSTHAN,.75,-90, false, true)); //This plus drive to glyph box w/ correction is -9
+        /*commands.add(new DriveForward(-3.5,DriveForward.YLESSTHAN,.75,-90, false, true)); //This plus drive to glyph box w/ correction is -9
         commands.add(new WaitForTime(50));
         commands.add(new ResetDriveEncoders());
-        commands.add(new WaitForTime(100));
+        commands.add(new WaitForTime(100));*/
 
 
 
@@ -62,14 +62,14 @@ public class Blue1Auton extends BlueAuton {
 
 
 
-        commands.add(new HandsOpenedMid());
+        /*commands.add(new HandsOpenedMid());
         commands.add(new WaitForTime(50));
         commands.add(new ResetDriveEncoders());
         commands.add(new WaitForTime(100));
         commands.add(new DriveForward(2,DriveForward.YGREATERTHAN,-.6,-90));
         commands.add(new WaitForTime(50));
         commands.add(new ResetDriveEncoders());
-        commands.add(new WaitForTime(100));
+        commands.add(new WaitForTime(100));*/
 
 
 

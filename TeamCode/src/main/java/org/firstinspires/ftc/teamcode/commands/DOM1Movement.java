@@ -23,7 +23,7 @@ public class DOM1Movement extends BasicCommand {
         //headingPID = new PID(0.05, 0, 0);
         //headingPID.setTarget(targetHeading);
         //dom1PID = new PID(.01,0,0);
-        dom1PID = new PID(.001,0,0);
+        dom1PID = new PID(.045,0,0);
         //distancePID = new PID(.2,0,0);
         dom1PID.setTarget(targetPosition);
         this.targetPosition = targetPosition;
@@ -43,7 +43,8 @@ public class DOM1Movement extends BasicCommand {
     public void execute(){
         //double heading = io.getHeading();
         //double heading = Math.toDegrees(io.heading);
-        double correction = dom1PID.getCorrection(io.getDOM1MotorEncoder());
+        //double correction = dom1PID.getCorrection(io.getDOM1MotorEncoder());
+        double correction = dom1PID.getCorrection(io.getDOMPotDegrees());
         //double distanceCorrection;
 /*        switch(test) {
             case XGREATERTHAN:

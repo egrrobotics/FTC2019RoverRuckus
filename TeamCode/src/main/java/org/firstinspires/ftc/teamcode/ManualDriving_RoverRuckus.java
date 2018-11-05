@@ -152,6 +152,7 @@ public class ManualDriving_RoverRuckus extends OpMode
         //io.jewelArmUp();
         ///io.proximityArmMid();
         io.hookStop();
+        io.markerBoxFlat();
         io.resetDriveEncoders();
 
         BasicCommand.setIO(io);
@@ -392,6 +393,19 @@ public class ManualDriving_RoverRuckus extends OpMode
             io.domSweepMotor.setPower(0);
         }
 
+        if (gamepad2.left_bumper) {
+            io.markerBoxUp();
+        }
+
+        if (gamepad2.right_bumper) {
+            io.markerBoxDown();
+        }
+
+        if (gamepad1.right_bumper) {
+            io.markerBoxFlat();
+        }
+
+
         /*telemetry.addData("Elevator Hand Position", position);
         io.setHands(position);
         telemetry.addData("Relic Hand Position", position2);
@@ -432,21 +446,21 @@ public class ManualDriving_RoverRuckus extends OpMode
 
         if (gamepad2.left_stick_y == -1) {
             // Keep stepping up until we hit the max value.
-            initStartingPositionDOM1 += 50 ;
-            initStartingPositionDOM2 += 50 ;
-            if (initStartingPositionDOM1 >= 3000 ) {
-                initStartingPositionDOM1 = 3000;
+            initStartingPositionDOM1 += 5 ;
+            initStartingPositionDOM2 += 5 ;
+            if (initStartingPositionDOM1 >= 270 ) {
+                initStartingPositionDOM1 = 270;
                 //rampUp = !rampUp;   // Switch ramp direction
             }
-            if (initStartingPositionDOM2 >= 3000 ) {
-                initStartingPositionDOM2 = 3000;
+            if (initStartingPositionDOM2 >= 270 ) {
+                initStartingPositionDOM2 = 270;
                 //rampUp = !rampUp;   // Switch ramp direction
             }
         }
         else if (gamepad2.left_stick_y == 1) {
             // Keep stepping down until we hit the min value.
-            initStartingPositionDOM1 -= 50 ;
-            initStartingPositionDOM2 -= 50 ;
+            initStartingPositionDOM1 -= 5 ;
+            initStartingPositionDOM2 -= 5 ;
             if ((initStartingPositionDOM1 <= 0) || (io.touchDOM.getState() == false)) {
                 initStartingPositionDOM1 = 0;
                 //rampUp = !rampUp;  // Switch ramp direction
@@ -882,6 +896,9 @@ public class ManualDriving_RoverRuckus extends OpMode
         telemetry.addData("Right Range", String.format("%.01f in", io.rightDistance.getDistance(DistanceUnit.INCH)));
         telemetry.addData("Front Range", String.format("%.01f in", io.frontDistance.getDistance(DistanceUnit.INCH)));
         telemetry.addData("Back Range", String.format("%.01f in", io.backDistance.getDistance(DistanceUnit.INCH)));
+
+        telemetry.addData("Potentiometer", String.format("%.01f volts", io.domPot.getVoltage()));
+        telemetry.addData("Potentiometer", String.format("%.01f degrees", (io.domPot.getVoltage()*81.8181818)));
 
 
         if (io.touchChin.getState() == false) {

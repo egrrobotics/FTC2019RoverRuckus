@@ -1,6 +1,9 @@
 package org.firstinspires.ftc.teamcode.utilities;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.robotcore.hardware.AnalogInput;
+import com.qualcomm.robotcore.hardware.AnalogOutput;
+import com.qualcomm.robotcore.hardware.AnalogSensor;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -13,6 +16,7 @@ import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
@@ -32,6 +36,7 @@ public class IO_RoverRuckus_Test {
     public DcMotor rightBackDrive, leftBackDrive, chinMotor, dom1Motor, dom2Motor, domExtendMotor, domSweepMotor;
     //public GyroSensor gyro;
     public CRServo hook;
+    public Servo markerBox;
     public DistanceSensor leftDistance;
     public DistanceSensor rightDistance;
     public DistanceSensor frontDistance;
@@ -41,10 +46,17 @@ public class IO_RoverRuckus_Test {
     public DigitalChannel touchDOM;
     public DigitalChannel touchDOMExtend;
 
+    public AnalogInput domPot;
+
+    public WebcamName webcamName;
+
     public BNO055IMU imu;
+    public BNO055IMU imu1;
     //double gyroOffset = 0;
     double imuOffset = 0;
+    double imu1Offset = 0;
     public double heading = 0;
+    public double heading1 = 0;
     double rightBackOffset = 0, leftBackOffset = 0, chinOffset = 0, dom1Offset = 0, dom2Offset = 0, domExtendOffset = 0;
     double lastRightBackEncoder = 0, lastLeftBackEncoder = 0, lastChinEncoder = 0, lastDOM1Encoder = 0, lastDOM2Encoder = 0, lastDOMExtendEncoder = 0;
     double x = 0, y = 0;
@@ -77,10 +89,17 @@ public class IO_RoverRuckus_Test {
     //public static double relicHandOpen = 0;
     //public static double relicHandClosed = 1;
 
+    public static double markerBoxUp = 1;
+    public static double markerBoxFlat = .5;
+    public static double markerBoxDown = 0;
+
     // State used for updating telemetry
     public Orientation angles;
     public Acceleration gravity;
+    public Orientation angles1;
+    public Acceleration gravity1;
     public double[] eulerAngles = new double[3];
+    public double[] eulerAngles1 = new double[3];
 
     // Set up the parameters with which we will use our IMU. Note that integration
     // algorithm here just reports accelerations to the logcat log; it doesn't actually
@@ -88,9 +107,11 @@ public class IO_RoverRuckus_Test {
     BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
 
     Telemetry telemetry;
+    HardwareMap map;
 
     public IO_RoverRuckus_Test(HardwareMap map, Telemetry telemetry) {
         this.telemetry = telemetry;
+        this.map = map;
         rightBackDrive = map.dcMotor.get("backright");
         leftBackDrive = map.dcMotor.get("backleft");
         chinMotor = map.dcMotor.get("chin");
@@ -100,6 +121,7 @@ public class IO_RoverRuckus_Test {
         domSweepMotor = map.dcMotor.get("domSweep");
 
         hook = map.crservo.get("hook");
+        markerBox = map.servo.get("markerbox");
         /*rightHand = map.servo.get("right_hand");
         jewelArm = map.servo.get("jewel_arm");
         proximityArm = map.servo.get("proximity_arm");
@@ -108,12 +130,17 @@ public class IO_RoverRuckus_Test {
         touchChin = map.digitalChannel.get("touchchin");
         touchDOM = map.digitalChannel.get("touchdom");
         touchDOMExtend = map.digitalChannel.get("touchdomextend");
+
+        domPot = map.analogInput.get("dompot");
+
+        webcamName = map.get(WebcamName.class, "Webcam 2");
         /*touchProximity = map.digitalChannel.get("touchproximity");
         touchLowerRelicArm = map.digitalChannel.get("touchlowerrelicarm");
         touchUpperRelicArm = map.digitalChannel.get("touchupperrelicarm");*/
 
         //gyro = map.gyroSensor.get("gyro");
         imu = map.get(BNO055IMU.class, "imu");
+        imu1 = map.get(BNO055IMU.class, "imu1");
 
         /*//ods = map.opticalDistanceSensor.get("ods");
         colorSensor = map.colorSensor.get("colorsensor");*/
@@ -194,6 +221,13 @@ public class IO_RoverRuckus_Test {
 
     public void hookCounterClockwise() { hook.setPower(IO_RoverRuckus_Test.hookCounterClockwise); }
 
+    public void markerBoxUp() { markerBox.setPosition(IO_RoverRuckus_Test.markerBoxUp); }
+
+    public void markerBoxDown() { markerBox.setPosition(IO_RoverRuckus_Test.markerBoxDown); }
+
+    public void markerBoxFlat() { markerBox.setPosition(IO_RoverRuckus_Test.markerBoxFlat); }
+
+
     /*public void jewelArmDown() { jewelArm.setPosition(IO_RoverRuckus_Test.jewelArmDown); }
 
     public void proximityArmUp() {
@@ -214,6 +248,11 @@ public class IO_RoverRuckus_Test {
     public void setIMUOffset() {
         angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         imuOffset = angles.firstAngle;
+    }
+
+    public void setIMU1Offset() {
+        angles1 = imu1.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        imu1Offset = angles1.firstAngle;
     }
 
     public void resetDriveEncoders() {
@@ -253,6 +292,7 @@ public class IO_RoverRuckus_Test {
         //double heading = Math.toRadians(getHeading());
         //heading from imu
         heading = Math.toRadians(getIMUHeading());
+        heading1 = Math.toRadians(getIMU1Heading());
         x += averageChange * Math.cos(heading);
         y += averageChange * Math.sin(heading);
         lastRightBackEncoder = rightBackEncoder;
@@ -277,6 +317,21 @@ public class IO_RoverRuckus_Test {
 
         telemetry.addData("Distance right sensor(cm)",
                 String.format(Locale.US, "%.02f", rightDistance.getDistance(DistanceUnit.CM)));*/
+
+        telemetry.addData("IMU Heading",  "Starting at %.2f",
+                getIMUHeading());
+        telemetry.addData("IMU1 Heading",  "Starting at %.2f",
+                getIMU1Heading());
+
+/*        telemetry.addData("IMU Y",  "Starting at %.2f",
+                angles.secondAngle);
+        telemetry.addData("IMU1 Y",  "Starting at %.2f",
+                angles.secondAngle);
+
+        telemetry.addData("IMU X",  "Starting at %.2f",
+                angles.thirdAngle);
+        telemetry.addData("IMU1 X",  "Starting at %.2f",
+                angles.thirdAngle);*/
 
     }
 
@@ -313,6 +368,21 @@ public class IO_RoverRuckus_Test {
         return -imuHeading;
     }
 
+    public double getIMU1Heading() {
+        // Acquiring the angles is relatively expensive; we don't want
+        // to do that in each of the three items that need that info, as that's
+        // three times the necessary expense.
+        angles1   = imu1.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        double imu1Heading = angles1.firstAngle - imu1Offset;
+        while (imu1Heading > 180) {
+            imu1Heading -= 360;
+        }
+        while (imu1Heading <= - 180) {
+            imu1Heading += 360;
+        }
+        return -imu1Heading;
+    }
+
     /**
      * This method returns the Euler angles of all 3 axes from quaternion orientation.
      *
@@ -333,14 +403,32 @@ public class IO_RoverRuckus_Test {
         angles[2] = Math.toDegrees(Math.atan2(2.0*(q.w*q.z + q.x*q.y), 1.0 - 2.0*(q.y*q.y + q.z*q.z)));
     }   //getEulerAngles
 
+    private void getEulerAngles1(double[] angles1)
+    {
+        Quaternion q1 = imu1.getQuaternionOrientation();
+
+        //
+        // 0: roll (x-axis rotation)
+        // 1: pitch (y-axis rotation)
+        // 2: yaw (z-axis rotation)
+        //
+        angles1[0] = Math.toDegrees(Math.atan2(2.0*(q1.w*q1.x + q1.y*q1.z), 1.0 - 2.0*(q1.x*q1.x + q1.y*q1.y)));
+        double sinp = 2.0*(q1.w*q1.y - q1.z*q1.x);
+        angles1[1] = Math.toDegrees(Math.abs(sinp) >= 1.0? Math.signum(sinp)*(Math.PI/2.0): Math.asin(sinp));
+        angles1[2] = Math.toDegrees(Math.atan2(2.0*(q1.w*q1.z + q1.x*q1.y), 1.0 - 2.0*(q1.y*q1.y + q1.z*q1.z)));
+    }
+
     public double getRightBackDriveEncoder() {
         return rightBackDrive.getCurrentPosition() - rightBackOffset;
     }
+
     public double getLeftBackDriveEncoder() {
         return leftBackDrive.getCurrentPosition() - leftBackOffset;
     }
+
     public double getChinMotorEncoder() {
-        return chinMotor.getCurrentPosition() - chinOffset; }
+        return chinMotor.getCurrentPosition() - chinOffset;
+    }
 
     public double getDOM1MotorEncoder() {
         return dom1Motor.getCurrentPosition() - dom1Offset;
@@ -352,6 +440,14 @@ public class IO_RoverRuckus_Test {
 
     public double getDOMMotorExtendEncoder() {
         return domExtendMotor.getCurrentPosition() - domExtendOffset;
+    }
+
+    public double getDOMPotVoltage() {
+        return domPot.getVoltage();
+    }
+
+    public double getDOMPotDegrees() {
+        return (domPot.getVoltage()*81.8181818);
     }
 
     public void setDrivePower(double left, double right) {
@@ -373,6 +469,18 @@ public class IO_RoverRuckus_Test {
         //Thread.sleep(1000); // wait 1 second for gyro to stabilize (may be movement from initializing servo)
         //gyro.calibrate();
         imu.initialize(parameters);
+    }
+
+    public void calibrateGyroandIMU1() {
+        // start calibrating the gyro.
+        telemetry.addData(">", "IMU1 Calibrating. Do Not Move!");
+        //telemetry.update();
+
+        sleep(500);
+
+        //Thread.sleep(1000); // wait 1 second for gyro to stabilize (may be movement from initializing servo)
+        //gyro.calibrate();
+        imu1.initialize(parameters);
     }
 
     /*public void setJewelColor(int jcolor){

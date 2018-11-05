@@ -26,17 +26,17 @@ public abstract class FirstAuton extends OpMode {
     int state;
     int initState;
     ArrayList<BasicCommand> commands;
-    ArrayList<BasicCommand> commandsInit;
+    /*ArrayList<BasicCommand> commandsInit;
     ArrayList<BasicCommand> commandsInitDOM1;
-    ArrayList<BasicCommand> commandsInitDOM2;
+    ArrayList<BasicCommand> commandsInitDOM2;*/
     BasicCommand currentCommand;
-    BasicCommand currentCommandInit;
+    /*BasicCommand currentCommandInit;
     BasicCommand currentCommandInitDOM1;
-    BasicCommand currentCommandInitDOM2;
+    BasicCommand currentCommandInitDOM2;*/
     Iterator<BasicCommand> iterator;
-    Iterator<BasicCommand> iteratorInit;
+    /*Iterator<BasicCommand> iteratorInit;
     Iterator<BasicCommand> iteratorInitDOM1;
-    Iterator<BasicCommand> iteratorInitDOM2;
+    Iterator<BasicCommand> iteratorInitDOM2;*/
     //int allianceColor = IO.RED;
 
     public FirstAuton() {
@@ -49,13 +49,17 @@ public abstract class FirstAuton extends OpMode {
         io = new IO_RoverRuckus_Test(hardwareMap, telemetry);
         //io.setAllianceColor(allianceColor);
         BasicCommand.setIO(io);
+        BasicCommand.setMap(hardwareMap);
         BasicCommand.setTelemetry(telemetry);
         //io.retractHands();
         //io.openRelicHand();
         //io.jewelArmUp();
         //io.proximityArmUp();
-        telemetry.addData("Status", " Arms Initialized");
+        io.hookStop();
+        io.markerBoxFlat();
+        telemetry.addData("Status", " Hook and Marker Box Initialized");
         io.calibrateGyroandIMU();
+        io.calibrateGyroandIMU1();
         //HSCamera.setHardwareMap(hardwareMap);
 
 /*        //io.setAllianceColor(allianceColor);
@@ -63,24 +67,24 @@ public abstract class FirstAuton extends OpMode {
         BasicCommand.setTelemetry(telemetry);*/
 
         commands = new ArrayList<BasicCommand>();
-        commandsInit = new ArrayList<BasicCommand>();
+        /*commandsInit = new ArrayList<BasicCommand>();
         commandsInitDOM1 = new ArrayList<BasicCommand>();
-        commandsInitDOM2 = new ArrayList<BasicCommand>();
+        commandsInitDOM2 = new ArrayList<BasicCommand>();*/
         //addInitCommands();
-        addInitDOM1Commands();
-        addInitDOM2Commands();
+        //addInitDOM1Commands();
+        //addInitDOM2Commands();
         addCommands();
         addFinalCommands();
         iterator = commands.iterator();
-        iteratorInit = commandsInit.iterator();
+        /*iteratorInit = commandsInit.iterator();
         iteratorInitDOM1 = commandsInitDOM1.iterator();
-        iteratorInitDOM2 = commandsInitDOM2.iterator();
+        iteratorInitDOM2 = commandsInitDOM2.iterator();*/
         currentCommand = iterator.next();
-        currentCommandInit = iteratorInit.next();
+        /*currentCommandInit = iteratorInit.next();
         currentCommandInitDOM1 = iteratorInitDOM1.next();
-        currentCommandInitDOM2 = iteratorInitDOM2.next();
+        currentCommandInitDOM2 = iteratorInitDOM2.next();*/
         state = INIT;
-        initState = INIT;
+        //initState = INIT;
     }
 
     /*
@@ -98,7 +102,13 @@ public abstract class FirstAuton extends OpMode {
         if (!io.imu.isGyroCalibrated()) {
             telemetry.addData(">", "IMU Calibrating. Do Not Move!");
         } else {
-            telemetry.addData(">", "IMU Calibrated.  Wait for vuMark Identification.");
+            telemetry.addData(">", "IMU Calibrated.");
+        }
+
+        if (!io.imu1.isGyroCalibrated()) {
+            telemetry.addData(">", "IMU1 Calibrating. Do Not Move!");
+        } else {
+            telemetry.addData(">", "IMU1 Calibrated");
         }
 
         //telemetry.addData("VuMark from IdentifyVuMark from IO", io.getVuMark());
@@ -161,17 +171,17 @@ public abstract class FirstAuton extends OpMode {
         commandsInit.add(new IdentifyVuMark());
     }*/
 
-    public void addInitDOM1Commands() {
+    /*public void addInitDOM1Commands() {
         commandsInitDOM1.add(new DOM1Movement(0, DOM1Movement.INCREASINGDIRECTION, .25));
-    }
+    }*/
 
-    public void addInitDOM2Commands() {
+    /*public void addInitDOM2Commands() {
         commandsInitDOM2.add(new DOM2Movement(0, DOM2Movement.INCREASINGDIRECTION, .25));
-    }
+    }*/
 
     public void loop() {
-        currentCommandInitDOM1.execute();
-        currentCommandInitDOM2.execute();
+        //currentCommandInitDOM1.execute();
+        //currentCommandInitDOM2.execute();
         io.updatePosition();
         switch(state){
             case INIT:
