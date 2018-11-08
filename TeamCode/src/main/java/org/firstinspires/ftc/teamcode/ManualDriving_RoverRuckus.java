@@ -444,7 +444,7 @@ public class ManualDriving_RoverRuckus extends OpMode
         currentCommandInitDOM1.execute();
         currentCommandInitDOM2.execute();
 
-        if (gamepad2.left_stick_y == -1) {
+        if (gamepad2.left_stick_y == 1) {
             // Keep stepping up until we hit the max value.
             initStartingPositionDOM1 += 5 ;
             initStartingPositionDOM2 += 5 ;
@@ -457,7 +457,7 @@ public class ManualDriving_RoverRuckus extends OpMode
                 //rampUp = !rampUp;   // Switch ramp direction
             }
         }
-        else if (gamepad2.left_stick_y == 1) {
+        else if (gamepad2.left_stick_y == -1) {
             // Keep stepping down until we hit the min value.
             initStartingPositionDOM1 -= 5 ;
             initStartingPositionDOM2 -= 5 ;
@@ -897,9 +897,8 @@ public class ManualDriving_RoverRuckus extends OpMode
         telemetry.addData("Front Range", String.format("%.01f in", io.frontDistance.getDistance(DistanceUnit.INCH)));
         telemetry.addData("Back Range", String.format("%.01f in", io.backDistance.getDistance(DistanceUnit.INCH)));
 
-        telemetry.addData("Potentiometer", String.format("%.01f volts", io.domPot.getVoltage()));
-        telemetry.addData("Potentiometer", String.format("%.01f degrees", (io.domPot.getVoltage()*81.8181818)));
-
+        telemetry.addData("Potentiometer", String.format("%.01f volts", io.getDOMPotVoltage()));
+        telemetry.addData("Potentiometer", String.format("%.01f degrees", (io.getDOMPotDegrees())));
 
         if (io.touchChin.getState() == false) {
             telemetry.addData("Touch Chin", "Is Pressed");
@@ -969,11 +968,11 @@ public class ManualDriving_RoverRuckus extends OpMode
     }
 
     public void addInitDOM1Commands() {
-        commandsInitDOM1.add(new DOM1Movement(0, DOM1Movement.INCREASINGDIRECTION, .5));
+        commandsInitDOM1.add(new DOM1Movement(io.getDOMPotDegrees(), DOM1Movement.INCREASINGDIRECTION, .7));
     }
 
     public void addInitDOM2Commands() {
-        commandsInitDOM2.add(new DOM2Movement(0, DOM2Movement.INCREASINGDIRECTION, .5));
+        commandsInitDOM2.add(new DOM2Movement(io.getDOMPotDegrees(), DOM2Movement.INCREASINGDIRECTION, .7));
     }
 
     /*public void addRetrieveRelicRPU1Commands() {

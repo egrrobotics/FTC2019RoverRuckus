@@ -70,7 +70,7 @@ public class IdentifyGoldMineral extends BasicCommand{
          * To start up Vuforia, tell it the view that we wish to use for camera monitor (on the RC phone);
          * If no camera monitor is desired, use the parameterless constructor instead (commented out below).
          */
-        timeOut = System.currentTimeMillis() + 20000;
+        timeOut = System.currentTimeMillis() + 200000;
         // Default webcam name
         webcamName = io.webcamName;
         // Set up parameters for Vuforia
@@ -237,11 +237,32 @@ public class IdentifyGoldMineral extends BasicCommand{
             //return vuMark == (RelicRecoveryVuMark.LEFT || RelicRecoveryVuMark.RIGHT || RelicRecoveryVuMark.CENTER) || System.currentTimeMillis() >= timeOut;
             //return vuMark != RelicRecoveryVuMark.UNKNOWN || System.currentTimeMillis() >= timeOut;
         //}
-        return System.currentTimeMillis() >= timeOut;
+
+        if (io.getDOMPotDegrees() >=45) {
+            if (detector.isFound()) {
+                io.isGoldFound = true;
+                io.goldXPosition = detector.getXPosition();
+            } else {
+                io.isGoldFound = false;
+                io.goldXPosition = 0;
+            }
+
+            if (detector.getAligned()) {
+                io.isGoldAligned = true;
+            } else {
+                io.isGoldAligned = false;
+            }
+
+        }
+
+        telemetry.addData("IsFound" , detector.isFound()); // Is the gold mineral found?
+        telemetry.addData("IsAligned" , detector.getAligned()); // Is the bot aligned with the gold mineral?
+        telemetry.addData("X Pos" , detector.getXPosition()); // Gold X position.
+        return io.twoCyclesIsGoldCentered || System.currentTimeMillis() >= timeOut;
     }
     public void stop() {
-        //vuforia.stop();
         detector.disable();
+        vuforia.stop();
     }
 
     String format(OpenGLMatrix transformationMatrix) {

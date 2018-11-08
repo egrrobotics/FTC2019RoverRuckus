@@ -181,7 +181,8 @@ public class VuforiaWebcamTesting extends OpMode
         //detector.useDefaults();
         //detector.areaScoringMethod = DogeCV.AreaScoringMethod.MAX_AREA; // Can also be PERFECT_AREA
         //detector.perfectAreaScorer.perfectArea = 10000; // if using PERFECT_AREA scoring
-        detector.downscale = 0.8;
+        //detector.downscale = 0.8;
+        detector.downscale = 0.4;
 
         // Set the detector
         vuforia.setDogeCVDetector(detector);
@@ -243,7 +244,9 @@ public class VuforiaWebcamTesting extends OpMode
             telemetry.addData("Visible Target", "none");
         }
 
-
+        telemetry.addData("IsFound" , detector.isFound()); // Is the gold mineral found?
+        telemetry.addData("IsAligned" , detector.getAligned()); // Is the bot aligned with the gold mineral?
+        telemetry.addData("X Pos" , detector.getXPosition()); // Gold X position.
         telemetry.update();
 
 

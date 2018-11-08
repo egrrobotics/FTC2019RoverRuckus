@@ -17,12 +17,12 @@ public class Rotate extends BasicCommand {
         this.heading = heading;
         this.leftSpd = leftSpd;
         this.rightSpd = rightSpd;
-        headingPID = new PID(0.065,0,0); //was 0.05
+        headingPID = new PID(0.05,0,0); //was 0.05
         headingPID.setTarget(heading);
     }
 
     public void init() {
-        timeOut = System.currentTimeMillis() + 6000;
+        timeOut = System.currentTimeMillis() + 20000;
     }
 
     public void execute(){

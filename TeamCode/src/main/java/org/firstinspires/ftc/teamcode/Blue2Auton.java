@@ -44,7 +44,7 @@ public class Blue2Auton extends BlueAuton {
 
         commands.add(new ResetDriveEncoders());
         commands.add(new WaitForTime(100));
-        commands.add(new DriveForward(-1,DriveForward.XLESSTHAN,-.6,-90, false, false, true));
+        //commands.add(new DriveForward(-1,DriveForward.XLESSTHAN,-.6,-90, false, false, true));
         commands.add(new WaitForTime(50));
 
         commands.add(new ResetDriveEncoders());

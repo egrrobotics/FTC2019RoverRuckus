@@ -25,12 +25,12 @@ public class RaiseDOM extends BasicCommand {
     }
 
     public void init() {
-        timeOut = System.currentTimeMillis() + 10000;
+        timeOut = System.currentTimeMillis() + 200000;
         commandsInitDOM1 = new ArrayList<BasicCommand>();
         commandsInitDOM2 = new ArrayList<BasicCommand>();
 
-        commandsInitDOM1.add(new DOM1Movement(30, DOM1Movement.INCREASINGDIRECTION, .5));
-        commandsInitDOM2.add(new DOM2Movement(30, DOM2Movement.INCREASINGDIRECTION, .5));
+        commandsInitDOM1.add(new DOM1Movement(80, DOM1Movement.INCREASINGDIRECTION, .75));
+        commandsInitDOM2.add(new DOM2Movement(80, DOM2Movement.INCREASINGDIRECTION, .75));
 
         iteratorInitDOM1 = commandsInitDOM1.iterator();
         iteratorInitDOM2 = commandsInitDOM2.iterator();
@@ -41,12 +41,16 @@ public class RaiseDOM extends BasicCommand {
 
     public void execute(){
         telemetry.addData("Mode:", "Raise DOM");
+        telemetry.addData("Heading: ", Math.toDegrees(io.heading));
+        telemetry.addData("Captured Gold Heading: ", io.headingOfGold);
         currentCommandInitDOM1.execute();
         currentCommandInitDOM2.execute();
     }
 
     public boolean isFinished(){
-        return System.currentTimeMillis() >= timeOut;
+        telemetry.addData("Heading: ", Math.toDegrees(io.heading));
+        telemetry.addData("Captured Gold Heading: ", io.headingOfGold);
+        return (io.twoCyclesIsGoldCentered && io.twoCyclesIsGoldAligned && io.twoCyclesIsGoldFound) || System.currentTimeMillis() >= timeOut;
     }
     public void stop() {
         io.dom1Motor.setPower(0);

@@ -61,6 +61,7 @@ public class IO_RoverRuckus_Test {
     double lastRightBackEncoder = 0, lastLeftBackEncoder = 0, lastChinEncoder = 0, lastDOM1Encoder = 0, lastDOM2Encoder = 0, lastDOMExtendEncoder = 0;
     double x = 0, y = 0;
     double COUNTSPERINCH = 140/1.28;//84/1.28;
+    public double DEGREESPERVOLT = 270/3.3; //potentiometer
     public static int RED = 1, BLUE = 2;
     public static int UNKNOWN = 0, LEFT = 1, CENTER = 2, RIGHT = 3;
     public static int allianceColor = UNKNOWN;
@@ -72,6 +73,22 @@ public class IO_RoverRuckus_Test {
     //public double rightProximityAverage = 0;
     //public double proximityCorrection = 0;
     //public boolean proximityArmButtonPushed = false;
+    public boolean isGoldFound = false;
+    public boolean isGoldAligned = false;
+    public boolean isGoldCentered = false;
+    public boolean lastIsGoldFound = false;
+    public boolean lastIsGoldAligned = false;
+    public boolean lastIsGoldCentered = false;
+
+    public boolean twoCyclesIsGoldFound = false;
+    public boolean twoCyclesIsGoldAligned = false;
+    public boolean twoCyclesIsGoldCentered = false;
+
+    public boolean completedSearch = false;
+
+    public double goldXPosition = 0;
+    public double headingatlanding = 0;
+    public double headingOfGold = 0;
 
     public static double hookClockwise = .79;
     public static double hookCounterClockwise = -.79;
@@ -284,6 +301,25 @@ public class IO_RoverRuckus_Test {
         //double averageChange = (leftBackEncoder - lastLeftBackEncoder);
         double averageChange = ((leftBackEncoder - lastLeftBackEncoder) + (rightBackEncoder - lastRightBackEncoder))/2.0;
 
+
+        if (isGoldFound && lastIsGoldFound) {
+            twoCyclesIsGoldFound = true;
+        } else {
+            twoCyclesIsGoldFound = false;
+        }
+
+        if (isGoldAligned && lastIsGoldAligned) {
+            twoCyclesIsGoldAligned = true;
+        } else {
+            twoCyclesIsGoldAligned = false;
+        }
+
+        if (isGoldCentered && lastIsGoldCentered) {
+            twoCyclesIsGoldCentered = true;
+        } else {
+            twoCyclesIsGoldCentered = false;
+        }
+
         //gravity  = imu.getGravity();
         //getIMUHeading();
         //getEulerAngles(eulerAngles);;
@@ -301,6 +337,10 @@ public class IO_RoverRuckus_Test {
         lastDOM1Encoder = dom1Encoder;
         lastDOM2Encoder = dom2Encoder;
         lastDOMExtendEncoder = domExtendEncoder;
+
+        lastIsGoldFound = isGoldFound;
+        lastIsGoldAligned = isGoldAligned;
+        lastIsGoldCentered = isGoldCentered;
 
         //lastRightBackEncoder = rightBackEncoder;
         //lastLeftBackEncoder = leftBackEncoder;
@@ -447,8 +487,16 @@ public class IO_RoverRuckus_Test {
     }
 
     public double getDOMPotDegrees() {
-        return (domPot.getVoltage()*81.8181818);
+        return (270 - (domPot.getVoltage()*DEGREESPERVOLT));
     }
+
+    public double getGoldXPosition() {
+        return (goldXPosition);
+    }
+    public double getGoldXPositionAroundZero() {
+        return (goldXPosition - 320);
+    }
+
 
     public void setDrivePower(double left, double right) {
         rightBackDrive.setPower(right);

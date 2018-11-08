@@ -42,7 +42,7 @@ public class Red2Auton extends RedAuton {
         commands.add(new ResetDriveEncoders());
 
         commands.add(new WaitForTime(100));
-        commands.add(new DriveForward(-1,DriveForward.YLESSTHAN,-.75,-90, false, false, true));
+        //commands.add(new DriveForward(-1,DriveForward.YLESSTHAN,-.75,-90, false, false, true));
         commands.add(new ResetDriveEncoders());
         commands.add(new WaitForTime(50));
 

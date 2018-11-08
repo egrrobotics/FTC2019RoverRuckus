@@ -23,9 +23,7 @@ public class DriveForward extends BasicCommand {
     long endTime;
     double targetHeading;
     boolean coast = false;
-    boolean proximitycorrection = false;
-    boolean proximitybutton = false;
-    boolean usebutton = false;
+    boolean usegoldheading = false;
     public DriveForward(double targetPosition, int test, double spd, double targetHeading){
         headingPID = new PID(0.05,0,0);
         //headingPID = new PID(0.02, 0.02, 0);
@@ -43,28 +41,23 @@ public class DriveForward extends BasicCommand {
         this(targetPosition,test,spd,targetHeading);
         this.coast=coast;
     }
-    public DriveForward(double targetPosition, int test, double spd, double targetHeading, boolean coast, boolean proximitycorrection){
+    public DriveForward(double targetPosition, int test, double spd, double targetHeading, boolean coast, boolean usegoldheading){
         this(targetPosition,test,spd,targetHeading);
         this.coast=coast;
-        this.proximitycorrection = proximitycorrection;
+        this.usegoldheading = usegoldheading;
     }
-    public DriveForward(double targetPosition, int test, double spd, double targetHeading, boolean coast, boolean proximitycorrection, boolean usebutton){
-        this(targetPosition,test,spd,targetHeading);
-        this.coast=coast;
-        this.proximitycorrection = proximitycorrection;
-        this.usebutton = usebutton;
-    }
+
     public DriveForward(double dist) {
         this(dist, YGREATERTHAN, 0.5, 0.0);
     }
 
     public void init(){
-        endTime = System.currentTimeMillis() + 10000;
+        endTime = System.currentTimeMillis() + 5000;
 
-        /*if (proximitycorrection){
-            headingPID.setTarget(targetHeading + io.getProximityCorrection());
+        if (usegoldheading){
+            headingPID.setTarget(io.headingOfGold);
         }
-        if (usebutton){
+        /*if (usebutton){
             this.proximitybutton = io.proximityArmButtonPushed;
         }*/
     }
