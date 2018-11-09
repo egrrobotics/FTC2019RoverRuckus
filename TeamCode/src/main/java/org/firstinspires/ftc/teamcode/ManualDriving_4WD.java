@@ -29,6 +29,7 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -60,7 +61,7 @@ import java.util.Iterator;
  */
 
 @TeleOp(name="Manual Driving 4WD OpMode", group="Iterative Opmode")
-//@Disabled
+@Disabled
 public class ManualDriving_4WD extends OpMode
 {
     IO_4WD_Test io;

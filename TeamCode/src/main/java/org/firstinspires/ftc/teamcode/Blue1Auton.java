@@ -20,6 +20,8 @@ import org.firstinspires.ftc.teamcode.commands.WaitForTime;
 @Autonomous(name="Blue Gold",group="Auton")
 public class Blue1Auton extends BlueAuton {
     public void addFinalCommands() {
+        commands.add(new Rotate(-90,.65,.65));
+        commands.add(new ResetDriveEncoders());
         //commands.add(new DriveForward(18,DriveForward.XGREATERTHAN,.35,0));
         //commands.add(new WaitForTime(200));
         /*commands.add(new ResetDriveEncoders());

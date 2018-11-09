@@ -360,14 +360,14 @@ public class CalibrationRoverRuckus extends OpMode
         telemetry.addData("Chin",  "Setting at %.2f",
                 io.getChinMotorEncoder());
 
-        telemetry.addData("DOM Arm 1",  "Setting at %.2f",
+        /*telemetry.addData("DOM Arm 1",  "Setting at %.2f",
                 io.getDOM1MotorEncoder());
 
         telemetry.addData("DOM Arm 2",  "Setting at %.2f",
                 io.getDOM2MotorEncoder());
 
         telemetry.addData("DOM Arm Extension",  "Setting at %.2f",
-                io.getDOMMotorExtendEncoder());
+                io.getDOMMotorExtendEncoder());*/
     }
 
     /*

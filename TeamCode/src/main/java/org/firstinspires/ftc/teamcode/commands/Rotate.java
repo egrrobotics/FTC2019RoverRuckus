@@ -22,7 +22,7 @@ public class Rotate extends BasicCommand {
     }
 
     public void init() {
-        timeOut = System.currentTimeMillis() + 20000;
+        timeOut = System.currentTimeMillis() + 5000;
     }
 
     public void execute(){
@@ -52,7 +52,7 @@ public class Rotate extends BasicCommand {
         telemetry.addData("Right Speed: ", rightSpd);
         //telemetry.addData("VuMark from IdentifyVuMark from IO", io.getVuMark());
         //return Math.abs(io.getHeading() - heading) <=2 || System.currentTimeMillis() >= timeOut;
-        return Math.abs(Math.toDegrees(io.heading) - heading) <=2.3 || System.currentTimeMillis() >= timeOut;
+        return Math.abs(Math.toDegrees(io.heading) - heading) <=2 || System.currentTimeMillis() >= timeOut;
     }
     public void stop() {
         io.setDrivePower(0,0);

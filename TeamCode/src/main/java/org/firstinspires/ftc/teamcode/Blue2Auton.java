@@ -17,10 +17,12 @@ import org.firstinspires.ftc.teamcode.commands.WaitForTime;
  * Created by David Austin on 11/10/2016.
  */
 
-@Autonomous(name="Blue2",group="Auton")
+@Autonomous(name="Blue Silver",group="Auton")
 public class Blue2Auton extends BlueAuton {
     public void addFinalCommands() {
+        commands.add(new Rotate(-90,.65,.5));
         commands.add(new ResetDriveEncoders());
+        /*commands.add(new ResetDriveEncoders());
         commands.add(new WaitForTime(100));
         commands.add(new DriveForward(25,DriveForward.XGREATERTHAN,.55,0));
         commands.add(new WaitForTime(100));
@@ -69,7 +71,7 @@ public class Blue2Auton extends BlueAuton {
         commands.add(new WaitForTime(50));
         commands.add(new ResetDriveEncoders());
         commands.add(new WaitForTime(100));
-/*        double angle = -70;
+*//*        double angle = -70;
         commands.add(new Rotate(angle,0.9,0));
         commands.add(new DriveForward(25, DriveForward.YLESSTHAN, 0.7, angle));
         double finalAngle = -135;

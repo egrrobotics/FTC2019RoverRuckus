@@ -58,7 +58,7 @@ public class IO_RoverRuckus_Test {
     public double heading = 0;
     public double heading1 = 0;
     double rightBackOffset = 0, leftBackOffset = 0, chinOffset = 0, dom1Offset = 0, dom2Offset = 0, domExtendOffset = 0;
-    double lastRightBackEncoder = 0, lastLeftBackEncoder = 0, lastChinEncoder = 0, lastDOM1Encoder = 0, lastDOM2Encoder = 0, lastDOMExtendEncoder = 0;
+    double lastRightBackEncoder = 0, lastLeftBackEncoder = 0, lastChinEncoder = 0; //lastDOM1Encoder = 0, lastDOM2Encoder = 0, lastDOMExtendEncoder = 0;
     double x = 0, y = 0;
     double COUNTSPERINCH = 140/1.28;//84/1.28;
     public double DEGREESPERVOLT = 270/3.3; //potentiometer
@@ -283,9 +283,9 @@ public class IO_RoverRuckus_Test {
         lastRightBackEncoder = 0;
         lastLeftBackEncoder = 0;
         lastChinEncoder = 0;
-        lastDOM1Encoder = 0;
-        lastDOM2Encoder = 0;
-        lastDOMExtendEncoder = 0;
+        //lastDOM1Encoder = 0;
+        //lastDOM2Encoder = 0;
+        //lastDOMExtendEncoder = 0;
 
         x = 0;
         y = 0;
@@ -294,9 +294,9 @@ public class IO_RoverRuckus_Test {
         double rightBackEncoder = getRightBackDriveEncoder();
         double leftBackEncoder = getLeftBackDriveEncoder();
         double chinEncoder = getChinMotorEncoder();
-        double dom1Encoder = getDOM1MotorEncoder();
-        double dom2Encoder = getDOM2MotorEncoder();
-        double domExtendEncoder = getDOMMotorExtendEncoder();
+        //double dom1Encoder = getDOM1MotorEncoder();
+        //double dom2Encoder = getDOM2MotorEncoder();
+        //double domExtendEncoder = getDOMMotorExtendEncoder();
 
         //double averageChange = (leftBackEncoder - lastLeftBackEncoder);
         double averageChange = ((leftBackEncoder - lastLeftBackEncoder) + (rightBackEncoder - lastRightBackEncoder))/2.0;
@@ -334,9 +334,9 @@ public class IO_RoverRuckus_Test {
         lastRightBackEncoder = rightBackEncoder;
         lastLeftBackEncoder = leftBackEncoder;
         lastChinEncoder = chinEncoder;
-        lastDOM1Encoder = dom1Encoder;
-        lastDOM2Encoder = dom2Encoder;
-        lastDOMExtendEncoder = domExtendEncoder;
+        //lastDOM1Encoder = dom1Encoder;
+        //lastDOM2Encoder = dom2Encoder;
+        //lastDOMExtendEncoder = domExtendEncoder;
 
         lastIsGoldFound = isGoldFound;
         lastIsGoldAligned = isGoldAligned;
@@ -470,7 +470,7 @@ public class IO_RoverRuckus_Test {
         return chinMotor.getCurrentPosition() - chinOffset;
     }
 
-    public double getDOM1MotorEncoder() {
+    /*public double getDOM1MotorEncoder() {
         return dom1Motor.getCurrentPosition() - dom1Offset;
     }
 
@@ -480,7 +480,7 @@ public class IO_RoverRuckus_Test {
 
     public double getDOMMotorExtendEncoder() {
         return domExtendMotor.getCurrentPosition() - domExtendOffset;
-    }
+    }*/
 
     public double getDOMPotVoltage() {
         return domPot.getVoltage();

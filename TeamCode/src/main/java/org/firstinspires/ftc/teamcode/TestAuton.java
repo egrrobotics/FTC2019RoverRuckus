@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.commands.CommandGroup;
 import org.firstinspires.ftc.teamcode.commands.DriveForward;
@@ -36,6 +37,7 @@ import org.firstinspires.ftc.teamcode.utilities.IO_4WD_Test;
  * Created by David Austin on 11/10/2016.
  */
 @Autonomous(name="Test",group="Auton")
+@Disabled
 public class TestAuton extends FirstAuton {
     public TestAuton() {
         super();

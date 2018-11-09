@@ -17,11 +17,11 @@ public class FindGoldMineral extends BasicCommand {
     boolean completedSearch = false;
 
     public FindGoldMineral(){
-        this.heading_cw = 15; //clockwise 15 degrees
-        this.heading_ccw = -15; //counterclockwise 15 degrees
+        this.heading_cw = 10; //clockwise 10 degrees
+        this.heading_ccw = -10; //counterclockwise 10 degrees
         this.heading = 0;
-        this.leftSpd = .75;
-        this.rightSpd = .75;
+        this.leftSpd = .65;
+        this.rightSpd = .65;
         headingPID = new PID(0.05,0,0); // was 0.05
 
 /*        if ((io.getAllianceColor() == IO.RED) && (io.getJewelColor() == IO.RED)) {
@@ -42,7 +42,7 @@ public class FindGoldMineral extends BasicCommand {
     }
 
     public void init() {
-        timeOut = System.currentTimeMillis() + 20000;
+        timeOut = System.currentTimeMillis() + 5000;
 
         if (!io.isGoldFound) {
             headingPID.setTarget(heading_cw);
@@ -77,13 +77,13 @@ public class FindGoldMineral extends BasicCommand {
             io.setDrivePower(correction*leftSpd,-correction*rightSpd);
         }
 
-        if ((Math.abs(Math.toDegrees(io.heading) - heading) <=2.3) && !rotatedCW) {
+        if ((Math.abs(Math.toDegrees(io.heading) - heading) <=2) && !rotatedCW) {
             rotatedCW = true;
             headingPID.setTarget(heading_ccw);
             heading = heading_ccw;
         }
 
-        if ((rotatedCW) && (Math.abs(Math.toDegrees(io.heading) - heading) <=2.3)) {
+        if ((rotatedCW) && (Math.abs(Math.toDegrees(io.heading) - heading) <=2)) {
             rotatedCCW = true;
             completedSearch = true;
             io.completedSearch = true;

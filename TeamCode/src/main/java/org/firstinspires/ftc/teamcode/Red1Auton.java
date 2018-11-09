@@ -17,10 +17,12 @@ import org.firstinspires.ftc.teamcode.commands.WaitForTime;
  * Created by David Austin on 11/10/2016.
  */
 
-@Autonomous(name="Red1",group="Auton")
+@Autonomous(name="Red Gold",group="Auton")
 public class Red1Auton extends RedAuton {
     public void addFinalCommands() {
+        commands.add(new Rotate(-90,.65,.65));
         commands.add(new ResetDriveEncoders());
+        /*commands.add(new ResetDriveEncoders());
         commands.add(new WaitForTime(100));
         commands.add(new DriveForwardGlyph(-.35, "Red1"));
         commands.add(new WaitForTime(100));
@@ -60,7 +62,7 @@ public class Red1Auton extends RedAuton {
         commands.add(new WaitForTime(50));
         commands.add(new ResetDriveEncoders());
         commands.add(new WaitForTime(100));
-/*        double angle = -70;
+*//*        double angle = -70;
         commands.add(new Rotate(angle,0.9,0));
         commands.add(new DriveForward(25, DriveForward.YLESSTHAN, 0.7, angle));
         double finalAngle = -135;

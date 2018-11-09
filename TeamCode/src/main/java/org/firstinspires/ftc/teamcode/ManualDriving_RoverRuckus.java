@@ -472,9 +472,10 @@ public class ManualDriving_RoverRuckus extends OpMode
         }
 
 
-        if((io.getDOMMotorExtendEncoder() >= 9450) && (gamepad2.right_stick_x > 0)) {
-            io.domExtendMotor.setPower(0);
-        } else if(((io.getDOMMotorExtendEncoder() <= 0) || (io.touchDOMExtend.getState() == false)) && (gamepad2.right_stick_x < 0)) {
+        /*if((io.getDOMMotorExtendEncoder() >= 9450) && (gamepad2.right_stick_x > 0)) {
+            io.domExtendMotor.setPower(0);*/
+
+        if((io.touchDOMExtend.getState() == false) && (gamepad2.right_stick_x < 0)) {
             io.domExtendMotor.setPower(0);
         } else {
             io.domExtendMotor.setPower(gamepad2.right_stick_x);
@@ -885,12 +886,12 @@ public class ManualDriving_RoverRuckus extends OpMode
 
         telemetry.addData("Chin Motor Encoder",  "Starting at %.2f",
                 io.getChinMotorEncoder());
-        telemetry.addData("DOM1 Motor Encoder",  "Starting at %.2f",
+        /*telemetry.addData("DOM1 Motor Encoder",  "Starting at %.2f",
                 io.getDOM1MotorEncoder());
         telemetry.addData("DOM2 Motor Encoder",  "Starting at %.2f",
                 io.getDOM2MotorEncoder());
         telemetry.addData("DOM Motor Extend Encoder",  "Starting at %.2f",
-                io.getDOMMotorExtendEncoder());
+                io.getDOMMotorExtendEncoder());*/
 
         telemetry.addData("Left Range", String.format("%.01f in", io.leftDistance.getDistance(DistanceUnit.INCH)));
         telemetry.addData("Right Range", String.format("%.01f in", io.rightDistance.getDistance(DistanceUnit.INCH)));

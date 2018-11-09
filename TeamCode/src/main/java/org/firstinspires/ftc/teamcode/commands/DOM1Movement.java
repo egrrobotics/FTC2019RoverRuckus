@@ -88,7 +88,8 @@ public class DOM1Movement extends BasicCommand {
     }
 
     public boolean isFinished(){
-        if (System.currentTimeMillis() >= endTime) return true;
+        return System.currentTimeMillis() >= endTime;
+        //if (System.currentTimeMillis() >= endTime) return true;
         //telemetry.addData("x: ",io.getX());
         //telemetry.addData("y: ",io.getY());
         //telemetry.addData("Target Heading:", targetHeading);
@@ -98,14 +99,14 @@ public class DOM1Movement extends BasicCommand {
         //telemetry.addData("Drive Speed: ", driveSpeed);
         //telemetry.addData("Left Speed: ", (driveSpeed * distancePID.getCorrection(io.getY())) - headingPID.getCorrection(io.getHeading()));
         //telemetry.addData("Right Speed: ", (driveSpeed * distancePID.getCorrection(io.getY())) + headingPID.getCorrection(io.getHeading()));
-        switch(test) {
+        /*switch(test) {
             case INCREASINGDIRECTION:
                 return io.getDOM1MotorEncoder() > targetPosition;
             case DECREASINGDIRECTION:
                 return io.getDOM1MotorEncoder() < targetPosition;
             default:
                 return io.getDOM1MotorEncoder() > targetPosition;
-        }
+        }*/
     }
 
     public void stop(){

@@ -31,6 +31,7 @@ package org.firstinspires.ftc.teamcode.dogecv;
 
 import com.disnodeteam.dogecv.CameraViewDisplay;
 import com.disnodeteam.dogecv.detectors.roverrukus.HoughSilverDetector;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -38,7 +39,7 @@ import org.opencv.core.Size;
 
 
 @TeleOp(name="Hough Silver Example", group="DogeCV")
-
+@Disabled
 public class HoughSilverExample extends OpMode
 {
     //Detector object

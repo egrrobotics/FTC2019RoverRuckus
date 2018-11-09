@@ -258,6 +258,17 @@ public class IdentifyGoldMineral extends BasicCommand{
         telemetry.addData("IsFound" , detector.isFound()); // Is the gold mineral found?
         telemetry.addData("IsAligned" , detector.getAligned()); // Is the bot aligned with the gold mineral?
         telemetry.addData("X Pos" , detector.getXPosition()); // Gold X position.
+        telemetry.addData("Gold Position Around Zero: ", io.getGoldXPositionAroundZero());
+        telemetry.addData("Heading: ", Math.toDegrees(io.heading));
+        telemetry.addData("Completed Search: ", io.completedSearch );
+        telemetry.addData("Captured Gold Heading: ", io.headingOfGold);
+        telemetry.addData("Two Cycles Gold Found: ", io.twoCyclesIsGoldFound);
+        telemetry.addData("Two Cycles Gold Aligned: ", io.twoCyclesIsGoldAligned);
+        telemetry.addData("Two Cycles Gold Centered: ", io.twoCyclesIsGoldCentered);
+        telemetry.addData("Gold Position: ", io.getGoldXPosition());
+        telemetry.addData("Is Gold Found: ", io.isGoldFound);
+        telemetry.addData("Is Gold Aligned: ", io.isGoldAligned);
+        telemetry.addData("Mode:", "Identify Gold Mineral");
         return io.twoCyclesIsGoldCentered || System.currentTimeMillis() >= timeOut;
     }
     public void stop() {

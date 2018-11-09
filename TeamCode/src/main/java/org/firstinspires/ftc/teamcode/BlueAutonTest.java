@@ -4,6 +4,9 @@ package org.firstinspires.ftc.teamcode;
 import org.firstinspires.ftc.teamcode.commands.AlignwithGoldMineral;
 import org.firstinspires.ftc.teamcode.commands.AlignwithGoldMineralTest;
 import org.firstinspires.ftc.teamcode.commands.CommandGroup;
+import org.firstinspires.ftc.teamcode.commands.DriveForward;
+import org.firstinspires.ftc.teamcode.commands.DriveForwardDistanceSensorandDistanceSensor;
+import org.firstinspires.ftc.teamcode.commands.DriveForwardDistanceSensorandEncoder;
 import org.firstinspires.ftc.teamcode.commands.IdentifyGoldMineral;
 import org.firstinspires.ftc.teamcode.commands.RaiseDOM;
 import org.firstinspires.ftc.teamcode.commands.ResetDriveEncoders;
@@ -37,13 +40,18 @@ public abstract class BlueAutonTest extends FirstAuton {
         //commands.add(new RaiseDOM());
 
 
-        CommandGroup group = new CommandGroup();
-        group.addCommand(new RaiseDOM());
-        group.addCommand(new IdentifyGoldMineral());
+        // add back CommandGroup group = new CommandGroup();
+        // add back group.addCommand(new RaiseDOM());
+        // add back group.addCommand(new IdentifyGoldMineral());
         //group.addCommand(new FindGoldMineral());
-        group.addCommand(new AlignwithGoldMineralTest());
-        commands.add(group);
-        //commands.add(new IdentifyGoldMineral());
+        // add back group.addCommand(new AlignwithGoldMineralTest());
+        // add back commands.add(group);
+
+
+
+
+        //commands.add(new DriveForwardDistanceSensorandEncoder(50, DriveForwardDistanceSensorandEncoder.XGREATERTHAN,.6,10, "Right"));
+        commands.add(new DriveForwardDistanceSensorandDistanceSensor(5, DriveForwardDistanceSensorandDistanceSensor.FRONTLESSTHAN,.6,10, "Right"));
 
 
 

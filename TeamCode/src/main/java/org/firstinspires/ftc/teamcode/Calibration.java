@@ -36,6 +36,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.utilities.IO_4WD_Test;
 
@@ -54,7 +55,7 @@ import org.firstinspires.ftc.teamcode.utilities.IO_4WD_Test;
  */
 
 @TeleOp(name="Calibration", group="Calibration")
-//@Disabled
+@Disabled
 public class Calibration extends OpMode
 {
     // Declare OpMode members.

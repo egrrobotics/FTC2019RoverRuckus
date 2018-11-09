@@ -17,10 +17,10 @@ public class AlignwithGoldMineral extends BasicCommand {
 
     public AlignwithGoldMineral(){
         this.heading = 0;
-        this.leftSpd = .8;
-        this.rightSpd = .8;
+        this.leftSpd = .65;
+        this.rightSpd = .65;
         this.correction = 0;
-        goldPID = new PID(0.0035,0,0); // was 0.05
+        goldPID = new PID(0.0025,0,0); // was 0.05
 
 /*        if ((io.getAllianceColor() == IO.RED) && (io.getJewelColor() == IO.RED)) {
             headingPID.setTarget(heading_cw);
@@ -121,6 +121,7 @@ public class AlignwithGoldMineral extends BasicCommand {
         telemetry.addData("Right Speed: ", rightSpd);
         //telemetry.addData("VuMark from IdentifyVuMark from IO", io.getVuMark());
         telemetry.addData("Potentiometer", String.format("%.01f degrees", (io.getDOMPotDegrees())));
+        telemetry.addData("Mode:", "Align with Gold Mineral");
         //return Math.abs(io.getHeading() - heading) <=2 || System.currentTimeMillis() >= timeOut;
         return io.twoCyclesIsGoldCentered || System.currentTimeMillis() >= timeOut;
         //return System.currentTimeMillis() >= timeOut;
