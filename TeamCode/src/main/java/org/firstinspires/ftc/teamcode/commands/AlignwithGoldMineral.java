@@ -40,7 +40,7 @@ public class AlignwithGoldMineral extends BasicCommand {
     }
 
     public void init() {
-        timeOut = System.currentTimeMillis() + 200000;
+        timeOut = System.currentTimeMillis() + 10000;
         initTime = System.currentTimeMillis();
         goldPID.setTarget(0);
         /*if (io.isGoldFound) {

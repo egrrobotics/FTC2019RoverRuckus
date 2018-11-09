@@ -7,6 +7,7 @@ import org.firstinspires.ftc.teamcode.commands.CommandGroup;
 import org.firstinspires.ftc.teamcode.commands.DriveForward;
 import org.firstinspires.ftc.teamcode.commands.DriveForwardDistanceSensorandDistanceSensor;
 import org.firstinspires.ftc.teamcode.commands.DriveForwardDistanceSensorandEncoder;
+import org.firstinspires.ftc.teamcode.commands.DriveForwardHeadingandDistanceSensor;
 import org.firstinspires.ftc.teamcode.commands.IdentifyGoldMineral;
 import org.firstinspires.ftc.teamcode.commands.RaiseDOM;
 import org.firstinspires.ftc.teamcode.commands.ResetDriveEncoders;
@@ -51,7 +52,8 @@ public abstract class BlueAutonTest extends FirstAuton {
 
 
         //commands.add(new DriveForwardDistanceSensorandEncoder(50, DriveForwardDistanceSensorandEncoder.XGREATERTHAN,.6,10, "Right"));
-        commands.add(new DriveForwardDistanceSensorandDistanceSensor(5, DriveForwardDistanceSensorandDistanceSensor.FRONTLESSTHAN,.6,10, "Right"));
+        //commands.add(new DriveForwardDistanceSensorandDistanceSensor(5, DriveForwardDistanceSensorandDistanceSensor.FRONTLESSTHAN,.6,10, "Right"));
+        commands.add(new DriveForwardHeadingandDistanceSensor(5, DriveForwardHeadingandDistanceSensor.FRONTLESSTHAN,.6,20));
 
 
 

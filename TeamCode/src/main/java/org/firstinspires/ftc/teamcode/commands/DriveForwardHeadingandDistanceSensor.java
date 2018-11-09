@@ -9,16 +9,16 @@ import org.firstinspires.ftc.teamcode.utilities.PID;
  * Created by Howard Paul on 11/8/2018.
  */
 
-public class DriveForwardDistanceSensorandDistanceSensor extends BasicCommand {
+public class DriveForwardHeadingandDistanceSensor extends BasicCommand {
     double targetPosition;
     double endDistance;
     double driveSpeed;
-    double currentDistanceOffset;
+    double heading;
     double leftSpeed;
     double rightSpeed;
     double correction;
     double distanceCorrection;
-    PID distanceSensorPID;
+    PID headingPID;
     PID distancePID;
     public static final int FRONTGREATERTHAN = 0;
     public static final int BACKGREATERTHAN = 1;
@@ -26,19 +26,17 @@ public class DriveForwardDistanceSensorandDistanceSensor extends BasicCommand {
     public static final int BACKLESSTHAN = 3;
     int test;
     long endTime;
-    double distanceOffsetfromWall;
+    double targetHeading;
     boolean coast = false;
-    String side;
-    public DriveForwardDistanceSensorandDistanceSensor(double targetPosition, int test, double spd, double distanceOffsetfromWall, String side){
-        distanceSensorPID = new PID(0.01,0,0);
-        distanceSensorPID.setTarget(distanceOffsetfromWall);
+    public DriveForwardHeadingandDistanceSensor(double targetPosition, int test, double spd, double targetHeading){
+        headingPID = new PID(0.05,0,0);
+        headingPID.setTarget(targetHeading);
         distancePID = new PID(0.2,0,0);
         distancePID.setTarget(targetPosition);
         this.targetPosition = targetPosition;
         this.test = test;
         driveSpeed = spd;
-        this.distanceOffsetfromWall = distanceOffsetfromWall;
-        this.side = side;
+        this.targetHeading = targetHeading;
     }
 
     public void init(){
@@ -47,13 +45,9 @@ public class DriveForwardDistanceSensorandDistanceSensor extends BasicCommand {
 
     public void execute(){
 
-        if (side.equals("Left")) {
-            currentDistanceOffset = io.leftDistance.getDistance(DistanceUnit.INCH);
-        } else {
-            currentDistanceOffset = io.rightDistance.getDistance(DistanceUnit.INCH);
-        }
+        heading = Math.toDegrees(io.heading);
+        correction = headingPID.getCorrection(heading);
 
-        correction = distanceSensorPID.getCorrection(currentDistanceOffset);
         switch(test) {
             case FRONTGREATERTHAN:
             case FRONTLESSTHAN:
@@ -67,15 +61,8 @@ public class DriveForwardDistanceSensorandDistanceSensor extends BasicCommand {
         }
         distanceCorrection = Range.clip(Math.abs(distanceCorrection),0,1);
         correction = Range.clip(correction,-1,1);
-
-        if (side.equals("Left")) {
-            leftSpeed = (driveSpeed * distanceCorrection) + correction;
-            rightSpeed = (driveSpeed * distanceCorrection) - correction;
-        } else {
-            leftSpeed = (driveSpeed * distanceCorrection) - correction;
-            rightSpeed = (driveSpeed * distanceCorrection) + correction;
-        }
-
+        leftSpeed = (driveSpeed * distanceCorrection) + correction;
+        rightSpeed = (driveSpeed * distanceCorrection) - correction;
         if (driveSpeed > 0) {
             leftSpeed = Range.clip(leftSpeed, 0, 1);
             rightSpeed = Range.clip(rightSpeed, 0, 1);
@@ -87,30 +74,30 @@ public class DriveForwardDistanceSensorandDistanceSensor extends BasicCommand {
         io.setDrivePower(leftSpeed,rightSpeed);
         telemetry.addData("Front Distance: ",io.frontDistance.getDistance(DistanceUnit.INCH));
         telemetry.addData("Back Distance: ",io.backDistance.getDistance(DistanceUnit.INCH));
-        telemetry.addData("Target Distance from Wall:", distanceOffsetfromWall);
-        telemetry.addData("Current Distance from Wall:", currentDistanceOffset);
-        telemetry.addData("Distance Sensor Correction: ", correction);
+        telemetry.addData("Target Heading:", targetHeading);
+        telemetry.addData("Heading:", heading);
+        telemetry.addData("Heading Correction: ", correction);
         telemetry.addData("Distance Correction: ", distanceCorrection);
         telemetry.addData("Drive Speed: ", driveSpeed);
         telemetry.addData("Left Speed: ", leftSpeed);
         telemetry.addData("Right Speed: ", rightSpeed);
         telemetry.addData("Alliance Color is Unknown, Red, Blue: ", io.getAllianceColor());
-        telemetry.addData("Mode:", "Drive Forward Distance Sensor and Distance Sensor");
+        telemetry.addData("Mode:", "Drive Forward Heading and Distance Sensor");
     }
 
     public boolean isFinished(){
         if (System.currentTimeMillis() >= endTime) return true;
         telemetry.addData("Front Distance: ",io.frontDistance.getDistance(DistanceUnit.INCH));
         telemetry.addData("Back Distance: ",io.backDistance.getDistance(DistanceUnit.INCH));
-        telemetry.addData("Target Distance from Wall:", distanceOffsetfromWall);
-        telemetry.addData("Current Distance from Wall:", currentDistanceOffset);
-        telemetry.addData("Distance Sensor Correction: ", correction);
+        telemetry.addData("Target Heading:", targetHeading);
+        telemetry.addData("Heading:", heading);
+        telemetry.addData("Heading Correction: ", correction);
         telemetry.addData("Distance Correction: ", distanceCorrection);
         telemetry.addData("Drive Speed: ", driveSpeed);
         telemetry.addData("Left Speed: ", leftSpeed);
         telemetry.addData("Right Speed: ", rightSpeed);
         telemetry.addData("Alliance Color is Unknown, Red, Blue: ", io.getAllianceColor());
-        telemetry.addData("Mode:", "Drive Forward Distance Sensor and Distance Sensor");
+        telemetry.addData("Mode:", "Drive Forward Heading and Distance Sensor");
 
         switch(test) {
             case FRONTGREATERTHAN:

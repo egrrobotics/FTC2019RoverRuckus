@@ -42,7 +42,7 @@ public class FindGoldMineral extends BasicCommand {
     }
 
     public void init() {
-        timeOut = System.currentTimeMillis() + 5000;
+        timeOut = System.currentTimeMillis() + 10000;
 
         if (!io.isGoldFound) {
             headingPID.setTarget(heading_cw);
@@ -77,13 +77,13 @@ public class FindGoldMineral extends BasicCommand {
             io.setDrivePower(correction*leftSpd,-correction*rightSpd);
         }
 
-        if ((Math.abs(Math.toDegrees(io.heading) - heading) <=2) && !rotatedCW) {
+        if ((Math.abs(Math.toDegrees(io.heading) - heading) <= 2) && !rotatedCW) {
             rotatedCW = true;
             headingPID.setTarget(heading_ccw);
             heading = heading_ccw;
         }
 
-        if ((rotatedCW) && (Math.abs(Math.toDegrees(io.heading) - heading) <=2)) {
+        if ((rotatedCW) && (Math.abs(Math.toDegrees(io.heading) - heading) <= 2)) {
             rotatedCCW = true;
             completedSearch = true;
             io.completedSearch = true;

@@ -25,7 +25,7 @@ public class RaiseDOM extends BasicCommand {
     }
 
     public void init() {
-        timeOut = System.currentTimeMillis() + 200000;
+        timeOut = System.currentTimeMillis() + 10000;
         commandsInitDOM1 = new ArrayList<BasicCommand>();
         commandsInitDOM2 = new ArrayList<BasicCommand>();
 
