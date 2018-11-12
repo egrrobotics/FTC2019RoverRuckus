@@ -78,22 +78,41 @@ public class AlignwithGoldMineralTest extends BasicCommand {
             io.setDrivePower(0,0);
         }
 
-        if ((Math.abs(io.getGoldXPositionAroundZero() - 0) <= 10) && io.twoCyclesIsGoldFound && io.twoCyclesIsGoldAligned) {
+        /*if ((Math.abs(io.getGoldXPositionAroundZero() - 0) <= 10) && io.twoCyclesIsGoldFound && io.twoCyclesIsGoldAligned) {
             centeredGold = true;
         } else {
             centeredGold = false;
+        }*/
+
+        if ((Math.abs(io.getGoldXPositionAroundZero() - 0) <= 40) && io.twoCyclesIsGoldFound && io.twoCyclesIsGoldAligned)  {
+            centeredGold = true;
+            io.isGoldCentered = true;
+            io.headingOfGold = Math.toDegrees(io.heading);
+            if (Math.abs(io.headingOfGold) <= 10) {
+                io.isGoldTheCenterMineral = true;
+            } else {
+                io.isGoldTheCenterMineral = false;
+            }
+        } else {
+            centeredGold = false;
+            io.isGoldCentered = false;
         }
 
         telemetry.addData("Target Gold Position:", 0);
-        telemetry.addData("Target Heading:", 65);
         //telemetry.addData("Heading: ", io.getHeading());
         telemetry.addData("Gold Position Around Zero: ", io.getGoldXPositionAroundZero());
         telemetry.addData("Heading: ", Math.toDegrees(io.heading));
+        telemetry.addData("Completed Search: ", io.completedSearch );
+        telemetry.addData("Captured Gold Heading: ", io.headingOfGold);
+        telemetry.addData("Is Gold Center Mineral: ", io.isGoldTheCenterMineral);
+        telemetry.addData("Two Cycles Gold Found: ", io.twoCyclesIsGoldFound);
+        telemetry.addData("Two Cycles Gold Aligned: ", io.twoCyclesIsGoldAligned);
+        telemetry.addData("Two Cycles Gold Centered: ", io.twoCyclesIsGoldCentered);
         telemetry.addData("Gold Position: ", io.getGoldXPosition());
         telemetry.addData("Is Gold Found: ", io.isGoldFound);
         telemetry.addData("Is Gold Aligned: ", io.isGoldAligned);
+        telemetry.addData("Centered Gold: ", centeredGold);
         telemetry.addData("Correction: ", correction);
-        telemetry.addData("Correction1: ", correction1);
         telemetry.addData("Left Speed: ", leftSpd);
         telemetry.addData("Right Speed: ", rightSpd);
         //telemetry.addData("VuMark from IdentifyVuMark from IO", io.getVuMark());
@@ -103,19 +122,25 @@ public class AlignwithGoldMineralTest extends BasicCommand {
 
     public boolean isFinished(){
         telemetry.addData("Target Gold Position:", 0);
-        telemetry.addData("Target Heading:", 65);
         //telemetry.addData("Heading: ", io.getHeading());
         telemetry.addData("Gold Position Around Zero: ", io.getGoldXPositionAroundZero());
         telemetry.addData("Heading: ", Math.toDegrees(io.heading));
+        telemetry.addData("Completed Search: ", io.completedSearch );
+        telemetry.addData("Captured Gold Heading: ", io.headingOfGold);
+        telemetry.addData("Is Gold Center Mineral: ", io.isGoldTheCenterMineral);
+        telemetry.addData("Two Cycles Gold Found: ", io.twoCyclesIsGoldFound);
+        telemetry.addData("Two Cycles Gold Aligned: ", io.twoCyclesIsGoldAligned);
+        telemetry.addData("Two Cycles Gold Centered: ", io.twoCyclesIsGoldCentered);
         telemetry.addData("Gold Position: ", io.getGoldXPosition());
         telemetry.addData("Is Gold Found: ", io.isGoldFound);
         telemetry.addData("Is Gold Aligned: ", io.isGoldAligned);
+        telemetry.addData("Centered Gold: ", centeredGold);
         telemetry.addData("Correction: ", correction);
-        telemetry.addData("Correction1: ", correction1);
         telemetry.addData("Left Speed: ", leftSpd);
         telemetry.addData("Right Speed: ", rightSpd);
         //telemetry.addData("VuMark from IdentifyVuMark from IO", io.getVuMark());
         telemetry.addData("Potentiometer", String.format("%.01f degrees", (io.getDOMPotDegrees())));
+        telemetry.addData("Mode:", "Align with Gold Mineral");
         //return Math.abs(io.getHeading() - heading) <=2 || System.currentTimeMillis() >= timeOut;
         //return centeredGold || System.currentTimeMillis() >= timeOut;
         return System.currentTimeMillis() >= timeOut;

@@ -24,12 +24,13 @@ public class DriveForward extends BasicCommand {
     double targetHeading;
     boolean coast = false;
     boolean usegoldheading = false;
+    boolean driveintodepot = false;
     public DriveForward(double targetPosition, int test, double spd, double targetHeading){
-        headingPID = new PID(0.05,0,0);
+        headingPID = new PID(0.08,0,0);
         //headingPID = new PID(0.02, 0.02, 0);
         //headingPID = new PID(0.05, 0, 0);
         headingPID.setTarget(targetHeading);
-        distancePID = new PID(.2,0,0);
+        distancePID = new PID(.3,0,0);
         //distancePID = new PID(.2,0,0);
         distancePID.setTarget(targetPosition);
         this.targetPosition = targetPosition;
@@ -46,6 +47,12 @@ public class DriveForward extends BasicCommand {
         this.coast=coast;
         this.usegoldheading = usegoldheading;
     }
+    public DriveForward(double targetPosition, int test, double spd, double targetHeading, boolean coast, boolean usegoldheading, boolean driveintodepot){
+        this(targetPosition,test,spd,targetHeading);
+        this.coast=coast;
+        this.usegoldheading = usegoldheading;
+        this.driveintodepot = driveintodepot;
+    }
 
     public DriveForward(double dist) {
         this(dist, YGREATERTHAN, 0.5, 0.0);
@@ -54,7 +61,21 @@ public class DriveForward extends BasicCommand {
     public void init(){
         endTime = System.currentTimeMillis() + 5000;
 
-        if (usegoldheading){
+        if (usegoldheading && driveintodepot){
+            if (io.isGoldTheCenterMineral) {
+                headingPID.setTarget(io.headingOfGold);
+            }
+            if (io.isGoldTheLeftMineral || io.isGoldTheRightMineral) {
+                if (io.headingOfGold > 0) {
+                    headingPID.setTarget(-io.headingOfGold - 10);
+                } else {
+                    headingPID.setTarget(-io.headingOfGold + 10);
+                }
+                //headingPID.setTarget(-io.headingOfGold);
+            }
+        }
+
+        if (usegoldheading && !driveintodepot){
             headingPID.setTarget(io.headingOfGold);
         }
         /*if (usebutton){

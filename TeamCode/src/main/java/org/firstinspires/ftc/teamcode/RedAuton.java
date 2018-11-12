@@ -46,14 +46,42 @@ public abstract class RedAuton extends FirstAuton {
     @Override
     public void addCommands() {
         io.setAllianceColor(IO_RoverRuckus_Test.RED);
+
+
+        commands.add(new RobotDown());
+        commands.add(new WaitForTime(50));
+        commands.add(new HookRelease());
+        commands.add(new ChinDown());
+        commands.add(new HookHome());
         commands.add(new ResetDriveEncoders());
+        commands.add(new SetIMUOffset());
+        commands.add(new DriveForward(2,DriveForward.XGREATERTHAN,1,0));
+
+        CommandGroup group = new CommandGroup();
+        group.addCommand(new RaiseDOM());
+        group.addCommand(new IdentifyGoldMineral());
+        group.addCommand(new FindGoldMineral());
+        group.addCommand(new AlignwithGoldMineral());
+        commands.add(group);
+        commands.add(new WaitForTime(50));
+        commands.add(new ResetDriveEncoders());
+        commands.add(new DriveForward(24,DriveForward.XGREATERTHAN,.8,0, false, true));
+        commands.add(new WaitForTime(50));
+        commands.add(new ResetDriveEncoders());
+        commands.add(new WaitForTime(50));
+
+
+
+
+
+        /*commands.add(new ResetDriveEncoders());
         commands.add(new RobotDown());
         commands.add(new WaitForTime(50));
         commands.add(new HookRelease());
         commands.add(new ChinDown());
         commands.add(new HookHome());
         commands.add(new SetIMUOffset());
-        commands.add(new DriveForward(5,DriveForward.XGREATERTHAN,.8,0));
+        commands.add(new DriveForward(2,DriveForward.XGREATERTHAN,.8,0));
 
         CommandGroup group = new CommandGroup();
         group.addCommand(new RaiseDOM());
@@ -68,9 +96,7 @@ public abstract class RedAuton extends FirstAuton {
         commands.add(new ResetDriveEncoders());
         commands.add(new DriveForward(-15,DriveForward.XLESSTHAN,-.8,0, false, true));
         commands.add(new ResetDriveEncoders());
-        commands.add(new WaitForTime(50));
-        commands.add(new Rotate(-90,.65,.5));
-        commands.add(new ResetDriveEncoders());
+        commands.add(new WaitForTime(50));*/
 
 
 

@@ -145,7 +145,44 @@ public class IdentifyGoldMineral extends BasicCommand{
         detector.init(map.appContext,CameraViewDisplay.getInstance(), 0, true);
 
         detector.yellowFilter = new LeviColorFilter(LeviColorFilter.ColorPreset.YELLOW, 100); // Create new filter
+
+
+        // Optional tuning
+        detector.alignSize = 100; // How wide (in pixels) is the range in which the gold object will be aligned. (Represented by green bars in the preview)
+        detector.alignPosOffset = 0; // How far from center frame to offset this alignment zone.
+        //detector.downscale = 0.4; // How much to downscale the input frames
+
+        //detector.areaScoringMethod = DogeCV.AreaScoringMethod.MAX_AREA; // Can also be PERFECT_AREA
+        //detector.perfectAreaScorer.perfectArea = 10000; // if using PERFECT_AREA scoring
+        detector.areaScoringMethod = DogeCV.AreaScoringMethod.PERFECT_AREA; // Can also be PERFECT_AREA
         detector.useDefaults(); // Use default settings
+        detector.perfectAreaScorer.perfectArea = 1369; // if using PERFECT_AREA scoring
+        //detector.maxAreaScorer.weight = 0.005; //
+        //detector.maxAreaScorer.weight = 3; //
+        detector.perfectAreaScorer.weight = 10;
+
+        detector.ratioScorer.weight = 5; //
+        detector.ratioScorer.perfectRatio = 1.0; // Ratio adjustment
+
+
+        //detector.areaScoringMethod = DogeCV.AreaScoringMethod.MAX_AREA; // Can also be PERFECT_AREA
+        //detector.perfectAreaScorer.perfectArea = 10000; // Uncomment if using PERFECT_AREA scoring
+
+        //detector.useDefaults();
+        //detector.areaScoringMethod = DogeCV.AreaScoringMethod.MAX_AREA; // Can also be PERFECT_AREA
+        //detector.perfectAreaScorer.perfectArea = 10000; // if using PERFECT_AREA scoring
+        //detector.downscale = 0.8;
+        detector.downscale = 0.8;
+
+
+
+
+
+
+
+
+
+        /*detector.useDefaults(); // Use default settings
 
 
         // Optional tuning
@@ -169,7 +206,7 @@ public class IdentifyGoldMineral extends BasicCommand{
         //detector.areaScoringMethod = DogeCV.AreaScoringMethod.MAX_AREA; // Can also be PERFECT_AREA
         //detector.perfectAreaScorer.perfectArea = 10000; // if using PERFECT_AREA scoring
 
-        //detector.downscale = 0.8;
+        //detector.downscale = 0.8;*/
 
         // Set the detector
         vuforia.setDogeCVDetector(detector);
@@ -238,7 +275,7 @@ public class IdentifyGoldMineral extends BasicCommand{
             //return vuMark != RelicRecoveryVuMark.UNKNOWN || System.currentTimeMillis() >= timeOut;
         //}
 
-        if (io.getDOMPotDegrees() >=45) {
+        if (io.getDOMPotDegrees() >=15) {
             if (detector.isFound()) {
                 io.isGoldFound = true;
                 io.goldXPosition = detector.getXPosition();
@@ -255,7 +292,7 @@ public class IdentifyGoldMineral extends BasicCommand{
 
         }
 
-        telemetry.addData("IsFound" , detector.isFound()); // Is the gold mineral found?
+        /*telemetry.addData("IsFound" , detector.isFound()); // Is the gold mineral found?
         telemetry.addData("IsAligned" , detector.getAligned()); // Is the bot aligned with the gold mineral?
         telemetry.addData("X Pos" , detector.getXPosition()); // Gold X position.
         telemetry.addData("Gold Position Around Zero: ", io.getGoldXPositionAroundZero());
@@ -267,9 +304,10 @@ public class IdentifyGoldMineral extends BasicCommand{
         telemetry.addData("Two Cycles Gold Centered: ", io.twoCyclesIsGoldCentered);
         telemetry.addData("Gold Position: ", io.getGoldXPosition());
         telemetry.addData("Is Gold Found: ", io.isGoldFound);
-        telemetry.addData("Is Gold Aligned: ", io.isGoldAligned);
+        telemetry.addData("Is Gold Aligned: ", io.isGoldAligned);*/
         telemetry.addData("Mode:", "Identify Gold Mineral");
         return io.twoCyclesIsGoldCentered || System.currentTimeMillis() >= timeOut;
+        //return System.currentTimeMillis() >= timeOut;
     }
     public void stop() {
         detector.disable();

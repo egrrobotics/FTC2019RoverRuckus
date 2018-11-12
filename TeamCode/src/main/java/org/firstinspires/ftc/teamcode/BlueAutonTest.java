@@ -8,9 +8,12 @@ import org.firstinspires.ftc.teamcode.commands.DriveForward;
 import org.firstinspires.ftc.teamcode.commands.DriveForwardDistanceSensorandDistanceSensor;
 import org.firstinspires.ftc.teamcode.commands.DriveForwardDistanceSensorandEncoder;
 import org.firstinspires.ftc.teamcode.commands.DriveForwardHeadingandDistanceSensor;
+import org.firstinspires.ftc.teamcode.commands.FindGoldMineral;
 import org.firstinspires.ftc.teamcode.commands.IdentifyGoldMineral;
 import org.firstinspires.ftc.teamcode.commands.RaiseDOM;
 import org.firstinspires.ftc.teamcode.commands.ResetDriveEncoders;
+import org.firstinspires.ftc.teamcode.commands.SetIMUOffset;
+import org.firstinspires.ftc.teamcode.commands.WaitForTime;
 import org.firstinspires.ftc.teamcode.utilities.IO_RoverRuckus_Test;
 
 //import org.firstinspires.ftc.teamcode.commands.DriveForwardForDistance;
@@ -32,30 +35,35 @@ public abstract class BlueAutonTest extends FirstAuton {
     @Override
     public void addCommands() {
         io.setAllianceColor(IO_RoverRuckus_Test.BLUE);
-        commands.add(new ResetDriveEncoders());
         //commands.add(new RobotDown());
         //commands.add(new WaitForTime(50));
         //commands.add(new HookRelease());
         //commands.add(new ChinDown());
         //commands.add(new HookHome());
+        commands.add(new ResetDriveEncoders());
+        commands.add(new SetIMUOffset());
         //commands.add(new RaiseDOM());
 
 
-        // add back CommandGroup group = new CommandGroup();
-        // add back group.addCommand(new RaiseDOM());
-        // add back group.addCommand(new IdentifyGoldMineral());
-        //group.addCommand(new FindGoldMineral());
-        // add back group.addCommand(new AlignwithGoldMineralTest());
-        // add back commands.add(group);
+        CommandGroup group = new CommandGroup();
+        group.addCommand(new RaiseDOM());
+        group.addCommand(new IdentifyGoldMineral());
+        group.addCommand(new FindGoldMineral());
+        group.addCommand(new AlignwithGoldMineralTest());
+        //group.addCommand(new AlignwithGoldMineral());
+        commands.add(group);
 
 
 
 
         //commands.add(new DriveForwardDistanceSensorandEncoder(50, DriveForwardDistanceSensorandEncoder.XGREATERTHAN,.6,10, "Right"));
         //commands.add(new DriveForwardDistanceSensorandDistanceSensor(5, DriveForwardDistanceSensorandDistanceSensor.FRONTLESSTHAN,.6,10, "Right"));
-        commands.add(new DriveForwardHeadingandDistanceSensor(5, DriveForwardHeadingandDistanceSensor.FRONTLESSTHAN,.6,20));
+        //commands.add(new DriveForwardHeadingandDistanceSensor(5, DriveForwardHeadingandDistanceSensor.FRONTLESSTHAN,.6,20));
 
-
+        commands.add(new DriveForward(15,DriveForward.XGREATERTHAN,.8,0, false, true));
+        commands.add(new WaitForTime(1000));
+        commands.add(new ResetDriveEncoders());
+        commands.add(new DriveForward(5,DriveForward.XGREATERTHAN,.8,0, false, true, true));
 
 
 

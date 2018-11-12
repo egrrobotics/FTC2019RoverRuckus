@@ -86,8 +86,12 @@ public class IO_RoverRuckus_Test {
 
     public boolean completedSearch = false;
 
+    public boolean isGoldTheCenterMineral = false;
+    public boolean isGoldTheLeftMineral = false;
+    public boolean isGoldTheRightMineral = false;
+
     public double goldXPosition = 0;
-    public double headingatlanding = 0;
+    //public double headingatlanding = 0;
     public double headingOfGold = 0;
 
     public static double hookClockwise = .79;

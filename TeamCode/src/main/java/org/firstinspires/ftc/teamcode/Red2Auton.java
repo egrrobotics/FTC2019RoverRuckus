@@ -21,8 +21,8 @@ import org.firstinspires.ftc.teamcode.commands.WaitForTime;
 @Autonomous(name="Red Silver",group="Auton")
 public class Red2Auton extends RedAuton {
     public void addFinalCommands() {
-        commands.add(new Rotate(-90,.65,.5));
-        commands.add(new ResetDriveEncoders());
+        //commands.add(new Rotate(-90,.65,.65));
+        //commands.add(new ResetDriveEncoders());
         /*commands.add(new ResetDriveEncoders());
         commands.add(new WaitForTime(100));
         commands.add(new DriveForward(-22,DriveForward.XLESSTHAN,-.55,0));

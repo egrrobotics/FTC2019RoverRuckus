@@ -1,12 +1,14 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 /**
  * Created by David Austin on 11/10/2016.
  */
 
 @Autonomous(name="Follow the Gold",group="Auton")
+@Disabled
 public class Blue1AutonTest extends BlueAutonTest {
     public void addFinalCommands() {
         //commands.add(new DriveForward(18,DriveForward.XGREATERTHAN,.35,0));

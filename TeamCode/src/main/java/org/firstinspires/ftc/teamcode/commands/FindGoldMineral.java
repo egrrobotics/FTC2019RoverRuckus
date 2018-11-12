@@ -17,11 +17,11 @@ public class FindGoldMineral extends BasicCommand {
     boolean completedSearch = false;
 
     public FindGoldMineral(){
-        this.heading_cw = 10; //clockwise 10 degrees
-        this.heading_ccw = -10; //counterclockwise 10 degrees
+        this.heading_cw = 9; //clockwise 10 degrees
+        this.heading_ccw = -9; //counterclockwise 10 degrees
         this.heading = 0;
-        this.leftSpd = .65;
-        this.rightSpd = .65;
+        this.leftSpd = .6;
+        this.rightSpd = .6;
         headingPID = new PID(0.05,0,0); // was 0.05
 
 /*        if ((io.getAllianceColor() == IO.RED) && (io.getJewelColor() == IO.RED)) {
@@ -73,7 +73,7 @@ public class FindGoldMineral extends BasicCommand {
         double correction = headingPID.getCorrection(Math.toDegrees(io.heading));
         correction = Range.clip(correction,-1,1);
         //correction = Range.clip(correction,0,1);
-        if (io.getDOMPotDegrees() >= 45) {
+        if (io.getDOMPotDegrees() >= 15) {
             io.setDrivePower(correction*leftSpd,-correction*rightSpd);
         }
 
@@ -90,7 +90,7 @@ public class FindGoldMineral extends BasicCommand {
         }
 
 
-        telemetry.addData("Target Heading:", heading);
+        /*telemetry.addData("Target Heading:", heading);
         //telemetry.addData("Heading: ", io.getHeading());
         telemetry.addData("Heading: ", Math.toDegrees(io.heading));
         telemetry.addData("Completed Search: ", io.completedSearch );
@@ -98,12 +98,12 @@ public class FindGoldMineral extends BasicCommand {
         telemetry.addData("Left Speed: ", leftSpd);
         telemetry.addData("Right Speed: ", rightSpd);
         //telemetry.addData("VuMark from IdentifyVuMark from IO", io.getVuMark());
-        telemetry.addData("Potentiometer", String.format("%.01f degrees", (io.getDOMPotDegrees())));
+        telemetry.addData("Potentiometer", String.format("%.01f degrees", (io.getDOMPotDegrees())));*/
         telemetry.addData("Mode:", "Find Gold Mineral");
     }
 
     public boolean isFinished(){
-        telemetry.addData("Target Heading:", heading);
+        /*telemetry.addData("Target Heading:", heading);
         //telemetry.addData("Heading: ", io.getHeading());
         telemetry.addData("Heading: ", Math.toDegrees(io.heading));
         telemetry.addData("Completed Search: ", io.completedSearch );
@@ -112,7 +112,7 @@ public class FindGoldMineral extends BasicCommand {
         //telemetry.addData("Correction: ", headingPID.getCorrection(io.getHeading()));
         telemetry.addData("Correction: ", headingPID.getCorrection(Math.toDegrees(io.heading)));
         telemetry.addData("Left Speed: ", leftSpd);
-        telemetry.addData("Right Speed: ", rightSpd);
+        telemetry.addData("Right Speed: ", rightSpd);*/
         //telemetry.addData("VuMark from IdentifyVuMark from IO", io.getVuMark());
         //return Math.abs(io.getHeading() - heading) <=2 || System.currentTimeMillis() >= timeOut;
         return io.twoCyclesIsGoldFound || completedSearch || System.currentTimeMillis() >= timeOut;

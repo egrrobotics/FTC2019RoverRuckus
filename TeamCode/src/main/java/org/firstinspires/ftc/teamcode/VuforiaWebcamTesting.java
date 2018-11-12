@@ -35,6 +35,7 @@ import com.disnodeteam.dogecv.Dogeforia;
 import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
 import com.disnodeteam.dogecv.detectors.roverrukus.SamplingOrderDetector;
 import com.disnodeteam.dogecv.filters.LeviColorFilter;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -73,7 +74,7 @@ import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocaliz
  */
 
 @TeleOp(name="Vuforia Webcam Testing", group="DogeCV")
-
+@Disabled
 public class VuforiaWebcamTesting extends OpMode
 {
 
@@ -174,15 +175,35 @@ public class VuforiaWebcamTesting extends OpMode
         detector.init(hardwareMap.appContext,CameraViewDisplay.getInstance(), 0, true);
 
         detector.yellowFilter = new LeviColorFilter(LeviColorFilter.ColorPreset.YELLOW, 100); // Create new filter
+
+
+
+        // Optional tuning
+        detector.alignSize = 100; // How wide (in pixels) is the range in which the gold object will be aligned. (Represented by green bars in the preview)
+        detector.alignPosOffset = 0; // How far from center frame to offset this alignment zone.
+        //detector.downscale = 0.4; // How much to downscale the input frames
+
+        //detector.areaScoringMethod = DogeCV.AreaScoringMethod.MAX_AREA; // Can also be PERFECT_AREA
+        //detector.perfectAreaScorer.perfectArea = 10000; // if using PERFECT_AREA scoring
+        detector.areaScoringMethod = DogeCV.AreaScoringMethod.PERFECT_AREA; // Can also be PERFECT_AREA
         detector.useDefaults(); // Use default settings
-        detector.areaScoringMethod = DogeCV.AreaScoringMethod.MAX_AREA; // Can also be PERFECT_AREA
+        detector.perfectAreaScorer.perfectArea = 1369; // if using PERFECT_AREA scoring
+        //detector.maxAreaScorer.weight = 0.005; //
+        //detector.maxAreaScorer.weight = 3; //
+        detector.perfectAreaScorer.weight = 10;
+
+        detector.ratioScorer.weight = 5; //
+        detector.ratioScorer.perfectRatio = 1.0; // Ratio adjustment
+
+
+        //detector.areaScoringMethod = DogeCV.AreaScoringMethod.MAX_AREA; // Can also be PERFECT_AREA
         //detector.perfectAreaScorer.perfectArea = 10000; // Uncomment if using PERFECT_AREA scoring
 
         //detector.useDefaults();
         //detector.areaScoringMethod = DogeCV.AreaScoringMethod.MAX_AREA; // Can also be PERFECT_AREA
         //detector.perfectAreaScorer.perfectArea = 10000; // if using PERFECT_AREA scoring
         //detector.downscale = 0.8;
-        detector.downscale = 0.4;
+        detector.downscale = 0.8;
 
         // Set the detector
         vuforia.setDogeCVDetector(detector);

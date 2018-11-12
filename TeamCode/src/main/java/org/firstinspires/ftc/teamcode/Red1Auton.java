@@ -7,10 +7,12 @@ import org.firstinspires.ftc.teamcode.commands.DriveForwardGlyph;
 import org.firstinspires.ftc.teamcode.commands.HandsOpened;
 import org.firstinspires.ftc.teamcode.commands.HandsOpenedMid;
 import org.firstinspires.ftc.teamcode.commands.IdentifyProximity;
+import org.firstinspires.ftc.teamcode.commands.MarkerboxDown;
 import org.firstinspires.ftc.teamcode.commands.ProximityArmDown;
 import org.firstinspires.ftc.teamcode.commands.ProximityArmUp;
 import org.firstinspires.ftc.teamcode.commands.ResetDriveEncoders;
 import org.firstinspires.ftc.teamcode.commands.Rotate;
+import org.firstinspires.ftc.teamcode.commands.SetIMUOffset;
 import org.firstinspires.ftc.teamcode.commands.WaitForTime;
 
 /**
@@ -20,8 +22,16 @@ import org.firstinspires.ftc.teamcode.commands.WaitForTime;
 @Autonomous(name="Red Gold",group="Auton")
 public class Red1Auton extends RedAuton {
     public void addFinalCommands() {
-        commands.add(new Rotate(-90,.65,.65));
+        commands.add(new Rotate(0, .8, .8, true));
         commands.add(new ResetDriveEncoders());
+        commands.add(new SetIMUOffset());
+        commands.add(new DriveForward(18,DriveForward.XGREATERTHAN,.75,0));
+        commands.add(new WaitForTime(50));
+        commands.add(new ResetDriveEncoders());
+        commands.add(new MarkerboxDown());
+
+        //commands.add(new Rotate(-90,.65,.65));
+        //commands.add(new ResetDriveEncoders());
         /*commands.add(new ResetDriveEncoders());
         commands.add(new WaitForTime(100));
         commands.add(new DriveForwardGlyph(-.35, "Red1"));

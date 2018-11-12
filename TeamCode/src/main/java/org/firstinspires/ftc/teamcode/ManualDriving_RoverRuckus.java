@@ -256,10 +256,15 @@ public class ManualDriving_RoverRuckus extends OpMode
 
         // POV Mode uses left stick to go forward, and right stick to turn.
         // - This uses basic math to combine motions and is easier to drive straight.
-        double drive = -gamepad1.right_stick_y;
-        double turn  =  gamepad1.right_stick_x;
-        leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
-        rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
+        //double drive = -gamepad1.right_stick_y; original
+        //double turn  =  gamepad1.right_stick_x; original
+        //leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
+        //rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
+
+        double drive =  gamepad1.right_stick_y;
+        double turn  = -gamepad1.right_stick_x;
+        leftPower    = Range.clip(drive - turn, -1.0, 1.0) ;
+        rightPower   = Range.clip(drive + turn, -1.0, 1.0) ;
 
 
         // Tank Mode uses one stick to control each wheel.
@@ -305,14 +310,25 @@ public class ManualDriving_RoverRuckus extends OpMode
             io.setDrivePower((leftPower*.6), (rightPower*.6));
         }
 
-        if((io.getChinMotorEncoder() >= 3600) && (gamepad1.y)) {
+        if((io.getChinMotorEncoder() >= 3400) && (gamepad1.y)) {
             io.chinMotor.setPower(0);
-        } else if(((io.getChinMotorEncoder() <= 0) || (io.touchChin.getState() == false)) && (gamepad1.a)){
+        } else if ((io.getChinMotorEncoder() >= 2500) && (gamepad1.y)){
+            io.chinMotor.setPower(((.6 - (.4 * 1)) * 1));
+        }
+        else if(((io.getChinMotorEncoder() <= 0) || (io.touchChin.getState() == false)) && (gamepad1.a)){
             io.chinMotor.setPower(0);
         } else if (gamepad1.y){
-            io.chinMotor.setPower(1);
+            if (low_speed_engaged) {
+                io.chinMotor.setPower(((.6 - (.4 * gamepad1.left_trigger)) * 1));
+            } else {
+                io.chinMotor.setPower(1);
+            }
         } else if (gamepad1.a){
-            io.chinMotor.setPower(-1);
+            if (low_speed_engaged) {
+                io.chinMotor.setPower(((.6 - (.4 * gamepad1.left_trigger)) * -1));
+            } else {
+                io.chinMotor.setPower(-1);
+            }
         } else {
             io.chinMotor.setPower(0);
         }
