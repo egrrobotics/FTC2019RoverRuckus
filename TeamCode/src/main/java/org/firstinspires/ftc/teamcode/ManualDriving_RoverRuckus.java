@@ -312,24 +312,28 @@ public class ManualDriving_RoverRuckus extends OpMode
 
         if((io.getChinMotorEncoder() >= 3400) && (gamepad1.y)) {
             io.chinMotor.setPower(0);
-        } else if ((io.getChinMotorEncoder() >= 2500) && (gamepad1.y)){
+        }
+        else if ((io.getChinMotorEncoder() >= 2500) && (gamepad1.y)){
             io.chinMotor.setPower(((.6 - (.4 * 1)) * 1));
         }
         else if(((io.getChinMotorEncoder() <= 0) || (io.touchChin.getState() == false)) && (gamepad1.a)){
             io.chinMotor.setPower(0);
-        } else if (gamepad1.y){
+        }
+        else if (gamepad1.y){
             if (low_speed_engaged) {
                 io.chinMotor.setPower(((.6 - (.4 * gamepad1.left_trigger)) * 1));
             } else {
                 io.chinMotor.setPower(1);
             }
-        } else if (gamepad1.a){
+        }
+        else if (gamepad1.a){
             if (low_speed_engaged) {
                 io.chinMotor.setPower(((.6 - (.4 * gamepad1.left_trigger)) * -1));
             } else {
                 io.chinMotor.setPower(-1);
             }
-        } else {
+        }
+        else {
             io.chinMotor.setPower(0);
         }
 
@@ -462,8 +466,32 @@ public class ManualDriving_RoverRuckus extends OpMode
 
         if (gamepad2.left_stick_y == 1) {
             // Keep stepping up until we hit the max value.
-            initStartingPositionDOM1 += 5 ;
-            initStartingPositionDOM2 += 5 ;
+            initStartingPositionDOM1 += 7;
+            initStartingPositionDOM2 += 7;
+            if (initStartingPositionDOM1 >= 270 ) {
+                initStartingPositionDOM1 = 270;
+                //rampUp = !rampUp;   // Switch ramp direction
+            }
+            if (initStartingPositionDOM2 >= 270 ) {
+                initStartingPositionDOM2 = 270;
+                //rampUp = !rampUp;   // Switch ramp direction
+            }
+        }
+        else if (gamepad2.left_stick_y < 1 && gamepad2.left_stick_y >= .5){
+            initStartingPositionDOM1 += 5;
+            initStartingPositionDOM2 += 5;
+            if (initStartingPositionDOM1 >= 270 ) {
+                initStartingPositionDOM1 = 270;
+                //rampUp = !rampUp;   // Switch ramp direction
+            }
+            if (initStartingPositionDOM2 >= 270 ) {
+                initStartingPositionDOM2 = 270;
+                //rampUp = !rampUp;   // Switch ramp direction
+            }
+        }
+        else if (gamepad2.left_stick_y < .5 && gamepad2.left_stick_y >= .03){
+            initStartingPositionDOM1 += 2;
+            initStartingPositionDOM2 += 2;
             if (initStartingPositionDOM1 >= 270 ) {
                 initStartingPositionDOM1 = 270;
                 //rampUp = !rampUp;   // Switch ramp direction
@@ -475,8 +503,19 @@ public class ManualDriving_RoverRuckus extends OpMode
         }
         else if (gamepad2.left_stick_y == -1) {
             // Keep stepping down until we hit the min value.
-            initStartingPositionDOM1 -= 5 ;
-            initStartingPositionDOM2 -= 5 ;
+            initStartingPositionDOM1 -= 7;
+            initStartingPositionDOM2 -= 7;
+            if ((initStartingPositionDOM1 <= 0) || (io.touchDOM.getState() == false)) {
+                initStartingPositionDOM1 = 0;
+                //rampUp = !rampUp;  // Switch ramp direction
+            }
+            if ((initStartingPositionDOM2 <= 0) || (io.touchDOM.getState() == false)) {
+                initStartingPositionDOM2 = 0;
+                //rampUp = !rampUp;  // Switch ramp direction
+            }
+        } else if (gamepad2.left_stick_y > -1 && gamepad2.left_stick_y <= -.5){
+            initStartingPositionDOM1 -= 5;
+            initStartingPositionDOM2 -= 5;
             if ((initStartingPositionDOM1 <= 0) || (io.touchDOM.getState() == false)) {
                 initStartingPositionDOM1 = 0;
                 //rampUp = !rampUp;  // Switch ramp direction
@@ -486,6 +525,19 @@ public class ManualDriving_RoverRuckus extends OpMode
                 //rampUp = !rampUp;  // Switch ramp direction
             }
         }
+        else if (gamepad2.left_stick_y < -.5 && gamepad2.left_stick_y <= -.03){
+            initStartingPositionDOM1 -= 2;
+            initStartingPositionDOM2 -= 2;
+            if ((initStartingPositionDOM1 <= 0) || (io.touchDOM.getState() == false)) {
+                initStartingPositionDOM1 = 0;
+                //rampUp = !rampUp;  // Switch ramp direction
+            }
+            if ((initStartingPositionDOM2 <= 0) || (io.touchDOM.getState() == false)) {
+                initStartingPositionDOM2 = 0;
+                //rampUp = !rampUp;  // Switch ramp direction
+            }
+        }
+
 
 
         /*if((io.getDOMMotorExtendEncoder() >= 9450) && (gamepad2.right_stick_x > 0)) {
@@ -985,11 +1037,11 @@ public class ManualDriving_RoverRuckus extends OpMode
     }
 
     public void addInitDOM1Commands() {
-        commandsInitDOM1.add(new DOM1Movement(io.getDOMPotDegrees(), DOM1Movement.INCREASINGDIRECTION, .7));
+        commandsInitDOM1.add(new DOM1Movement(io.getDOMPotDegrees(), DOM1Movement.INCREASINGDIRECTION, .6));
     }
 
     public void addInitDOM2Commands() {
-        commandsInitDOM2.add(new DOM2Movement(io.getDOMPotDegrees(), DOM2Movement.INCREASINGDIRECTION, .7));
+        commandsInitDOM2.add(new DOM2Movement(io.getDOMPotDegrees(), DOM2Movement.INCREASINGDIRECTION, .6));
     }
 
     /*public void addRetrieveRelicRPU1Commands() {

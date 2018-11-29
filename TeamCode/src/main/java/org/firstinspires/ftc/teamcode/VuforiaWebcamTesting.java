@@ -74,7 +74,7 @@ import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocaliz
  */
 
 @TeleOp(name="Vuforia Webcam Testing", group="DogeCV")
-@Disabled
+//@Disabled
 public class VuforiaWebcamTesting extends OpMode
 {
 
