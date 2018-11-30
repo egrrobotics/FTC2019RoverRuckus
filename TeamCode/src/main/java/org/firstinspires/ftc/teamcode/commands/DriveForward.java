@@ -67,9 +67,9 @@ public class DriveForward extends BasicCommand {
             }
             if (io.isGoldTheLeftMineral || io.isGoldTheRightMineral) {
                 if (io.headingOfGold > 0) {
-                    headingPID.setTarget(-io.headingOfGold - 10);
+                    headingPID.setTarget(-30);
                 } else {
-                    headingPID.setTarget(-io.headingOfGold + 10);
+                    headingPID.setTarget(70);
                 }
                 //headingPID.setTarget(-io.headingOfGold);
             }
@@ -77,6 +77,18 @@ public class DriveForward extends BasicCommand {
 
         if (usegoldheading && !driveintodepot){
             headingPID.setTarget(io.headingOfGold);
+
+            if (io.isGoldTheCenterMineral) {
+                headingPID.setTarget(io.headingOfGold);
+            }
+            if (io.isGoldTheLeftMineral || io.isGoldTheRightMineral) {
+                if (io.headingOfGold > 0) {
+                    headingPID.setTarget(io.headingOfGold + 5);
+                } else {
+                    headingPID.setTarget(io.headingOfGold - 5);
+                }
+                //headingPID.setTarget(-io.headingOfGold);
+            }
         }
         /*if (usebutton){
             this.proximitybutton = io.proximityArmButtonPushed;

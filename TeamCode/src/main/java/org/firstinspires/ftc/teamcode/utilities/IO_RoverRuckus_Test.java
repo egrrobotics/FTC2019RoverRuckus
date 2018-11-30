@@ -85,6 +85,7 @@ public class IO_RoverRuckus_Test {
     public boolean twoCyclesIsGoldCentered = false;
 
     public boolean completedSearch = false;
+    public boolean goldMineralFound = false;
 
     public boolean isGoldTheCenterMineral = false;
     public boolean isGoldTheLeftMineral = false;
@@ -110,9 +111,9 @@ public class IO_RoverRuckus_Test {
     //public static double relicHandOpen = 0;
     //public static double relicHandClosed = 1;
 
-    public static double markerBoxUp = 1;
+    public static double markerBoxUp = 0;
     public static double markerBoxFlat = .5;
-    public static double markerBoxDown = 0;
+    public static double markerBoxDown = 1;
 
     // State used for updating telemetry
     public Orientation angles;

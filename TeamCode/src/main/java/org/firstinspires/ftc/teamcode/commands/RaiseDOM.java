@@ -29,8 +29,8 @@ public class RaiseDOM extends BasicCommand {
         commandsInitDOM1 = new ArrayList<BasicCommand>();
         commandsInitDOM2 = new ArrayList<BasicCommand>();
 
-        commandsInitDOM1.add(new DOM1Movement(65, DOM1Movement.INCREASINGDIRECTION, .75));
-        commandsInitDOM2.add(new DOM2Movement(65, DOM2Movement.INCREASINGDIRECTION, .75));
+        commandsInitDOM1.add(new DOM1Movement(70, DOM1Movement.INCREASINGDIRECTION, .75));
+        commandsInitDOM2.add(new DOM2Movement(70, DOM2Movement.INCREASINGDIRECTION, .75));
 
         iteratorInitDOM1 = commandsInitDOM1.iterator();
         iteratorInitDOM2 = commandsInitDOM2.iterator();

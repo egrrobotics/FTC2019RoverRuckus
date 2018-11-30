@@ -17,10 +17,10 @@ public class AlignwithGoldMineral extends BasicCommand {
 
     public AlignwithGoldMineral(){
         this.heading = 0;
-        this.leftSpd = .70;
-        this.rightSpd = .70;
+        this.leftSpd = .95;
+        this.rightSpd = .95;
         this.correction = 0;
-        goldPID = new PID(0.0025,0,0); // was 0.05
+        goldPID = new PID(0.0028,0,0); // was 0.05
 
 /*        if ((io.getAllianceColor() == IO.RED) && (io.getJewelColor() == IO.RED)) {
             headingPID.setTarget(heading_cw);
@@ -40,7 +40,7 @@ public class AlignwithGoldMineral extends BasicCommand {
     }
 
     public void init() {
-        timeOut = System.currentTimeMillis() + 8000;
+        timeOut = System.currentTimeMillis() + 9000;
         initTime = System.currentTimeMillis();
         goldPID.setTarget(0);
         /*if (io.isGoldFound) {
@@ -66,13 +66,13 @@ public class AlignwithGoldMineral extends BasicCommand {
 
     public void execute(){
 
-        if (io.getDOMPotDegrees() >= 15 && io.twoCyclesIsGoldFound && ((System.currentTimeMillis() - initTime) > 250) ) {
+        if (io.getDOMPotDegrees() >= 35 && io.twoCyclesIsGoldFound && ((System.currentTimeMillis() - initTime) > 2500) && io.goldMineralFound ) {
             correction = goldPID.getCorrection(-io.getGoldXPositionAroundZero());
             correction = Range.clip(correction,-1,1);
             io.setDrivePower(correction*leftSpd,-correction*rightSpd);
         }
 
-        if ((Math.abs(io.getGoldXPositionAroundZero() - 0) <= 100) && io.twoCyclesIsGoldFound && io.twoCyclesIsGoldAligned && ((System.currentTimeMillis() - initTime) > 250)) {
+        if (io.getDOMPotDegrees() >= 35 && (Math.abs(io.getGoldXPositionAroundZero() - 0) <= 100) && io.twoCyclesIsGoldFound && io.twoCyclesIsGoldAligned && ((System.currentTimeMillis() - initTime) > 2500)) {
             centeredGold = true;
             io.isGoldCentered = true;
             io.headingOfGold = Math.toDegrees(io.heading);
@@ -142,7 +142,7 @@ public class AlignwithGoldMineral extends BasicCommand {
         telemetry.addData("Potentiometer", String.format("%.01f degrees", (io.getDOMPotDegrees())));*/
         telemetry.addData("Mode:", "Align with Gold Mineral");
         //return Math.abs(io.getHeading() - heading) <=2 || System.currentTimeMillis() >= timeOut;
-        return io.twoCyclesIsGoldCentered || System.currentTimeMillis() >= timeOut;
+        return (io.twoCyclesIsGoldCentered && io.goldMineralFound) || System.currentTimeMillis() >= timeOut;
         //return System.currentTimeMillis() >= timeOut;
     }
     public void stop() {

@@ -18,7 +18,7 @@ public class Rotate extends BasicCommand {
         this.heading = heading;
         this.leftSpd = leftSpd;
         this.rightSpd = rightSpd;
-        headingPID = new PID(0.04,0,0); //was 0.05
+        headingPID = new PID(0.05,0,0); //was 0.05
         headingPID.setTarget(heading);
     }
 
@@ -41,8 +41,8 @@ public class Rotate extends BasicCommand {
                     headingPID.setTarget(-30);
                     heading = -30;
                 } else {
-                    headingPID.setTarget(30);
-                    heading = 30;
+                    headingPID.setTarget(70);
+                    heading = 70;
                 }
                 //headingPID.setTarget(-io.headingOfGold);
             }
@@ -83,7 +83,7 @@ public class Rotate extends BasicCommand {
         telemetry.addData("isGoldTheRightMineralh: ", io.isGoldTheRightMineral );
         //telemetry.addData("VuMark from IdentifyVuMark from IO", io.getVuMark());
         //return Math.abs(io.getHeading() - heading) <=2 || System.currentTimeMillis() >= timeOut;
-        return Math.abs(Math.toDegrees(io.heading) - heading) <=2.3 || System.currentTimeMillis() >= timeOut;
+        return Math.abs(Math.toDegrees(io.heading) - heading) <=2.75 || System.currentTimeMillis() >= timeOut;
         //return System.currentTimeMillis() >= timeOut;
     }
     public void stop() {

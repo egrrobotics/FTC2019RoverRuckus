@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 
 import org.firstinspires.ftc.teamcode.commands.AlignwithGoldMineral;
+import org.firstinspires.ftc.teamcode.commands.CageHome;
 import org.firstinspires.ftc.teamcode.commands.ChinDown;
 import org.firstinspires.ftc.teamcode.commands.CommandGroup;
 import org.firstinspires.ftc.teamcode.commands.DriveForward;
@@ -10,6 +11,7 @@ import org.firstinspires.ftc.teamcode.commands.HookHome;
 import org.firstinspires.ftc.teamcode.commands.HookRelease;
 import org.firstinspires.ftc.teamcode.commands.IdentifyGoldMineral;
 import org.firstinspires.ftc.teamcode.commands.RaiseDOM;
+import org.firstinspires.ftc.teamcode.commands.ReleaseCage;
 import org.firstinspires.ftc.teamcode.commands.ResetDriveEncoders;
 import org.firstinspires.ftc.teamcode.commands.RobotDown;
 import org.firstinspires.ftc.teamcode.commands.Rotate;
@@ -37,13 +39,15 @@ public abstract class BlueAuton extends FirstAuton {
     public void addCommands() {
         io.setAllianceColor(IO_RoverRuckus_Test.BLUE);
         commands.add(new RobotDown());
-        commands.add(new WaitForTime(50));
+        //commands.add(new WaitForTime(50));
         commands.add(new HookRelease());
         commands.add(new ChinDown());
         commands.add(new HookHome());
         commands.add(new ResetDriveEncoders());
+        //commands.add(new ReleaseCage());
+        //commands.add(new CageHome());
         commands.add(new SetIMUOffset());
-        commands.add(new DriveForward(2,DriveForward.XGREATERTHAN,1,0));
+        commands.add(new DriveForward(1.5,DriveForward.XGREATERTHAN,1,0));
 
         CommandGroup group = new CommandGroup();
         group.addCommand(new RaiseDOM());
@@ -51,12 +55,9 @@ public abstract class BlueAuton extends FirstAuton {
         group.addCommand(new FindGoldMineral());
         group.addCommand(new AlignwithGoldMineral());
         commands.add(group);
-        commands.add(new WaitForTime(50));
+        //commands.add(new WaitForTime(50));
         commands.add(new ResetDriveEncoders());
-        commands.add(new DriveForward(24,DriveForward.XGREATERTHAN,.8,0, false, true));
-        commands.add(new WaitForTime(50));
-        commands.add(new ResetDriveEncoders());
-        commands.add(new WaitForTime(50));
+
 
 
 

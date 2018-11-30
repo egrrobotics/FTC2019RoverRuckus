@@ -275,7 +275,7 @@ public class IdentifyGoldMineral extends BasicCommand{
             //return vuMark != RelicRecoveryVuMark.UNKNOWN || System.currentTimeMillis() >= timeOut;
         //}
 
-        if (io.getDOMPotDegrees() >=15) {
+        if (io.getDOMPotDegrees() >=35) {
             if (detector.isFound()) {
                 io.isGoldFound = true;
                 io.goldXPosition = detector.getXPosition();
