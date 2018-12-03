@@ -67,9 +67,9 @@ public class DriveForward extends BasicCommand {
             }
             if (io.isGoldTheLeftMineral || io.isGoldTheRightMineral) {
                 if (io.headingOfGold > 0) {
-                    headingPID.setTarget(-30);
+                    headingPID.setTarget(-45);
                 } else {
-                    headingPID.setTarget(70);
+                    headingPID.setTarget(60);
                 }
                 //headingPID.setTarget(-io.headingOfGold);
             }

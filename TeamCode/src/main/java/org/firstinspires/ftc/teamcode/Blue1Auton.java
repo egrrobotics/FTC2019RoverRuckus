@@ -24,7 +24,7 @@ import org.firstinspires.ftc.teamcode.commands.WaitForTime;
 public class Blue1Auton extends BlueAuton {
     public void addFinalCommands() {
         //commands.add(new DriveForward(18,DriveForward.XGREATERTHAN,.8,0, false, true, true));
-        commands.add(new DriveForward(24,DriveForward.XGREATERTHAN,.95,0, false, true));
+        commands.add(new DriveForward(22,DriveForward.XGREATERTHAN,.95,0, false, true));
         //commands.add(new WaitForTime(50));
         commands.add(new ResetDriveEncoders());
         //commands.add(new WaitForTime(50));
@@ -38,7 +38,7 @@ public class Blue1Auton extends BlueAuton {
         commands.add(new ResetDriveEncoders());
         //commands.add(new MarkerboxDown());
 
-        commands.add(new DriveForward(-2,DriveForward.XLESSTHAN,-.95,0, false, true, true));
+        commands.add(new DriveForward(-1,DriveForward.XLESSTHAN,-.95,0, false, true, true));
         //commands.add(new WaitForTime(50));
         commands.add(new ResetDriveEncoders());
 
@@ -51,20 +51,24 @@ public class Blue1Auton extends BlueAuton {
         //commands.add(new WaitForTime(50));
         commands.add(new ResetDriveEncoders());
         commands.add(new MarkerboxDown());
-        commands.add(new DriveForward(2,DriveForward.XGREATERTHAN,.95,-10));
+        commands.add(new DriveForward(4,DriveForward.XGREATERTHAN,.95,-10));
         //commands.add(new WaitForTime(50));
         commands.add(new ResetDriveEncoders());
 
-        commands.add(new Rotate(15, 1, 1));
+        commands.add(new Rotate(25, 1, 1));
         commands.add(new ResetDriveEncoders());
 
 
-        commands.add(new DriveForward(15,DriveForward.XGREATERTHAN,.95,15));
+        commands.add(new DriveForward(7,DriveForward.XGREATERTHAN,.95,25));
+        commands.add(new ResetDriveEncoders());
+
+
+        commands.add(new DriveForward(15,DriveForward.XGREATERTHAN,.95,10));
         //commands.add(new WaitForTime(50));
         commands.add(new ResetDriveEncoders());
 
         //commands.add(new WaitForTime(50));
-        commands.add(new DriveForward(25,DriveForward.XGREATERTHAN,.95,10));
+        commands.add(new DriveForward(20,DriveForward.XGREATERTHAN,.95,10));
         //commands.add(new WaitForTime(50));
         commands.add(new ResetDriveEncoders());
         commands.add(new DriveForwardHeadingandDistanceSensor(.1,DriveForwardHeadingandDistanceSensor.FRONTLESSTHAN,.95,10));

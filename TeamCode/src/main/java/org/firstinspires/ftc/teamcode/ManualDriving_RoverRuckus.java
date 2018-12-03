@@ -413,7 +413,7 @@ public class ManualDriving_RoverRuckus extends OpMode
             io.domSweepMotor.setPower(0);
         }
 
-        if (gamepad2.left_bumper) {
+        /*if (gamepad2.left_bumper) {
             io.markerBoxUp();
         }
 
@@ -423,7 +423,7 @@ public class ManualDriving_RoverRuckus extends OpMode
 
         if (gamepad1.right_bumper) {
             io.markerBoxFlat();
-        }
+        }*/
 
 
         /*telemetry.addData("Elevator Hand Position", position);
@@ -525,7 +525,7 @@ public class ManualDriving_RoverRuckus extends OpMode
                 //rampUp = !rampUp;  // Switch ramp direction
             }
         }
-        else if (gamepad2.left_stick_y < -.5 && gamepad2.left_stick_y <= -.03){
+        else if (gamepad2.left_stick_y > -.5 && gamepad2.left_stick_y <= -.03){
             initStartingPositionDOM1 -= 2;
             initStartingPositionDOM2 -= 2;
             if ((initStartingPositionDOM1 <= 0) || (io.touchDOM.getState() == false)) {

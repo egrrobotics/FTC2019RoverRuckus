@@ -29,7 +29,7 @@ public class Blue2Auton extends BlueAuton {
         //commands.add(new WaitForTime(50));
 
 
-        commands.add(new DriveForward(-5,DriveForward.XLESSTHAN,-.95,0, false, true));
+        commands.add(new DriveForward(-3.75,DriveForward.XLESSTHAN,-.95,0, false, true));
         //commands.add(new WaitForTime(50));
         commands.add(new ResetDriveEncoders());
         commands.add(new Rotate(-70, .85, .85));
@@ -37,14 +37,14 @@ public class Blue2Auton extends BlueAuton {
         commands.add(new ResetDriveEncoders());
         commands.add(new SetIMUOffset());
 
-        commands.add(new DriveForward(25,DriveForward.XGREATERTHAN,.95,0));
+        commands.add(new DriveForward(29,DriveForward.XGREATERTHAN,.95,0));
         //commands.add(new WaitForTime(50));
         commands.add(new ResetDriveEncoders());
         //commands.add(new DriveForward(-2,DriveForward.XLESSTHAN,-.95,0));
         //commands.add(new WaitForTime(50));
         //commands.add(new ResetDriveEncoders());
 
-        commands.add(new Rotate(-65, .85, .85));
+        commands.add(new Rotate(-55, .85, .85));
         //commands.add(new WaitForTime(50));
         commands.add(new ResetDriveEncoders());
         commands.add(new SetIMUOffset());
