@@ -42,7 +42,7 @@ public class DriveForwardDistanceSensorandEncoder extends BasicCommand {
     }
 
     public void init(){
-        endTime = System.currentTimeMillis() + 500000;
+        endTime = System.currentTimeMillis() + 5000;
     }
 
     public void execute(){
@@ -99,6 +99,7 @@ public class DriveForwardDistanceSensorandEncoder extends BasicCommand {
     }
 
     public boolean isFinished(){
+        if (System.currentTimeMillis() >= endTime) return true;
         telemetry.addData("x: ",io.getX());
         telemetry.addData("y: ",io.getY());
         telemetry.addData("Target Distance from Wall:", distanceOffsetfromWall);
@@ -110,7 +111,6 @@ public class DriveForwardDistanceSensorandEncoder extends BasicCommand {
         telemetry.addData("Right Speed: ", rightSpeed);
         telemetry.addData("Alliance Color is Unknown, Red, Blue: ", io.getAllianceColor());
         telemetry.addData("Mode:", "Drive Forward Distance Sensor and Encoder");
-        if (System.currentTimeMillis() >= endTime) return true;
 
         switch(test) {
             case XGREATERTHAN:

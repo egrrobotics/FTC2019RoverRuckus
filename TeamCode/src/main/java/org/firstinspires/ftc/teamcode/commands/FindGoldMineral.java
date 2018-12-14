@@ -21,8 +21,8 @@ public class FindGoldMineral extends BasicCommand {
         this.heading_cw = 12; //clockwise 10 degrees
         this.heading_ccw = -12; //counterclockwise 10 degrees
         this.heading = 0;
-        this.leftSpd = .90;
-        this.rightSpd = .90;
+        this.leftSpd = 1;
+        this.rightSpd = 1;
         headingPID = new PID(0.05,0,0); // was 0.05
 
 /*        if ((io.getAllianceColor() == IO.RED) && (io.getJewelColor() == IO.RED)) {
@@ -43,7 +43,7 @@ public class FindGoldMineral extends BasicCommand {
     }
 
     public void init() {
-        timeOut = System.currentTimeMillis() + 7000;
+        timeOut = System.currentTimeMillis() + 5000;
         initTime = System.currentTimeMillis();
 
         headingPID.setTarget(heading_cw);

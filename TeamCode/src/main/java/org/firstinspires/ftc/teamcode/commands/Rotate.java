@@ -13,12 +13,13 @@ public class Rotate extends BasicCommand {
     PID headingPID;
     long timeOut;
     boolean rotatetodepot = false;
+    boolean rotateafterhook = false;
 
     public Rotate (double heading,double leftSpd,double rightSpd){
         this.heading = heading;
         this.leftSpd = leftSpd;
         this.rightSpd = rightSpd;
-        headingPID = new PID(0.05,0,0); //was 0.05
+        headingPID = new PID(0.07,0,0); //was 0.05
         headingPID.setTarget(heading);
     }
 
@@ -27,9 +28,14 @@ public class Rotate extends BasicCommand {
         this.rotatetodepot = rotatetodepot;
     }
 
+    public Rotate (double heading,double leftSpd,double rightSpd, boolean rotatetodepot, boolean rotateafterhook){
+        this(heading, leftSpd, rightSpd);
+        this.rotateafterhook = rotateafterhook;
+    }
+
     public void init() {
 
-        timeOut = System.currentTimeMillis() + 5000;
+        timeOut = System.currentTimeMillis() + 4000;
 
         if (rotatetodepot){
             if (io.isGoldTheCenterMineral) {
@@ -46,6 +52,11 @@ public class Rotate extends BasicCommand {
                 }
                 //headingPID.setTarget(-io.headingOfGold);
             }
+        }
+
+        if (!rotatetodepot && rotateafterhook) {
+            headingPID.setTarget(io.headingOfGold);
+            heading = io.headingOfGold;
         }
     }
 

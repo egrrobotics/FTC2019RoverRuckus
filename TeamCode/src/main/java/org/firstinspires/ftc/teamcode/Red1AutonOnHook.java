@@ -3,14 +3,8 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.commands.DriveForward;
-import org.firstinspires.ftc.teamcode.commands.DriveForwardGlyph;
 import org.firstinspires.ftc.teamcode.commands.DriveForwardHeadingandDistanceSensor;
-import org.firstinspires.ftc.teamcode.commands.HandsOpened;
-import org.firstinspires.ftc.teamcode.commands.HandsOpenedMid;
-import org.firstinspires.ftc.teamcode.commands.IdentifyProximity;
 import org.firstinspires.ftc.teamcode.commands.MarkerboxDown;
-import org.firstinspires.ftc.teamcode.commands.ProximityArmDown;
-import org.firstinspires.ftc.teamcode.commands.ProximityArmUp;
 import org.firstinspires.ftc.teamcode.commands.ResetDriveEncoders;
 import org.firstinspires.ftc.teamcode.commands.Rotate;
 import org.firstinspires.ftc.teamcode.commands.SetIMUOffset;
@@ -20,25 +14,25 @@ import org.firstinspires.ftc.teamcode.commands.WaitForTime;
  * Created by David Austin on 11/10/2016.
  */
 
-@Autonomous(name="Red Gold",group="Auton")
-public class Red1Auton extends RedAuton {
+@Autonomous(name="Red Gold On Hook",group="Auton")
+public class Red1AutonOnHook extends RedAutonOnHook {
     public void addFinalCommands() {
         //commands.add(new DriveForward(18,DriveForward.XGREATERTHAN,.8,0, false, true, true));
         commands.add(new DriveForward(20,DriveForward.XGREATERTHAN,.65,0, false, true));
         //commands.add(new WaitForTime(50));
 
-        commands.add(new WaitForTime(250));
+        commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
         //commands.add(new WaitForTime(50));
 
 
         commands.add(new Rotate(0, .6, .6, true));
-        commands.add(new WaitForTime(250));
+        commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
         //commands.add(new SetIMUOffset());
         commands.add(new DriveForward(13,DriveForward.XGREATERTHAN,.55,0, false, true, true));
         //commands.add(new WaitForTime(50));
-        commands.add(new WaitForTime(250));
+        commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
         //commands.add(new MarkerboxDown());
         //MIGHT NEED TO BRING BACK REVERSE -.25
@@ -49,13 +43,13 @@ public class Red1Auton extends RedAuton {
 
         commands.add(new Rotate(-135, .55, .55));
         //commands.add(new WaitForTime(50));
-        commands.add(new WaitForTime(250));
+        commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
 
         commands.add(new SetIMUOffset());
 
         commands.add(new DriveForward(-10,DriveForward.XLESSTHAN,-.65,0));
-        commands.add(new WaitForTime(250));
+        commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
         //commands.add(new WaitForTime(50));
         commands.add(new MarkerboxDown());
@@ -65,21 +59,21 @@ public class Red1Auton extends RedAuton {
         //commands.add(new WaitForTime(100));
         commands.add(new DriveForward(2.5,DriveForward.XGREATERTHAN,.65,-10));
         //commands.add(new WaitForTime(50));
-        commands.add(new WaitForTime(250));
+        commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
         commands.add(new Rotate(18.5, .55, .55));
-        commands.add(new WaitForTime(250));
+        commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
         commands.add(new DriveForward(12,DriveForward.XGREATERTHAN,.65,18.5));
-        commands.add(new WaitForTime(250));
+        commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
         commands.add(new Rotate(10, .65, .65));
-        commands.add(new WaitForTime(250));
+        commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
 
         commands.add(new DriveForward(35,DriveForward.XGREATERTHAN,.65,7.5));
         //commands.add(new WaitForTime(50));
-        commands.add(new WaitForTime(250));
+        commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
 
         //commands.add(new WaitForTime(50));

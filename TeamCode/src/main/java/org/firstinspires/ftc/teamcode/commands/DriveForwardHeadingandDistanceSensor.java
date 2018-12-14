@@ -40,7 +40,7 @@ public class DriveForwardHeadingandDistanceSensor extends BasicCommand {
     }
 
     public void init(){
-        endTime = System.currentTimeMillis() + 500000;
+        endTime = System.currentTimeMillis() + 5000;
     }
 
     public void execute(){

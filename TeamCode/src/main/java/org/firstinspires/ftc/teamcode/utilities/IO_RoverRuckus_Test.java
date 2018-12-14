@@ -60,7 +60,9 @@ public class IO_RoverRuckus_Test {
     double rightBackOffset = 0, leftBackOffset = 0, chinOffset = 0, dom1Offset = 0, dom2Offset = 0, domExtendOffset = 0;
     double lastRightBackEncoder = 0, lastLeftBackEncoder = 0, lastChinEncoder = 0; //lastDOM1Encoder = 0, lastDOM2Encoder = 0, lastDOMExtendEncoder = 0;
     double x = 0, y = 0;
-    double COUNTSPERINCH = 140/1.28;//84/1.28;
+    double x_ZeroDegree = 0, y_ZeroDegree = 0;
+    //double COUNTSPERINCH = 140/1.28;//84/1.28; //used for Rev HD Hex Motor (REV-41-1301) 40:1 motor (Counts per Rotation of the Output Shaft = 1120)
+    double COUNTSPERINCH = 35;//84/1.28; //used for NeveRest Orbital 20 Gearmotor (Counts per Rotation of the Output Shaft = 537.6)
     public double DEGREESPERVOLT = 270/3.3; //potentiometer
     public static int RED = 1, BLUE = 2;
     public static int UNKNOWN = 0, LEFT = 1, CENTER = 2, RIGHT = 3;
@@ -90,6 +92,9 @@ public class IO_RoverRuckus_Test {
     public boolean isGoldTheCenterMineral = false;
     public boolean isGoldTheLeftMineral = false;
     public boolean isGoldTheRightMineral = false;
+
+    public double GoldMineralPositionCameraAverage = 0;
+    public boolean GoldMineralPositionCameraAverageComplete = false;
 
     public double goldXPosition = 0;
     //public double headingatlanding = 0;
@@ -196,8 +201,8 @@ public class IO_RoverRuckus_Test {
         touchLowerRelicArm.setMode(DigitalChannel.Mode.INPUT);
         touchUpperRelicArm.setMode(DigitalChannel.Mode.INPUT);*/
 
-        rightBackDrive.setDirection(DcMotorSimple.Direction.FORWARD);
-        leftBackDrive.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightBackDrive.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftBackDrive.setDirection(DcMotorSimple.Direction.FORWARD);
         chinMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         dom1Motor.setDirection(DcMotorSimple.Direction.REVERSE);
         dom2Motor.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -294,6 +299,8 @@ public class IO_RoverRuckus_Test {
 
         x = 0;
         y = 0;
+        x_ZeroDegree = 0;
+        y_ZeroDegree = 0;
     }
     public void updatePosition() {
         double rightBackEncoder = getRightBackDriveEncoder();
@@ -334,8 +341,16 @@ public class IO_RoverRuckus_Test {
         //heading from imu
         heading = Math.toRadians(getIMUHeading());
         heading1 = Math.toRadians(getIMU1Heading());
-        x += averageChange * Math.cos(heading);
-        y += averageChange * Math.sin(heading);
+        //x += averageChange * Math.cos(heading);
+        //y += averageChange * Math.sin(heading);
+
+        x += averageChange;
+        y += averageChange;
+
+
+
+        x_ZeroDegree += averageChange * Math.cos(0);
+        y_ZeroDegree += averageChange * Math.sin(0);
         lastRightBackEncoder = rightBackEncoder;
         lastLeftBackEncoder = leftBackEncoder;
         lastChinEncoder = chinEncoder;
@@ -385,6 +400,13 @@ public class IO_RoverRuckus_Test {
     }
     public double getY() {
         return y / COUNTSPERINCH;
+    }
+
+    public double getX_ZeroDegree() {
+        return x_ZeroDegree / COUNTSPERINCH;
+    }
+    public double getY_ZeroDegree() {
+        return y_ZeroDegree / COUNTSPERINCH;
     }
 
 /*    public double getHeading() {

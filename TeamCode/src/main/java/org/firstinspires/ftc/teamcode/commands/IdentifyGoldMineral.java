@@ -306,7 +306,7 @@ public class IdentifyGoldMineral extends BasicCommand{
         telemetry.addData("Is Gold Found: ", io.isGoldFound);
         telemetry.addData("Is Gold Aligned: ", io.isGoldAligned);*/
         telemetry.addData("Mode:", "Identify Gold Mineral");
-        return io.twoCyclesIsGoldCentered || System.currentTimeMillis() >= timeOut;
+        return io.twoCyclesIsGoldCentered || io.GoldMineralPositionCameraAverageComplete || System.currentTimeMillis() >= timeOut;
         //return System.currentTimeMillis() >= timeOut;
     }
     public void stop() {

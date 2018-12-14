@@ -17,8 +17,8 @@ public class AlignwithGoldMineral extends BasicCommand {
 
     public AlignwithGoldMineral(){
         this.heading = 0;
-        this.leftSpd = .95;
-        this.rightSpd = .95;
+        this.leftSpd = .85;
+        this.rightSpd = .85;
         this.correction = 0;
         goldPID = new PID(0.0028,0,0); // was 0.05
 
@@ -70,6 +70,23 @@ public class AlignwithGoldMineral extends BasicCommand {
             correction = goldPID.getCorrection(-io.getGoldXPositionAroundZero());
             correction = Range.clip(correction,-1,1);
             io.setDrivePower(correction*leftSpd,-correction*rightSpd);
+
+            io.headingOfGold = Math.toDegrees(io.heading);
+            if (Math.abs(io.headingOfGold) <= 10) {
+                io.isGoldTheCenterMineral = true;
+            } else {
+                io.isGoldTheCenterMineral = false;
+            }
+            if (io.headingOfGold > 10) {
+                io.isGoldTheRightMineral = true;
+            } else {
+                io.isGoldTheRightMineral = false;
+            }
+            if (io.headingOfGold < -10) {
+                io.isGoldTheLeftMineral = true;
+            } else {
+                io.isGoldTheLeftMineral = false;
+            }
         }
 
         if (io.getDOMPotDegrees() >= 35 && (Math.abs(io.getGoldXPositionAroundZero() - 0) <= 100) && io.twoCyclesIsGoldFound && io.twoCyclesIsGoldAligned && ((System.currentTimeMillis() - initTime) > 2500)) {

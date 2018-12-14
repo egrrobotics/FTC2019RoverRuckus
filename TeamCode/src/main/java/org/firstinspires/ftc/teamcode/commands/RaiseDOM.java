@@ -50,7 +50,7 @@ public class RaiseDOM extends BasicCommand {
     public boolean isFinished(){
         telemetry.addData("Heading: ", Math.toDegrees(io.heading));
         telemetry.addData("Captured Gold Heading: ", io.headingOfGold);
-        return (io.twoCyclesIsGoldCentered && io.twoCyclesIsGoldAligned && io.twoCyclesIsGoldFound) || System.currentTimeMillis() >= timeOut;
+        return (io.twoCyclesIsGoldCentered && io.twoCyclesIsGoldAligned && io.twoCyclesIsGoldFound) || io.GoldMineralPositionCameraAverageComplete || System.currentTimeMillis() >= timeOut;
     }
     public void stop() {
         io.dom1Motor.setPower(0);

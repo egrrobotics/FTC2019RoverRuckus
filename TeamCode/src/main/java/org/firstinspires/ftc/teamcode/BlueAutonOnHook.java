@@ -4,27 +4,18 @@ package org.firstinspires.ftc.teamcode;
 import org.firstinspires.ftc.teamcode.commands.AlignwithGoldMineral;
 import org.firstinspires.ftc.teamcode.commands.ChinDown;
 import org.firstinspires.ftc.teamcode.commands.CommandGroup;
+import org.firstinspires.ftc.teamcode.commands.DetermineGoldMineralPositiononCamera;
 import org.firstinspires.ftc.teamcode.commands.DriveForward;
-import org.firstinspires.ftc.teamcode.commands.ElevatorUp;
 import org.firstinspires.ftc.teamcode.commands.FindGoldMineral;
-import org.firstinspires.ftc.teamcode.commands.HandsClosed;
 import org.firstinspires.ftc.teamcode.commands.HookHome;
 import org.firstinspires.ftc.teamcode.commands.HookRelease;
 import org.firstinspires.ftc.teamcode.commands.IdentifyGoldMineral;
-import org.firstinspires.ftc.teamcode.commands.IdentifyJewel;
-import org.firstinspires.ftc.teamcode.commands.IdentifyJewelwithREVColorSensor;
-import org.firstinspires.ftc.teamcode.commands.IdentifyVuMark;
-import org.firstinspires.ftc.teamcode.commands.JewelArmDown;
-import org.firstinspires.ftc.teamcode.commands.JewelArmUp;
-import org.firstinspires.ftc.teamcode.commands.ProximityArmMid;
 import org.firstinspires.ftc.teamcode.commands.RaiseDOM;
-import org.firstinspires.ftc.teamcode.commands.RemoveOpponentsJewel;
 import org.firstinspires.ftc.teamcode.commands.ResetDriveEncoders;
 import org.firstinspires.ftc.teamcode.commands.RobotDown;
 import org.firstinspires.ftc.teamcode.commands.Rotate;
 import org.firstinspires.ftc.teamcode.commands.SetIMUOffset;
 import org.firstinspires.ftc.teamcode.commands.WaitForTime;
-import org.firstinspires.ftc.teamcode.utilities.IO_4WD_Test;
 import org.firstinspires.ftc.teamcode.utilities.IO_RoverRuckus_Test;
 
 //import org.firstinspires.ftc.teamcode.commands.DriveForwardForDistance;
@@ -37,21 +28,27 @@ import org.firstinspires.ftc.teamcode.utilities.IO_RoverRuckus_Test;
 /**
  * Created by David Austin on 11/10/2016.
  */
-public abstract class RedAuton extends FirstAuton {
-    public RedAuton() {
+public abstract class BlueAutonOnHook extends FirstAuton {
+    public BlueAutonOnHook() {
         super();
-        //allianceColor = IO.RED;
+        //allianceColor = IO.BLUE;
     }
 
     @Override
     public void addCommands() {
-        io.setAllianceColor(IO_RoverRuckus_Test.RED);
+        io.setAllianceColor(IO_RoverRuckus_Test.BLUE);
+        CommandGroup group = new CommandGroup();
+        group.addCommand(new RaiseDOM());
+        group.addCommand(new IdentifyGoldMineral());
+        group.addCommand(new DetermineGoldMineralPositiononCamera());
+        commands.add(group);
 
-        //commands.add(new RobotDown());
+        commands.add(new RobotDown());
         //commands.add(new WaitForTime(50));
-        //commands.add(new HookRelease());
-        //commands.add(new ChinDown());
-        //commands.add(new HookHome());
+        commands.add(new HookRelease());
+        commands.add(new ChinDown());
+        commands.add(new HookHome());
+        commands.add(new WaitForTime(250));
         commands.add(new ResetDriveEncoders());
         //commands.add(new ReleaseCage());
         //commands.add(new CageHome());
@@ -59,17 +56,9 @@ public abstract class RedAuton extends FirstAuton {
         commands.add(new DriveForward(2,DriveForward.XGREATERTHAN,.65,0));
         commands.add(new WaitForTime(250));
         commands.add(new ResetDriveEncoders());
-
-        CommandGroup group = new CommandGroup();
-        group.addCommand(new RaiseDOM());
-        group.addCommand(new IdentifyGoldMineral());
-        group.addCommand(new FindGoldMineral());
-        group.addCommand(new AlignwithGoldMineral());
-        commands.add(group);
+        commands.add(new Rotate(0, .60, .60, false, true));
         commands.add(new WaitForTime(250));
         commands.add(new ResetDriveEncoders());
-
-
         /*commands.add(new RobotDown());
         //commands.add(new WaitForTime(50));
         commands.add(new HookRelease());
@@ -79,84 +68,24 @@ public abstract class RedAuton extends FirstAuton {
         //commands.add(new ReleaseCage());
         //commands.add(new CageHome());
         commands.add(new SetIMUOffset());
-        commands.add(new DriveForward(1.5,DriveForward.XGREATERTHAN,1,0));
-
-        CommandGroup group = new CommandGroup();
-        group.addCommand(new RaiseDOM());
-        group.addCommand(new IdentifyGoldMineral());
-        group.addCommand(new FindGoldMineral());
-        group.addCommand(new AlignwithGoldMineral());
-        commands.add(group);
+        commands.add(new DriveForward(1.5,DriveForward.XGREATERTHAN,.75,0));
         //commands.add(new WaitForTime(50));
         commands.add(new ResetDriveEncoders());*/
 
 
-        /*commands.add(new RobotDown());
-        commands.add(new WaitForTime(50));
-        commands.add(new HookRelease());
-        commands.add(new ChinDown());
-        commands.add(new HookHome());
-        commands.add(new ResetDriveEncoders());
-        commands.add(new SetIMUOffset());
-        commands.add(new DriveForward(2,DriveForward.XGREATERTHAN,1,0));
-
-        CommandGroup group = new CommandGroup();
-        group.addCommand(new RaiseDOM());
-        group.addCommand(new IdentifyGoldMineral());
-        group.addCommand(new FindGoldMineral());
-        group.addCommand(new AlignwithGoldMineral());
-        commands.add(group);
-        commands.add(new WaitForTime(50));
-        commands.add(new ResetDriveEncoders());
-        commands.add(new DriveForward(24,DriveForward.XGREATERTHAN,.8,0, false, true));
-        commands.add(new WaitForTime(50));
-        commands.add(new ResetDriveEncoders());
-        commands.add(new WaitForTime(50));*/
 
 
 
 
+        //commands.add(new ProximityArmMid());
 
-        /*commands.add(new ResetDriveEncoders());
-        commands.add(new RobotDown());
-        commands.add(new WaitForTime(50));
-        commands.add(new HookRelease());
-        commands.add(new ChinDown());
-        commands.add(new HookHome());
-        commands.add(new SetIMUOffset());
-        commands.add(new DriveForward(2,DriveForward.XGREATERTHAN,.8,0));
-
-        CommandGroup group = new CommandGroup();
-        group.addCommand(new RaiseDOM());
-        group.addCommand(new IdentifyGoldMineral());
-        group.addCommand(new FindGoldMineral());
-        group.addCommand(new AlignwithGoldMineral());
-        commands.add(group);
-        commands.add(new WaitForTime(50));
-        commands.add(new ResetDriveEncoders());
-        commands.add(new DriveForward(15,DriveForward.XGREATERTHAN,.8,0, false, true));
-        commands.add(new WaitForTime(50));
-        commands.add(new ResetDriveEncoders());
-        commands.add(new DriveForward(-15,DriveForward.XLESSTHAN,-.8,0, false, true));
-        commands.add(new ResetDriveEncoders());
-        commands.add(new WaitForTime(50));*/
-
-
-
-        /*commands.add(new ResetDriveEncoders());
-        commands.add(new HandsClosed());
-        commands.add(new ProximityArmMid());
-
-        CommandGroup group = new CommandGroup();
-        group.addCommand(new ElevatorUp());
+        //CommandGroup group = new CommandGroup();
+        //group.addCommand(new ElevatorUp());
         //group.addCommand(new ProximityArmMid());
-        group.addCommand(new JewelArmDown());
-        commands.add(group);
-        commands.add(new WaitForTime(150));
+        //group.addCommand(new JewelArmDown());
+        //commands.add(group);
+        //commands.add(new WaitForTime(150));
 
-
-
-        //commands.add(new ResetDriveEncoders());
         //commands.add(new HandsClosed());
         //commands.add(new WaitForTime(150));
         //commands.add(new ElevatorUp());
@@ -165,6 +94,9 @@ public abstract class RedAuton extends FirstAuton {
         //commands.add(new WaitForTime(150));
         //commands.add(new JewelArmDown());
         //commands.add(new WaitForTime(150));
+
+
+
         //CommandGroup group = new CommandGroup();
         //group.addCommand(new DriveHorizontal(13,-2,0.5));
         //group.addCommand(new ShootParticles());
@@ -173,25 +105,25 @@ public abstract class RedAuton extends FirstAuton {
         //commands.add(new DriveForward(47,DriveForward.YGREATERTHAN,.55,38));
         //group.addCommand(new IdentifyVuMark());
         //group.addCommand(new IdentifyJewel());
-        commands.add(new IdentifyJewelwithREVColorSensor());
+        //commands.add(new IdentifyJewelwithREVColorSensor());
         //commands.add(group);
-        commands.add(new RemoveOpponentsJewel());
-        commands.add(new WaitForTime(150));
-        commands.add(new ResetDriveEncoders());
-        commands.add(new JewelArmUp());
+        //commands.add(new RemoveOpponentsJewel());
+        //commands.add(new WaitForTime(150));
+        //commands.add(new ResetDriveEncoders());
+        //commands.add(new JewelArmUp());
         //commands.add(new IdentifyVuMark());
         //commands.add(new IdentifyJewel());
         //commands.add(new Rotate(-15,.7,0));
-        commands.add(new WaitForTime(150));
-        commands.add(new Rotate(0,.75,.75));
-        commands.add(new WaitForTime(150));
-        commands.add(new ResetDriveEncoders());
+        //commands.add(new WaitForTime(150));
+        //commands.add(new Rotate(0,.6,.6));
+        //commands.add(new WaitForTime(150));
+        //commands.add(new ResetDriveEncoders());
         //BasicCommand.getIO().resetDriveEncoders();
         //io.resetDriveEncoders();
         //commands.add(new ResetDriveEncoders());
         //telemetry.addData("x after reset: ",io.getX());
         //telemetry.addData("y after reset: ",io.getY());
-        //commands.add(new DriveForward(20,DriveForward.XGREATERTHAN,.65,0));
+        //commands.add(new DriveForward(20,DriveForward.XGREATERTHAN,.65,0));;
         //commands.add(new DriveForward(20,DriveForward.XGREATERTHAN,.35,0));
         //commands.add(new WaitForTime(1000));
         //BasicCommand.getIO().resetDriveEncoders();
@@ -200,8 +132,13 @@ public abstract class RedAuton extends FirstAuton {
         //telemetry.addData("x after reset: ",io.getX());
         //telemetry.addData("y after reset: ",io.getY());
         //commands.add(new DriveForward(-20,DriveForward.XLESSTHAN,-.35,0));
-        //commands.add(new WaitForTime(500));
+        //commands.add(new WaitForTime(1000));
         //commands.add(new ResetDriveEncoders());
+        //commands.add(new WaitForTime(1000));
+        //commands.add(new ElevatorDown());
+        //commands.add(new WaitForTime(1000));
+        //commands.add(new HandsOpened());
+        //commands.add(new WaitForTime(1000));
         //commands.add(new WaitForTime(1000));
         //commands.add(new Rotate(90,.65,0));
         //commands.add(new WaitForTime(1000));
@@ -245,7 +182,7 @@ public abstract class RedAuton extends FirstAuton {
         //commands.add(group);
         //commands.add(new PressButtons());
 
-        //commands.add(new WaitForTime(1500));*/
+        //commands.add(new WaitForTime(1500));
 
     }
 }

@@ -3,14 +3,8 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.commands.DriveForward;
-import org.firstinspires.ftc.teamcode.commands.DriveForwardGlyph;
 import org.firstinspires.ftc.teamcode.commands.DriveForwardHeadingandDistanceSensor;
-import org.firstinspires.ftc.teamcode.commands.HandsOpened;
-import org.firstinspires.ftc.teamcode.commands.HandsOpenedMid;
-import org.firstinspires.ftc.teamcode.commands.IdentifyProximity;
 import org.firstinspires.ftc.teamcode.commands.MarkerboxDown;
-import org.firstinspires.ftc.teamcode.commands.ProximityArmDown;
-import org.firstinspires.ftc.teamcode.commands.ProximityArmUp;
 import org.firstinspires.ftc.teamcode.commands.ResetDriveEncoders;
 import org.firstinspires.ftc.teamcode.commands.Rotate;
 import org.firstinspires.ftc.teamcode.commands.SetIMUOffset;
@@ -20,24 +14,24 @@ import org.firstinspires.ftc.teamcode.commands.WaitForTime;
  * Created by David Austin on 11/10/2016.
  */
 
-@Autonomous(name="Blue Silver",group="Auton")
-public class Blue2Auton extends BlueAuton {
+@Autonomous(name="Blue Silver On Hook",group="Auton")
+public class Blue2AutonOnHook extends BlueAutonOnHook {
     public void addFinalCommands() {
         commands.add(new DriveForward(10.5,DriveForward.XGREATERTHAN,.55,0, false, true));
         //commands.add(new WaitForTime(50));
-        commands.add(new WaitForTime(500));
+        commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
         //commands.add(new ResetDriveEncoders());
         //commands.add(new WaitForTime(100));
 
 
-        commands.add(new DriveForward(-14.25,DriveForward.XLESSTHAN,-.25,0, false, true));
+        commands.add(new DriveForward(-15.5,DriveForward.XLESSTHAN,-.25,0, false, true));
         //commands.add(new WaitForTime(50));
-        commands.add(new WaitForTime(250));
+        commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
         commands.add(new Rotate(-62.5, .60, .60));
         //commands.add(new WaitForTime(50));
-        commands.add(new WaitForTime(250));
+        commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
         commands.add(new SetIMUOffset());
 
@@ -45,7 +39,7 @@ public class Blue2Auton extends BlueAuton {
         commands.add(new DriveForward(17,DriveForward.XGREATERTHAN,.65,0));
         //commands.add(new DriveForwardHeadingandDistanceSensor(15,DriveForwardHeadingandDistanceSensor.FRONTLESSTHAN,.75,0));
         //commands.add(new WaitForTime(50));
-        commands.add(new WaitForTime(250));
+        commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
         //commands.add(new DriveForward(-2,DriveForward.XLESSTHAN,-.95,0));
         //commands.add(new WaitForTime(50));
@@ -53,13 +47,13 @@ public class Blue2Auton extends BlueAuton {
 
         commands.add(new Rotate(-55, .55, .55));
         //commands.add(new WaitForTime(50));
-        commands.add(new WaitForTime(250));
+        commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
         commands.add(new SetIMUOffset());
 
         //commands.add(new WaitForTime(50));
-        commands.add(new DriveForward(12,DriveForward.XGREATERTHAN,.65,6.5));
-        commands.add(new WaitForTime(250));
+        commands.add(new DriveForward(12,DriveForward.XGREATERTHAN,.75,6.5));
+        commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
 
         //commands.add(new DriveForward(12,DriveForward.XGREATERTHAN,.75,-5));
@@ -68,11 +62,11 @@ public class Blue2Auton extends BlueAuton {
 
         //commands.add(new WaitForTime(50));
         commands.add(new Rotate(-15, .60, .60));
-        commands.add(new WaitForTime(250));
+        commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
 
         commands.add(new DriveForward(8,DriveForward.XGREATERTHAN,.75,-15));
-        commands.add(new WaitForTime(250));
+        commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
         //commands.add(new SetIMUOffset());
 
@@ -85,18 +79,18 @@ public class Blue2Auton extends BlueAuton {
         commands.add(new DriveForwardHeadingandDistanceSensor(5,DriveForwardHeadingandDistanceSensor.FRONTLESSTHAN,.55,-15));
 
 
-        commands.add(new WaitForTime(250));
+        commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
 
         commands.add(new MarkerboxDown());
 
         commands.add(new DriveForward(-8,DriveForward.XLESSTHAN,-.65,-15));
-        commands.add(new WaitForTime(250));
+        commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
 
         //commands.add(new WaitForTime(50));
         commands.add(new DriveForward(-18,DriveForward.XLESSTHAN,-.95,-10));
-        commands.add(new WaitForTime(250));
+        commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
         commands.add(new DriveForwardHeadingandDistanceSensor(.1,DriveForwardHeadingandDistanceSensor.BACKLESSTHAN,-.35,-10));
 

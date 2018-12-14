@@ -38,16 +38,18 @@ public abstract class BlueAuton extends FirstAuton {
     @Override
     public void addCommands() {
         io.setAllianceColor(IO_RoverRuckus_Test.BLUE);
-        commands.add(new RobotDown());
+        //commands.add(new RobotDown());
         //commands.add(new WaitForTime(50));
-        commands.add(new HookRelease());
-        commands.add(new ChinDown());
-        commands.add(new HookHome());
+        //commands.add(new HookRelease());
+        //commands.add(new ChinDown());
+        //commands.add(new HookHome());
         commands.add(new ResetDriveEncoders());
         //commands.add(new ReleaseCage());
         //commands.add(new CageHome());
         commands.add(new SetIMUOffset());
-        commands.add(new DriveForward(1.5,DriveForward.XGREATERTHAN,1,0));
+        commands.add(new DriveForward(2,DriveForward.XGREATERTHAN,.65,0));
+        commands.add(new WaitForTime(250));
+        commands.add(new ResetDriveEncoders());
 
         CommandGroup group = new CommandGroup();
         group.addCommand(new RaiseDOM());
@@ -55,7 +57,7 @@ public abstract class BlueAuton extends FirstAuton {
         group.addCommand(new FindGoldMineral());
         group.addCommand(new AlignwithGoldMineral());
         commands.add(group);
-        //commands.add(new WaitForTime(50));
+        commands.add(new WaitForTime(250));
         commands.add(new ResetDriveEncoders());
 
 

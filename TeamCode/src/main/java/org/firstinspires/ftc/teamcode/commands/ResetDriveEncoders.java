@@ -21,6 +21,9 @@ public class ResetDriveEncoders extends BasicCommand {
         }
 
         public boolean isFinished(){
+            telemetry.addData("Mode:", "Reset Drive Encoders");
+            telemetry.addData("x after reset: ",io.getX());
+            telemetry.addData("y after reset: ",io.getY());
             return true;
         }
         public void stop() {
