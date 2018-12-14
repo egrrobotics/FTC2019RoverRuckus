@@ -17,7 +17,7 @@ import org.firstinspires.ftc.teamcode.commands.WaitForTime;
 @Autonomous(name="Red Silver On Hook",group="Auton")
 public class Red2AutonOnHook extends RedAutonOnHook {
     public void addFinalCommands() {
-        commands.add(new DriveForward(10.5,DriveForward.XGREATERTHAN,.55,0, false, true));
+        commands.add(new DriveForward(11,DriveForward.XGREATERTHAN,.55,0, false, true));
         //commands.add(new WaitForTime(50));
         commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
@@ -84,7 +84,7 @@ public class Red2AutonOnHook extends RedAutonOnHook {
 
         commands.add(new MarkerboxDown());
 
-        commands.add(new DriveForward(-8,DriveForward.XLESSTHAN,-.65,-15));
+        commands.add(new DriveForward(-8,DriveForward.XLESSTHAN,-.95,-15));
         commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
 

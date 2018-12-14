@@ -42,20 +42,26 @@ public abstract class RedAutonOnHook extends FirstAuton {
         commands.add(group);
 
         commands.add(new RobotDown());
+        commands.add(new SetIMUOffset());
         //commands.add(new WaitForTime(50));
         commands.add(new HookRelease());
-        commands.add(new ChinDown());
-        commands.add(new HookHome());
-        commands.add(new WaitForTime(250));
+        commands.add(new DriveForward(2,DriveForward.XGREATERTHAN,.65,0));
+
+        CommandGroup group1 = new CommandGroup();
+        group1.addCommand(new ChinDown());
+        group1.addCommand(new HookHome());
+        commands.add(group1);
+
+        //commands.add(new ChinDown());
+        //commands.add(new HookHome());
+
+        commands.add(new WaitForTime(50));
         commands.add(new ResetDriveEncoders());
         //commands.add(new ReleaseCage());
         //commands.add(new CageHome());
-        commands.add(new SetIMUOffset());
-        commands.add(new DriveForward(2,DriveForward.XGREATERTHAN,.65,0));
-        commands.add(new WaitForTime(250));
-        commands.add(new ResetDriveEncoders());
+        //commands.add(new SetIMUOffset());
         commands.add(new Rotate(0, .60, .60, false, true));
-        commands.add(new WaitForTime(250));
+        commands.add(new WaitForTime(50));
         commands.add(new ResetDriveEncoders());
         /*commands.add(new RobotDown());
         //commands.add(new WaitForTime(50));
