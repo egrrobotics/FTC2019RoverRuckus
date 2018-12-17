@@ -285,7 +285,7 @@ public class IO_RoverRuckus_Test {
     public void resetDriveEncoders() {
         rightBackOffset = rightBackDrive.getCurrentPosition();
         leftBackOffset = leftBackDrive.getCurrentPosition();
-        chinOffset = chinMotor.getCurrentPosition();
+        //chinOffset = chinMotor.getCurrentPosition();
         dom1Offset = dom1Motor.getCurrentPosition();
         dom2Offset = dom2Motor.getCurrentPosition();
         domExtendOffset = domExtendMotor.getCurrentPosition();

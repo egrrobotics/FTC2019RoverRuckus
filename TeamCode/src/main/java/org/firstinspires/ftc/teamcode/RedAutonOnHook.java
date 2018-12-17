@@ -47,10 +47,11 @@ public abstract class RedAutonOnHook extends FirstAuton {
         commands.add(new HookRelease());
         commands.add(new DriveForward(2,DriveForward.XGREATERTHAN,.65,0));
 
-        CommandGroup group1 = new CommandGroup();
-        group1.addCommand(new ChinDown());
-        group1.addCommand(new HookHome());
-        commands.add(group1);
+        //MOVED TO RED2
+        //CommandGroup group1 = new CommandGroup();
+        //group1.addCommand(new ChinDown());
+        //group1.addCommand(new HookHome());
+        //commands.add(group1);
 
         //commands.add(new ChinDown());
         //commands.add(new HookHome());

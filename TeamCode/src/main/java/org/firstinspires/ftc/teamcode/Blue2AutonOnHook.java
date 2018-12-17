@@ -2,8 +2,11 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
+import org.firstinspires.ftc.teamcode.commands.ChinDown;
+import org.firstinspires.ftc.teamcode.commands.CommandGroup;
 import org.firstinspires.ftc.teamcode.commands.DriveForward;
 import org.firstinspires.ftc.teamcode.commands.DriveForwardHeadingandDistanceSensor;
+import org.firstinspires.ftc.teamcode.commands.HookHome;
 import org.firstinspires.ftc.teamcode.commands.MarkerboxDown;
 import org.firstinspires.ftc.teamcode.commands.ResetDriveEncoders;
 import org.firstinspires.ftc.teamcode.commands.Rotate;
@@ -17,7 +20,8 @@ import org.firstinspires.ftc.teamcode.commands.WaitForTime;
 @Autonomous(name="Blue Silver On Hook",group="Auton")
 public class Blue2AutonOnHook extends BlueAutonOnHook {
     public void addFinalCommands() {
-        commands.add(new DriveForward(11,DriveForward.XGREATERTHAN,.55,0, false, true));
+        //WAS 11 before wheel change at States
+        commands.add(new DriveForward(13,DriveForward.XGREATERTHAN,.55,0, false, true));
         //commands.add(new WaitForTime(50));
         commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
@@ -25,7 +29,8 @@ public class Blue2AutonOnHook extends BlueAutonOnHook {
         //commands.add(new WaitForTime(100));
 
 
-        commands.add(new DriveForward(-15.5,DriveForward.XLESSTHAN,-.25,0, false, true));
+        //WAS -15.5 before wheel change at States
+        commands.add(new DriveForward(-16.5,DriveForward.XLESSTHAN,-.25,0, false, true));
         //commands.add(new WaitForTime(50));
         commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
@@ -36,7 +41,14 @@ public class Blue2AutonOnHook extends BlueAutonOnHook {
         commands.add(new SetIMUOffset());
 
         //ADDED Distance Sensor May Need to Return non-distance sensor
-        commands.add(new DriveForward(17,DriveForward.XGREATERTHAN,.65,0));
+        CommandGroup group1 = new CommandGroup();
+        group1.addCommand(new ChinDown());
+        group1.addCommand(new HookHome());
+        group1.addCommand(new DriveForward(17,DriveForward.XGREATERTHAN,.65,0));
+        commands.add(group1);
+
+        //TRYING IN GROUP1 ABOVE
+        //commands.add(new DriveForward(17,DriveForward.XGREATERTHAN,.65,0));
         //commands.add(new DriveForwardHeadingandDistanceSensor(15,DriveForwardHeadingandDistanceSensor.FRONTLESSTHAN,.75,0));
         //commands.add(new WaitForTime(50));
         commands.add(new WaitForTime(100));
@@ -65,7 +77,7 @@ public class Blue2AutonOnHook extends BlueAutonOnHook {
         commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
 
-        commands.add(new DriveForward(8,DriveForward.XGREATERTHAN,.75,-15));
+        commands.add(new DriveForward(8,DriveForward.XGREATERTHAN,1,-15));
         commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
         //commands.add(new SetIMUOffset());
@@ -76,7 +88,7 @@ public class Blue2AutonOnHook extends BlueAutonOnHook {
         //commands.add(new ResetDriveEncoders());
 
 
-        commands.add(new DriveForwardHeadingandDistanceSensor(5,DriveForwardHeadingandDistanceSensor.FRONTLESSTHAN,.55,-15));
+        commands.add(new DriveForwardHeadingandDistanceSensor(5,DriveForwardHeadingandDistanceSensor.FRONTLESSTHAN,.75,-15));
 
 
         commands.add(new WaitForTime(100));
@@ -84,15 +96,23 @@ public class Blue2AutonOnHook extends BlueAutonOnHook {
 
         commands.add(new MarkerboxDown());
 
-        commands.add(new DriveForward(-8,DriveForward.XLESSTHAN,-.95,-15));
+        //WAS -THIS IS NEW added due to wheel change at States
+        commands.add(new Rotate(-20, .75, .75));
+        commands.add(new WaitForTime(100));
+        commands.add(new ResetDriveEncoders());
+
+        //WAS -15 before wheel change at States
+        commands.add(new DriveForward(-8,DriveForward.XLESSTHAN,-1,-20));
         commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
 
         //commands.add(new WaitForTime(50));
-        commands.add(new DriveForward(-18,DriveForward.XLESSTHAN,-.95,-10));
+        //WAS -10 before wheel change at States
+        commands.add(new DriveForward(-18,DriveForward.XLESSTHAN,-1,-12.5));
         commands.add(new WaitForTime(100));
         commands.add(new ResetDriveEncoders());
-        commands.add(new DriveForwardHeadingandDistanceSensor(.1,DriveForwardHeadingandDistanceSensor.BACKLESSTHAN,-.35,-10));
+        //WAS -10 before wheel change at States
+        commands.add(new DriveForwardHeadingandDistanceSensor(.1,DriveForwardHeadingandDistanceSensor.BACKLESSTHAN,-.45,-12.5));
 
 
 
